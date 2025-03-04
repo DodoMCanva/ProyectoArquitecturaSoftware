@@ -20,9 +20,11 @@ public class ctrlPartida implements ActionListener {
         b.setVisible(true);
 
         try {
-            System.out.println("Going to sleep for 3 seconds...");
-            Thread.sleep(3000);  // Sleep for 3000 milliseconds (3 segundos)
-            System.out.println("Awake and refreshed!");
+            JOptionPane panel = new JOptionPane("Cargando", JOptionPane.INFORMATION_MESSAGE);
+            JDialog carg = panel.createDialog("Timbiriche");
+            carg.setVisible(true);
+            Thread.sleep(3000);
+            carg.dispose();
         } catch (InterruptedException e) {
             System.out.println("Thread was interrupted");
         }
@@ -57,4 +59,3 @@ public class ctrlPartida implements ActionListener {
         // Tu lógica aquí
     }
 }
-
