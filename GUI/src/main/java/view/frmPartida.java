@@ -220,7 +220,7 @@ public class frmPartida extends javax.swing.JFrame {
     private javax.swing.JLabel ls1;
     private javax.swing.JLabel ls2;
     private javax.swing.JLabel ls3;
-    private javax.swing.JPanel pnlDibujo;
+    public javax.swing.JPanel pnlDibujo;
     private javax.swing.JPanel pnlJuego;
     // End of variables declaration//GEN-END:variables
 }
