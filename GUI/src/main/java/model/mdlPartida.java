@@ -1,11 +1,11 @@
-
+    
 package model;
 
 /**
  *
  * @author Fer
  */
-public class mdlPartida implements iView{
+public class mdlPartida implements iVista{
     private int tmn;
     private mdlJugador[] jugadores = new mdlJugador[3];
     

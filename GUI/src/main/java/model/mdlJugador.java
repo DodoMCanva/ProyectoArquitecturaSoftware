@@ -6,4 +6,6 @@ package model;
  */
 public class mdlJugador {
     
+    
+    
 }

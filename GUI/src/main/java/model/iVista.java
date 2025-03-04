@@ -5,7 +5,7 @@ package model;
  *
  * @author Equipo
  */
-public interface iView {
+public interface iVista {
     
     public void update();
     
