@@ -83,8 +83,18 @@ public class frmPartida extends javax.swing.JFrame {
         btnTerminar.setBackground(new java.awt.Color(255, 51, 51));
         btnTerminar.setForeground(new java.awt.Color(255, 255, 255));
         btnTerminar.setText("Terminar Partida");
+        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarActionPerformed(evt);
+            }
+        });
 
         pnlDibujo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlDibujo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                pnlDibujoMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDibujoLayout = new javax.swing.GroupLayout(pnlDibujo);
         pnlDibujo.setLayout(pnlDibujoLayout);
@@ -122,11 +132,11 @@ public class frmPartida extends javax.swing.JFrame {
                             .addComponent(lblScoreJ1))))
                 .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlJuegoLayout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(pnlDibujo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlJuegoLayout.createSequentialGroup()
                         .addGap(290, 290, 290)
-                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlJuegoLayout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(pnlDibujo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,6 +210,14 @@ public class frmPartida extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlDibujoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDibujoMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlDibujoMouseReleased
+
+    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTerminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
