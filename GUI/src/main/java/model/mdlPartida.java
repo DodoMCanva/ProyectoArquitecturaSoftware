@@ -14,7 +14,7 @@ import view.frmPartida;
  */
 public class mdlPartida implements iVista {
 
-    private int tmn = 10;
+    private int tmn = 20;
     private int tmnTablero = 635;
     private int separador = 0;
     private int x = 20;
