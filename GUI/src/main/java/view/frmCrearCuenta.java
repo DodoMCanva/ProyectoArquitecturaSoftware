@@ -38,11 +38,9 @@ public class frmCrearCuenta extends javax.swing.JFrame {
         lbltituloCrearcuenta = new javax.swing.JLabel();
         txtNombreUsuario = new javax.swing.JTextField();
         lbTituloNombreUsuario = new javax.swing.JLabel();
-        btnCargarUsuario = new javax.swing.JButton();
         lblTituloDescripImagen1 = new javax.swing.JLabel();
         btnCrearcuenta = new javax.swing.JButton();
         btnAvatarUsuario = new javax.swing.JButton();
-        lblTituloDescripImagen2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -56,19 +54,16 @@ public class frmCrearCuenta extends javax.swing.JFrame {
         lbltituloCrearcuenta.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbltituloCrearcuenta.setText("CUENTA");
         jpCrearCuenta.add(lbltituloCrearcuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
-        jpCrearCuenta.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 230, -1));
+        jpCrearCuenta.add(txtNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 230, -1));
 
         lbTituloNombreUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbTituloNombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lbTituloNombreUsuario.setText("Nombre");
-        jpCrearCuenta.add(lbTituloNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
-
-        btnCargarUsuario.setText("Cargar");
-        jpCrearCuenta.add(btnCargarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, -1));
+        jpCrearCuenta.add(lbTituloNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         lblTituloDescripImagen1.setForeground(new java.awt.Color(255, 255, 255));
-        lblTituloDescripImagen1.setText("Seleccione un Avatar o bien haga");
-        jpCrearCuenta.add(lblTituloDescripImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, -1));
+        lblTituloDescripImagen1.setText("Seleccione un Avatar ");
+        jpCrearCuenta.add(lblTituloDescripImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
 
         btnCrearcuenta.setText("ENTRAR");
         btnCrearcuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -78,20 +73,16 @@ public class frmCrearCuenta extends javax.swing.JFrame {
         });
         jpCrearCuenta.add(btnCrearcuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 200, 50));
 
-        btnAvatarUsuario.setText("Avatar");
+        btnAvatarUsuario.setText("Selecciona Avatar");
         btnAvatarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvatarUsuarioActionPerformed(evt);
             }
         });
-        jpCrearCuenta.add(btnAvatarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 303, -1, 20));
-
-        lblTituloDescripImagen2.setForeground(new java.awt.Color(255, 255, 255));
-        lblTituloDescripImagen2.setText("click en \"cargar\" si desea añadir una imagen de perfil ");
-        jpCrearCuenta.add(lblTituloDescripImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, -1, -1));
+        jpCrearCuenta.add(btnAvatarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, 20));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
-        jpCrearCuenta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 160, 180));
+        jpCrearCuenta.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 160, 180));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logonuevo.jpg"))); // NOI18N
         jpCrearCuenta.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 270, 120));
@@ -163,14 +154,12 @@ public class frmCrearCuenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvatarUsuario;
-    private javax.swing.JButton btnCargarUsuario;
     private javax.swing.JButton btnCrearcuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jpCrearCuenta;
     private javax.swing.JLabel lbTituloNombreUsuario;
     private javax.swing.JLabel lblTituloDescripImagen1;
-    private javax.swing.JLabel lblTituloDescripImagen2;
     private javax.swing.JLabel lbltituloCrearcuenta;
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables

@@ -66,7 +66,7 @@
         <Component class="javax.swing.JTextField" name="txtNombreUsuario">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="270" y="180" width="230" height="-1"/>
+              <AbsoluteConstraints x="140" y="180" width="230" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -82,17 +82,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="210" y="180" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnCargarUsuario">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cargar"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="670" y="300" width="-1" height="-1"/>
+              <AbsoluteConstraints x="40" y="180" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -101,11 +91,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Seleccione un Avatar o bien haga"/>
+            <Property name="text" type="java.lang.String" value="Seleccione un Avatar "/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="580" y="340" width="-1" height="-1"/>
+              <AbsoluteConstraints x="510" y="290" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -124,27 +114,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAvatarUsuario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Avatar"/>
+            <Property name="text" type="java.lang.String" value="Selecciona Avatar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvatarUsuarioActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="550" y="303" width="-1" height="20"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblTituloDescripImagen2">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="click en &quot;cargar&quot; si desea a&#xf1;adir una imagen de perfil "/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="540" y="360" width="-1" height="-1"/>
+              <AbsoluteConstraints x="500" y="260" width="-1" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -160,7 +137,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="570" y="90" width="160" height="180"/>
+              <AbsoluteConstraints x="480" y="70" width="160" height="180"/>
             </Constraint>
           </Constraints>
         </Component>
