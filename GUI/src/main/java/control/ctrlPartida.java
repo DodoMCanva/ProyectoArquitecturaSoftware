@@ -20,11 +20,9 @@ public class ctrlPartida implements ActionListener {
         b.setVisible(true);
 
         try {
-            JOptionPane panel = new JOptionPane("Cargando", JOptionPane.INFORMATION_MESSAGE);
-            JDialog carg = panel.createDialog("Timbiriche");
-            carg.setVisible(true);
-            Thread.sleep(3000);
-            carg.dispose();
+            System.out.println("Going to sleep for 3 seconds...");
+            Thread.sleep(3000);  
+            System.out.println("Awake and refreshed!");
         } catch (InterruptedException e) {
             System.out.println("Thread was interrupted");
         }
@@ -39,17 +37,19 @@ public class ctrlPartida implements ActionListener {
                 y = e.getY();
                 System.out.println("Click en y: " + y + "  Click en x: " + x);
                 System.out.println(click);
-                if (click == 1) {
-                    Graphics g = b.pnlDibujo.getGraphics();
-                    g.drawLine(xaux, yaux, x, y);
-                    System.out.println(click);
-                    click = 0;
-                } else {
-                    System.out.println(click);
-                    xaux = x;
-                    yaux = y;
-                    click++;
-                }
+                a.verificarPunto(x, y);
+                //Seleccion objeto
+//                if (click == 1) {
+//                    Graphics g = b.pnlDibujo.getGraphics();
+//                    g.drawLine(xaux, yaux, x, y);
+//                    System.out.println(click);
+//                    click = 0;
+//                } else {
+//                    System.out.println(click);
+//                    xaux = x;
+//                    yaux = y;
+//                    click++;
+//                }
             }
         });
     }
@@ -59,3 +59,4 @@ public class ctrlPartida implements ActionListener {
         // Tu lógica aquí
     }
 }
+

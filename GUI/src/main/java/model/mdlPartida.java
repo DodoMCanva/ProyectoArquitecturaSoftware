@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
+import java.util.List;
 import view.frmPartida;
 
 /**
@@ -13,8 +15,10 @@ import view.frmPartida;
  * @author Fer
  */
 public class mdlPartida implements iVista {
-
-    private int tmn = 20;
+    private List<mdlPunto> puntos = new ArrayList<>();
+    private mdlPunto aux1, aux2;
+    private boolean c = false;
+    private int tmn = 10;
     private int tmnTablero = 635;
     private int separador = 0;
     private int x = 20;
@@ -44,30 +48,29 @@ public class mdlPartida implements iVista {
     // Método para agregar los puntos
     public void agregarPuntos() {
         separador = tmnTablero / tmn;
-        int punto = 0;
-
+        System.out.println("separador");
         // Recorre las filas y columnas para dibujar los puntos
         for (int j = 0; j < tmn; j++) {
             for (int i = 0; i < tmn; i++) {
                 // Dibuja el círculo en la posición (x, y)
+                puntos.add(new mdlPunto(x,y));
                 pintarCirculo(frm.pnlDibujo.getGraphics(), x, y);
-
-                // Actualiza la coordenada x para el siguiente punto en la misma fila
-                x = x + separador;
                 System.out.println("x: " + x);
                 System.out.println("y: " + y);
-                punto = punto + 1;
-                System.out.println("P: " + punto);
+                // Actualiza la coordenada x para el siguiente punto en la misma fila
+                x = x + separador;
             }
             // Resetea x y mueve hacia abajo para la siguiente fila
             x = 20;
             y = y + separador;
-            System.out.println("");
-            System.out.println("x: " + x);
-            System.out.println("y: " + y);
-            System.out.println("P: " + punto);
         }
-
+    }
+    
+    public void pintarPuntos(){
+        for (mdlPunto punto : puntos) {
+            pintarCirculo(frm.pnlDibujo.getGraphics(), punto.getX(), punto.getY());
+        }
+        
     }
 
     public static void pintarLinea(Graphics g, int x1, int y1, int x2, int y2) {
@@ -89,5 +92,30 @@ public class mdlPartida implements iVista {
         if (y1 >= y2) {
             yAux = ((y1 - y2) / 2) + y2;
         }
+    }
+
+    public void verificarPunto(int x, int y) {
+        int d = 15;
+        for (mdlPunto punto : puntos) {
+            if ((x<=(punto.getX()+15) && x >= (punto.getX()-15)) && ((y<=(punto.getY()+15)&&(y>=(punto.getY()-15))))) {
+                System.out.println("Si es punto wens");
+                if (!c) {
+                    aux1 = punto;
+                    c=true;
+                }else{
+                    aux2 = punto;
+                    verificarLinea(aux1, aux2);
+                    c=false;
+                    
+                }
+            }
+        }
+        
+    }
+    
+    public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
+        //Verificar lo tmn de linea
+        pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
+        
     }
 }
