@@ -9,21 +9,32 @@ import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import view.frmPartida;
+import java.lang.Math;
 
 /**
  *
- * @author Fer
+ * @author Equipo
  */
 public class mdlPartida implements iVista {
+    //Listas de atributos del juego
     private List<mdlPunto> puntos = new ArrayList<>();
+    private List<mdlLinea> lineas = new ArrayList<>();
+
+    private mdlJugador[] jugadores = new mdlJugador[3];
+
+    //Variables Auxiliares
     private mdlPunto aux1, aux2;
     private boolean c = false;
+
+    //Variables de Configuracion
     private int tmn = 10;
     private int tmnTablero = 635;
     private int separador = 0;
     private int x = 20;
     private int y = 20;
-    private mdlJugador[] jugadores = new mdlJugador[3];
+
+    
+    
 
     // Se agrega una referencia al frmPartida
     private frmPartida frm;
@@ -80,6 +91,7 @@ public class mdlPartida implements iVista {
         BasicStroke stroke = new BasicStroke(2);
         ((Graphics2D) g).setStroke(stroke);
         ((Graphics2D) g).drawLine(x1 + 10, y1 + 10, x2 + 10, y2 + 10);
+
         if (x1 <= x2) {
             xAux = ((x2 - x1) / 2) + x1;
         }
@@ -114,8 +126,31 @@ public class mdlPartida implements iVista {
     }
     
     public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
-        //Verificar lo tmn de linea
-        pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
+        int limite =  10;//Aqui se debe poner el tamaño limite que tendra una linea para evitar recorrer dos puntos
+        
+        if(aux1.getX == aux2.getX){
+            int distancia = Math.abs(aux1.getX-aux2.getX);
+            System.out.println(distancia);
+            if(distancia <= limite){
+                mdlLinea linea = new mdlLinea(aux1, aux2);
+                lineas.add(linea);
+
+                pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
+            }
+            else{
+                System.out.println("Linea Invalida");
+            }
+        }
+        if(aux1.getY == aux2.getY){
+            if(distancia <= limite){
+                mdlLinea linea = new mdlLinea(aux1, aux2);
+                lineas.add(linea);
+
+                pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
+            }else{
+                System.out.println("Linea Invalida");
+            }
+        }
         
     }
 }
