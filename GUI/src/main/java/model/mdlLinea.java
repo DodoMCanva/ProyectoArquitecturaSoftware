@@ -13,10 +13,10 @@ public class mdlLinea {
     private mdlPunto punto_2;
     private int limite;
 
-    public mdlLinea(mdlPunto p1, mdlPunto p2, int lim){
+    public mdlLinea(mdlPunto p1, mdlPunto p2){
         this.punto_1 = p1;
         this.punto_2 = p2;
-        this.limite = lim;
+      
     }
 
     public void setPunto1(mdlPunto punto){
