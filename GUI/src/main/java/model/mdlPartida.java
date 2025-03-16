@@ -126,12 +126,10 @@ public class mdlPartida implements iVista {
     }
     
     public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
-        int limite =  10;//Aqui se debe poner el tamaño limite que tendra una linea para evitar recorrer dos puntos
-        
         if(aux1.getX == aux2.getX){
             int distancia = Math.abs(aux1.getX-aux2.getX);
             System.out.println(distancia);
-            if(distancia <= limite){
+            if(distancia <= separador){
                 mdlLinea linea = new mdlLinea(aux1, aux2);
                 lineas.add(linea);
 
@@ -142,7 +140,7 @@ public class mdlPartida implements iVista {
             }
         }
         if(aux1.getY == aux2.getY){
-            if(distancia <= limite){
+            if(distancia <= separador){
                 mdlLinea linea = new mdlLinea(aux1, aux2);
                 lineas.add(linea);
 
