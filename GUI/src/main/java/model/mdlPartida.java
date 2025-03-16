@@ -64,10 +64,9 @@ public class mdlPartida implements iVista {
         for (int j = 0; j < tmn; j++) {
             for (int i = 0; i < tmn; i++) {
                 // Dibuja el círculo en la posición (x, y)
-                puntos.add(new mdlPunto(x,y));
-                pintarCirculo(frm.pnlDibujo.getGraphics(), x, y);
-                System.out.println("x: " + x);
-                System.out.println("y: " + y);
+                mdlPunto c=new mdlPunto(x,y);
+              c.pintarCirculo(frm.pnlDibujo.getGraphics());
+               
                 // Actualiza la coordenada x para el siguiente punto en la misma fila
                 x = x + separador;
             }
@@ -126,8 +125,8 @@ public class mdlPartida implements iVista {
     }
     
     public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
-        if(aux1.getX == aux2.getX){
-            int distancia = Math.abs(aux1.getX-aux2.getX);
+        if(aux1.getX() == aux2.getX()){
+            int distancia = Math.abs(aux1.getX()-aux2.getX());
             System.out.println(distancia);
             if(distancia <= separador){
                 mdlLinea linea = new mdlLinea(aux1, aux2);
@@ -139,8 +138,9 @@ public class mdlPartida implements iVista {
                 System.out.println("Linea Invalida");
             }
         }
-        if(aux1.getY == aux2.getY){
-            if(distancia <= separador){
+         int distanciay = Math.abs(aux1.getY()-aux2.getY());
+        if(aux1.getY() == aux2.getY()){
+            if(distanciay <= separador){
                 mdlLinea linea = new mdlLinea(aux1, aux2);
                 lineas.add(linea);
 
