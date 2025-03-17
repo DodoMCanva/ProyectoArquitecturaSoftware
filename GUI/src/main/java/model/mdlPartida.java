@@ -125,30 +125,37 @@ public class mdlPartida implements iVista {
     }
     
     public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
+        int distancia = 0;
         if(aux1.getX() == aux2.getX()){
-            int distancia = Math.abs(aux1.getX()-aux2.getX());
+            distancia = Math.abs(aux1.getY()-aux2.getY());
             System.out.println(distancia);
             if(distancia <= separador){
                 mdlLinea linea = new mdlLinea(aux1, aux2);
                 lineas.add(linea);
-
                 pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
+                cambiarTurno();
             }
             else{
                 System.out.println("Linea Invalida");
             }
         }
-         int distanciay = Math.abs(aux1.getY()-aux2.getY());
+        
         if(aux1.getY() == aux2.getY()){
-            if(distanciay <= separador){
+            distancia = Math.abs(aux1.getX()-aux2.getX());
+            System.out.println(distancia)
+            if(distancia <= separador){
                 mdlLinea linea = new mdlLinea(aux1, aux2);
                 lineas.add(linea);
-
                 pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
+                cambiarTurno();
             }else{
                 System.out.println("Linea Invalida");
             }
         }
         
     }
+}
+
+public void cambiarTurno(){
+    
 }
