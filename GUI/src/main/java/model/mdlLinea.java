@@ -11,11 +11,12 @@ package model;
 public class mdlLinea {
     private mdlPunto punto_1;
     private mdlPunto punto_2;
-    private int limite;
+    private mdlJugador jgdr;
 
-    public mdlLinea(mdlPunto p1, mdlPunto p2){
+    public mdlLinea(mdlPunto p1, mdlPunto p2, mdlJugador j){
         this.punto_1 = p1;
         this.punto_2 = p2;
+        this.jgdr = j;
       
     }
 
@@ -27,12 +28,20 @@ public class mdlLinea {
         this.punto_2 = punto;
     }
 
+    public void setJugador(mdlJugador jugador){
+        this.jgdr = jugador
+    }
+
     public mdlPunto getPunto1(){
         return this.punto_1;
     }
 
     public mdlPunto getPunto2(){
         return this.punto_2;
+    }
+
+    public mdlJugador getJugador(){
+        return this.jgdr;
     }
 
 }

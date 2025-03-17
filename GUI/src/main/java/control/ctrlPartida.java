@@ -37,6 +37,8 @@ public class ctrlPartida implements ActionListener {
                 y = e.getY();
                 System.out.println("Click en y: " + y + "  Click en x: " + x);
                 System.out.println(click);
+
+                //Aqui tambien deberia mandar que jugador esta mandando el click
                 a.verificarPunto(x, y);
             }
         });
@@ -44,7 +46,7 @@ public class ctrlPartida implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Tu lógica aquí
+        // Wens 
     }
 }
 

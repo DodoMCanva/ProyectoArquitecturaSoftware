@@ -125,6 +125,7 @@ public class mdlPartida implements iVista {
     }
     
     public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
+        
         int distancia = 0;
         if(aux1.getX() == aux2.getX()){
             distancia = Math.abs(aux1.getY()-aux2.getY());
@@ -139,7 +140,6 @@ public class mdlPartida implements iVista {
                 System.out.println("Linea Invalida");
             }
         }
-        
         if(aux1.getY() == aux2.getY()){
             distancia = Math.abs(aux1.getX()-aux2.getX());
             System.out.println(distancia)
