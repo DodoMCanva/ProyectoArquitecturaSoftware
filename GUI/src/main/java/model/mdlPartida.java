@@ -21,7 +21,7 @@ public class mdlPartida implements iVista {
     private List<mdlLinea> lineas = new ArrayList<>();
 
     private mdlJugador[] jugadores = new mdlJugador[3];
-
+    int Jugadoractual= 0;
     //Variables Auxiliares
     private mdlPunto aux1, aux2;
     private boolean c = false;
@@ -131,7 +131,7 @@ public class mdlPartida implements iVista {
             distancia = Math.abs(aux1.getY()-aux2.getY());
             System.out.println(distancia);
             if(distancia <= separador){
-                mdlLinea linea = new mdlLinea(aux1, aux2);
+                mdlLinea linea = new mdlLinea(aux1, aux2,jugadores[Jugadoractual]);
                 lineas.add(linea);
                 pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
                 cambiarTurno();
@@ -142,9 +142,9 @@ public class mdlPartida implements iVista {
         }
         if(aux1.getY() == aux2.getY()){
             distancia = Math.abs(aux1.getX()-aux2.getX());
-            System.out.println(distancia)
+            System.out.println(distancia);
             if(distancia <= separador){
-                mdlLinea linea = new mdlLinea(aux1, aux2);
+                mdlLinea linea = new mdlLinea(aux1, aux2,jugadores[Jugadoractual]);
                 lineas.add(linea);
                 pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
                 cambiarTurno();
@@ -154,8 +154,15 @@ public class mdlPartida implements iVista {
         }
         
     }
-}
+
 
 public void cambiarTurno(){
-    
+       if(Jugadoractual!=3){
+           jugadores[Jugadoractual+1];
+       }else{
+           Jugadoractual=0;
+       }
 }
+}
+
+
