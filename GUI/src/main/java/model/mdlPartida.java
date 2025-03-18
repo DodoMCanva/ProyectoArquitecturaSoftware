@@ -157,8 +157,8 @@ public class mdlPartida implements iVista {
 
 
 public void cambiarTurno(){
-       if(Jugadoractual!=3){
-           jugadores[Jugadoractual+1];
+       if(Jugadoractual!=4){
+            Jugadoractual++;
        }else{
            Jugadoractual=0;
        }
