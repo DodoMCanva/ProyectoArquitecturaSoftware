@@ -8,13 +8,14 @@ import java.awt.Graphics;
  * @author Equipo
  */
 public class mdlPunto {
-private static int x;
-    private static int y;
-    
+
+    private int x;
+    private int y;
+
     public mdlPunto(int x, int y) {
         this.x = x;
         this.y = y;
-   
+
     }
 
     public int getX() {
@@ -32,17 +33,15 @@ private static int x;
     public void setY(int y) {
         this.y = y;
     }
-        public void pintarCirculo(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillOval(mdlPunto.x, mdlPunto.y, 15, 15);  // Dibuja el círculo
-    }
+
+//    public void pintarCirculo(Graphics g) {
+//        g.setColor(Color.BLACK);
+//        g.fillOval(mdlPunto.x, mdlPunto.y, 15, 15);  // Dibuja el círculo
+//    }
 
     @Override
     public String toString() {
         return "mdlPunto{" + "x=" + x + ", y=" + y + '}';
     }
-    
-  
-    
-    
+
 }

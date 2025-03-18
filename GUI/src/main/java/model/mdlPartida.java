@@ -16,12 +16,13 @@ import java.lang.Math;
  * @author Equipo
  */
 public class mdlPartida implements iVista {
+
     //Listas de atributos del juego
     private List<mdlPunto> puntos = new ArrayList<>();
     private List<mdlLinea> lineas = new ArrayList<>();
 
-    private mdlJugador[] jugadores = new mdlJugador[3];
-    int Jugadoractual= 0;
+    private mdlJugador[] jugadores = new mdlJugador[4];
+    int Jugadoractual = 0;
     //Variables Auxiliares
     private mdlPunto aux1, aux2;
     private boolean c = false;
@@ -30,11 +31,6 @@ public class mdlPartida implements iVista {
     private int tmn = 10;
     private int tmnTablero = 635;
     private int separador = 0;
-    private int x = 20;
-    private int y = 20;
-
-    
-    
 
     // Se agrega una referencia al frmPartida
     private frmPartida frm;
@@ -58,29 +54,35 @@ public class mdlPartida implements iVista {
 
     // Método para agregar los puntos
     public void agregarPuntos() {
-        separador = tmnTablero / tmn;
-        System.out.println("separador");
-        // Recorre las filas y columnas para dibujar los puntos
+        int separador = tmnTablero / tmn;
+        System.out.println(separador);
+
+        int x = 20;
+        int y = 20;
+
+        puntos.clear();
         for (int j = 0; j < tmn; j++) {
             for (int i = 0; i < tmn; i++) {
-                // Dibuja el círculo en la posición (x, y)
-                mdlPunto c=new mdlPunto(x,y);
-              c.pintarCirculo(frm.pnlDibujo.getGraphics());
-               
-                // Actualiza la coordenada x para el siguiente punto en la misma fila
+                mdlPunto c = new mdlPunto(x, y);
+                puntos.add(c);
                 x = x + separador;
             }
-            // Resetea x y mueve hacia abajo para la siguiente fila
+
             x = 20;
             y = y + separador;
         }
+        pintarPuntos();
+        // Imprime todos los puntos para depurar
+        for (mdlPunto punto : puntos) {
+            System.out.println(punto.toString());
+        }
     }
-    
-    public void pintarPuntos(){
+
+    public void pintarPuntos() {
         for (mdlPunto punto : puntos) {
             pintarCirculo(frm.pnlDibujo.getGraphics(), punto.getX(), punto.getY());
         }
-        
+
     }
 
     public static void pintarLinea(Graphics g, int x1, int y1, int x2, int y2) {
@@ -108,61 +110,60 @@ public class mdlPartida implements iVista {
     public void verificarPunto(int x, int y) {
         int d = 15;
         for (mdlPunto punto : puntos) {
-            if ((x<=(punto.getX()+15) && x >= (punto.getX()-15)) && ((y<=(punto.getY()+15)&&(y>=(punto.getY()-15))))) {
+            if ((x <= (punto.getX() + 15) && x >= (punto.getX() - 15)) && ((y <= (punto.getY() + 15) && (y >= (punto.getY() - 15))))) {
                 System.out.println("Si es punto wens");
                 if (!c) {
                     aux1 = punto;
-                    c=true;
-                }else{
+                    c = true;
+                } else {
                     aux2 = punto;
                     verificarLinea(aux1, aux2);
-                    c=false;
-                    
+                    c = false;
                 }
             }
         }
-        
     }
-    
-    public void verificarLinea(mdlPunto aux1, mdlPunto aux2){
-        
+
+    public void verificarLinea(mdlPunto aux1, mdlPunto aux2) {
+
         int distancia = 0;
-        if(aux1.getX() == aux2.getX()){
-            distancia = Math.abs(aux1.getY()-aux2.getY());
+        if (aux1.getX() == aux2.getX()) {
+            System.out.println("Equis iguales");
+            distancia = Math.abs(aux1.getY() - aux2.getY());
             System.out.println(distancia);
-            if(distancia <= separador){
-                mdlLinea linea = new mdlLinea(aux1, aux2,jugadores[Jugadoractual]);
+            if (distancia <= separador) {
+                mdlLinea linea = new mdlLinea(aux1, aux2, jugadores[Jugadoractual]);
                 lineas.add(linea);
                 pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
                 cambiarTurno();
-            }
-            else{
+            } else {
                 System.out.println("Linea Invalida");
             }
         }
-        if(aux1.getY() == aux2.getY()){
-            distancia = Math.abs(aux1.getX()-aux2.getX());
+        if (aux1.getY() == aux2.getY()) {
+            System.out.println("Yes iguales");
+            distancia = Math.abs(aux1.getX() - aux2.getX());
             System.out.println(distancia);
-            if(distancia <= separador){
-                mdlLinea linea = new mdlLinea(aux1, aux2,jugadores[Jugadoractual]);
+            if (distancia <= separador) {
+                mdlLinea linea = new mdlLinea(aux1, aux2, jugadores[Jugadoractual]);
                 lineas.add(linea);
                 pintarLinea(frm.pnlDibujo.getGraphics(), aux1.getX(), aux1.getY(), aux2.getX(), aux2.getY());
                 cambiarTurno();
-            }else{
+            } else {
                 System.out.println("Linea Invalida");
             }
         }
-        
+
     }
 
-
-public void cambiarTurno(){
-       if(Jugadoractual!=4){
+    public void cambiarTurno() {
+        System.out.println("Turno jugador que jugó: " + (Jugadoractual+1));
+        
+        if (Jugadoractual < jugadores.length - 1) {
             Jugadoractual++;
-       }else{
-           Jugadoractual=0;
-       }
+        } else {
+            Jugadoractual = 0;
+        }
+        System.out.println("Turno jugador que sigue: " + (Jugadoractual+1));
+    }
 }
-}
-
-

@@ -6,7 +6,7 @@ import java.awt.event.*;
 import model.mdlPartida;
 import view.frmPartida;
 
-public class ctrlPartida implements ActionListener {
+public class ctrlPartida  {
 
     private frmPartida b = new frmPartida();
     private mdlPartida a;
@@ -22,7 +22,7 @@ public class ctrlPartida implements ActionListener {
         try {
             System.out.println("Cargando...");
             Thread.sleep(3000);  
-            System.out.println("Carga Finalizada");
+            System.out.println("Fin");
         } catch (InterruptedException e) {
             System.out.println("Hilo interrumpido");
         }
@@ -38,15 +38,10 @@ public class ctrlPartida implements ActionListener {
                 System.out.println("Click en y: " + y + "  Click en x: " + x);
                 System.out.println(click);
 
-                //Aqui tambien deberia mandar que jugador esta mandando el click
                 a.verificarPunto(x, y);
             }
         });
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Wens 
-    }
 }
 
