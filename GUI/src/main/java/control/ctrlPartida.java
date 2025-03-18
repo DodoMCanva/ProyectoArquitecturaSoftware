@@ -8,31 +8,29 @@ import view.frmPartida;
 
 public class ctrlPartida  {
 
+    //NO VA AQUI
     private frmPartida b = new frmPartida();
+    
     private mdlPartida a;
     private int yaux = 0;
     private int xaux = 0;
     private int y = 0;
     private int x = 0;
     private int click = 0;
+    
+    public ctrlPartida(){
+        
+    }
 
     public void iniciar() {
         b.setVisible(true);
-
-        try {
-            System.out.println("Cargando...");
-            Thread.sleep(3000);  
-            System.out.println("Fin");
-        } catch (InterruptedException e) {
-            System.out.println("Hilo interrumpido");
-        }
-
         a = new mdlPartida(b);
         a.agregarPuntos();
-
+        a.refrescar();
         b.pnlDibujo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                a.refrescar();
                 x = e.getX();
                 y = e.getY();
                 System.out.println("Click en y: " + y + "  Click en x: " + x);

@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
+
+import javax.swing.JButton;
 
 /**
  *
@@ -20,7 +19,6 @@ public class frmLobby extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
-        mock();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +28,7 @@ public class frmLobby extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnSolicitarInicio = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -67,13 +65,13 @@ public class frmLobby extends javax.swing.JFrame {
         });
         jPanel1.add(btnSolicitarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 220, 50));
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         jButton3.setText("Color del tablero");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -146,11 +144,11 @@ public class frmLobby extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         frmMenu menu = new frmMenu();
         menu.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
         
@@ -180,15 +178,22 @@ public class frmLobby extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public void mock(){
-        
+    public JButton getBtnSolicitarInicio() {
+        return btnSolicitarInicio;
     }
-    
+
+    public JButton getBtnSalir() {
+        return btnSalir;
+    }
+
+
+
+  
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSolicitarInicio;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

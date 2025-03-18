@@ -20,7 +20,7 @@ public class mdlPartida implements iVista {
     //Listas de atributos del juego
     private List<mdlPunto> puntos = new ArrayList<>();
     private List<mdlLinea> lineas = new ArrayList<>();
-    private mdlJugador propietario;
+    private mdlJugador propietario = new mdlJugador("", "", true, true, 0, "");
     private mdlJugador[] jugadores = new mdlJugador[4];
     int Jugadoractual = 0;
     //Variables Auxiliares
@@ -108,17 +108,22 @@ public class mdlPartida implements iVista {
     }
 
     public void verificarPunto(int x, int y) {
-        int d = 15;
+        int d = 20;
         for (mdlPunto punto : puntos) {
-            if ((x <= (punto.getX() + 15) && x >= (punto.getX() - 15)) && ((y <= (punto.getY() + 15) && (y >= (punto.getY() - 15))))) {
+            if ((x <= (punto.getX() + d) && x >= (punto.getX() - d)) && ((y <= (punto.getY() + d) && (y >= (punto.getY() - d))))) {
                 System.out.println("Si es punto wens");
                 if (!c) {
                     aux1 = punto;
                     c = true;
                 } else {
-                    aux2 = punto;
-                    verificarLinea(aux1, aux2);
-                    c = false;
+                    if (aux1 != punto) {
+                        aux2 = punto;
+                        verificarLinea(aux1, aux2);
+                        c = false;
+                    }else{
+                        System.out.println("Es el mismo punto wens");
+                    }
+
                 }
             }
         }
@@ -157,20 +162,27 @@ public class mdlPartida implements iVista {
     }
 
     public void cambiarTurno() {
-        
+
         //Esto no se quedara asi, es solo mock
-        System.out.println("Turno jugador que jugó: " + (Jugadoractual+1));
-        jugadores[Jugadoractual].setTurno(false);
+        System.out.println("Turno jugador que jugó: " + (Jugadoractual + 1));
+
+        //jugadores[Jugadoractual].setTurno(false);
         if (Jugadoractual < jugadores.length - 1) {
             Jugadoractual++;
         } else {
             Jugadoractual = 0;
         }
-        jugadores[Jugadoractual].setTurno(true);
-        System.out.println("Turno jugador que sigue: " + (Jugadoractual+1));
+
+        //jugadores[Jugadoractual].setTurno(true);
+        System.out.println("Turno jugador que sigue: " + (Jugadoractual + 1));
+        //propietario false
     }
-    
-    public boolean verficarTurno(){
+
+    public boolean verficarTurno() {
         return propietario.getTurno();
+    }
+
+    public void refrescar() {
+        pintarPuntos();
     }
 }

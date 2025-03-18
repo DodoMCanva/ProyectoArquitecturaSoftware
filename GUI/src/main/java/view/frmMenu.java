@@ -4,6 +4,8 @@
  */
 package view;
 
+import control.ctrlLobby;
+
 /**
  *
  * @author cesar
@@ -158,14 +160,12 @@ public class frmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxTamañoTableroComponentAdded
 
     private void btnUnirsePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirsePartidaActionPerformed
-        frmLobby loby = new frmLobby();
-        loby.setVisible(true);
+        ctrlLobby lobby = new ctrlLobby();
         this.dispose();
     }//GEN-LAST:event_btnUnirsePartidaActionPerformed
 
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
-        frmLobby fr = new frmLobby();
-        fr.setVisible(true);
+        ctrlLobby lobby = new ctrlLobby();
         this.dispose();
 
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
