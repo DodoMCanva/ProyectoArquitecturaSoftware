@@ -37,8 +37,10 @@ public class ctrlPartida  {
                 y = e.getY();
                 System.out.println("Click en y: " + y + "  Click en x: " + x);
                 System.out.println(click);
-
-                a.verificarPunto(x, y);
+                if (a.verficarTurno()) {
+                    a.verificarPunto(x, y);
+                }
+                
             }
         });
     }

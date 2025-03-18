@@ -20,7 +20,7 @@ public class mdlPartida implements iVista {
     //Listas de atributos del juego
     private List<mdlPunto> puntos = new ArrayList<>();
     private List<mdlLinea> lineas = new ArrayList<>();
-
+    private mdlJugador propietario;
     private mdlJugador[] jugadores = new mdlJugador[4];
     int Jugadoractual = 0;
     //Variables Auxiliares
@@ -157,13 +157,20 @@ public class mdlPartida implements iVista {
     }
 
     public void cambiarTurno() {
-        System.out.println("Turno jugador que jugó: " + (Jugadoractual+1));
         
+        //Esto no se quedara asi, es solo mock
+        System.out.println("Turno jugador que jugó: " + (Jugadoractual+1));
+        jugadores[Jugadoractual].setTurno(false);
         if (Jugadoractual < jugadores.length - 1) {
             Jugadoractual++;
         } else {
             Jugadoractual = 0;
         }
+        jugadores[Jugadoractual].setTurno(true);
         System.out.println("Turno jugador que sigue: " + (Jugadoractual+1));
+    }
+    
+    public boolean verficarTurno(){
+        return propietario.getTurno();
     }
 }

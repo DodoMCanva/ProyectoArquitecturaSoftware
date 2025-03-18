@@ -45,7 +45,7 @@ public class mdlJugador {
         this.voto = voto;
     }
 
-    public boolean isTurno() {
+    public boolean getTurno() {
         return turno;
     }
 
