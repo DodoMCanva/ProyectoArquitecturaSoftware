@@ -23,6 +23,8 @@ public class mdlPartida implements iVista {
     private mdlJugador propietario = new mdlJugador("", "", true, true, 0, "");
     private mdlJugador[] jugadores = new mdlJugador[4];
     int Jugadoractual = 0;
+    
+    
     //Variables Auxiliares
     private mdlPunto aux1, aux2;
     private boolean c = false;
