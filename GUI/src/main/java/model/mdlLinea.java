@@ -29,7 +29,7 @@ public class mdlLinea {
     }
 
     public void setJugador(mdlJugador jugador){
-        this.jgdr = jugador
+        this.jgdr = jugador;
     }
 
     public mdlPunto getPunto1(){
