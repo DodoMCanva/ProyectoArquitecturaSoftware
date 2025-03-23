@@ -1,6 +1,7 @@
 
 package view;
 
+import Menu.frmMenu;
 import javax.swing.JButton;
 
 /**
