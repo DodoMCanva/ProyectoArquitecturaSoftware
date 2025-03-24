@@ -1,5 +1,5 @@
 
-package view;
+package Lobby;
 
 import Menu.frmMenu;
 import javax.swing.JButton;

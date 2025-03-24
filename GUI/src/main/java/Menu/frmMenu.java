@@ -1,7 +1,7 @@
 
 package Menu;
 
-import view.frmCrearCuenta;
+import iniciar.frmCrearCuenta;
 
 /**
  *

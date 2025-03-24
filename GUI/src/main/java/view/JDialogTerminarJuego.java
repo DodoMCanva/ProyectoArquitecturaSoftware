@@ -4,6 +4,7 @@
  */
 package view;
 
+import Puntaje.frmScores;
 import java.awt.Window;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
