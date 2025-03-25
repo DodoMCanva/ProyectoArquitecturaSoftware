@@ -8,12 +8,14 @@ import Interfaz.Observador;
  * @author Equipo
  */
 public class mdlPartida implements Observado, ImdlPartida {
-    private Observador vista;
+    private Observador vista = new frmPartida();
     private ImdlPartida interfaz = this; 
     
     public mdlPartida(frmPartida vistaPartida){
         vista = vistaPartida;
     }
+    
+    
     
     @Override
     public void notificar() {
