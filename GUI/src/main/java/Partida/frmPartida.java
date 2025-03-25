@@ -1,15 +1,16 @@
 
 package Partida;
 
+import Interfaz.Observador;
+
 /**
  *
  * @author Equipo
  */
-public class frmPartida extends javax.swing.JFrame {
-
-    /**
-     * Creates new form frmPartida
-     */
+public class frmPartida extends javax.swing.JFrame implements Observador{
+    private ctrlPartida control;
+    
+    
     public frmPartida() {
         initComponents();
     }
@@ -241,4 +242,9 @@ public class frmPartida extends javax.swing.JFrame {
     public javax.swing.JPanel pnlDibujo;
     private javax.swing.JPanel pnlJuego;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar(Object objeto) {
+        
+    }
 }

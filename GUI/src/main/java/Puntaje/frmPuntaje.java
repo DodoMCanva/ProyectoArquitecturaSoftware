@@ -1,21 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Puntaje;
 
 import Menu.frmMenu;
 
 /**
  *
- * @author cesar
+ * @author Equipo
  */
-public class frmScores extends javax.swing.JFrame {
+public class frmPuntaje extends javax.swing.JFrame {
 
     /**
      * Creates new form frmScores
      */
-    public frmScores() {
+    public frmPuntaje() {
         initComponents();
         setSize(new java.awt.Dimension(900, 550));
         setPreferredSize(new java.awt.Dimension(900, 550));
