@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package view;
+
+package Menu;
+
+import iniciar.frmCrearCuenta;
 
 /**
  *
- * @author cesar
+ * @author Equipo
  */
 public class frmMenu extends javax.swing.JFrame {
 
@@ -49,7 +48,6 @@ public class frmMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 500));
-        setPreferredSize(new java.awt.Dimension(900, 500));
 
         jpMenu.setBackground(new java.awt.Color(0, 0, 0));
         jpMenu.setPreferredSize(new java.awt.Dimension(900, 500));
@@ -158,15 +156,11 @@ public class frmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxTamañoTableroComponentAdded
 
     private void btnUnirsePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirsePartidaActionPerformed
-        frmLobby loby = new frmLobby();
-        loby.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnUnirsePartidaActionPerformed
 
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
-        frmLobby fr = new frmLobby();
-        fr.setVisible(true);
-        this.dispose();
+        
 
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
 

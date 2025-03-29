@@ -4,6 +4,7 @@
  */
 package view;
 
+import Partida.frmPartida;
 import java.awt.Window;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
