@@ -1,9 +1,10 @@
+
 package Puntaje;
 
 /**
  *
  * @author Equipo
  */
-public class ctrlPuntuacion {
+public class mdlPuntaje {
     
 }
