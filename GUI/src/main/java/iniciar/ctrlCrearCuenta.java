@@ -12,13 +12,13 @@ public class ctrlCrearCuenta {
     mdlMenu modelo_menu = new mdlMenu();
     
     public void abrirVentana(){
-        modelo.abrirVentana();
+        //modelo.abrirVentana();
     }
     
     public void crearJugador(){
-        if (modelo.crearJugador()) {
-            modelo_menu.abrirVentana();
-        }
+        //if (modelo.crearJugador()) {
+        //    modelo_menu.abrirVentana();
+        //}
         
     }
 }
