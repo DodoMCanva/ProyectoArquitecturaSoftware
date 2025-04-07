@@ -2,6 +2,7 @@ package iniciar;
 
 import Interfaz.Observado;
 import Interfaz.Observador;
+import Objetos.Jugador;
 
 /**
  *
@@ -10,7 +11,7 @@ import Interfaz.Observador;
 public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
 
     Observador vista = new frmCrearCuenta(new ctrlCrearCuenta());
-    Logica dominio = new Logica();
+    Jugador Jugador;
 
     //preguntar a dominio o la red
     
