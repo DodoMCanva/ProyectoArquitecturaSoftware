@@ -13,6 +13,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
     
     public frmPartida() {
         initComponents();
+        
     }
 
     
@@ -38,7 +39,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
         lblScoreJ3 = new javax.swing.JLabel();
         ls3 = new javax.swing.JLabel();
         lblScoreJ4 = new javax.swing.JLabel();
-        btnTerminar = new javax.swing.JButton();
+        btnAbandonar = new javax.swing.JButton();
         pnlDibujo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,12 +82,12 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
 
         lblScoreJ4.setText("100");
 
-        btnTerminar.setBackground(new java.awt.Color(255, 51, 51));
-        btnTerminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnTerminar.setText("Terminar Partida");
-        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+        btnAbandonar.setBackground(new java.awt.Color(255, 51, 51));
+        btnAbandonar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAbandonar.setText("Abandonar");
+        btnAbandonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerminarActionPerformed(evt);
+                btnAbandonarActionPerformed(evt);
             }
         });
 
@@ -134,7 +135,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
                 .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlJuegoLayout.createSequentialGroup()
                         .addGap(290, 290, 290)
-                        .addComponent(btnTerminar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAbandonar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlJuegoLayout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addComponent(pnlDibujo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -194,7 +195,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
                     .addComponent(lblScoreJ3)
                     .addComponent(ls3)
                     .addComponent(lblScoreJ4)
-                    .addComponent(btnTerminar))
+                    .addComponent(btnAbandonar))
                 .addGap(10, 10, 10))
         );
 
@@ -213,16 +214,16 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnlDibujoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDibujoMouseReleased
-        // TODO add your handling code here:
+        control.clickPanel(evt.getY(), evt.getX());
     }//GEN-LAST:event_pnlDibujoMouseReleased
 
-    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTerminarActionPerformed
+    private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
+        control.abandonar();
+    }//GEN-LAST:event_btnAbandonarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTerminar;
+    private javax.swing.JButton btnAbandonar;
     private javax.swing.JLabel lblJ1;
     private javax.swing.JLabel lblJ2;
     private javax.swing.JLabel lblJ3;

@@ -71,7 +71,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
-                          <Component id="btnTerminar" min="-2" pref="361" max="-2" attributes="0"/>
+                          <Component id="btnAbandonar" min="-2" pref="361" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
                       <Component id="lblScoreJ3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ls3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblScoreJ4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnTerminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAbandonar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
@@ -265,7 +265,7 @@
             <Property name="text" type="java.lang.String" value="100"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnTerminar">
+        <Component class="javax.swing.JButton" name="btnAbandonar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
@@ -273,10 +273,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Terminar Partida"/>
+            <Property name="text" type="java.lang.String" value="Abandonar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTerminarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbandonarActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="pnlDibujo">
