@@ -1,9 +1,6 @@
 
 package iniciar;
-
 import Interfaz.Observador;
-import Menu.frmMenu;
-import javax.swing.JFrame;
 
 /**
  *
@@ -90,7 +87,7 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearcuentaActionPerformed
-        control.crearCuenta();
+        control.crearJugador(txtNombreUsuario.getText(), "");
     }//GEN-LAST:event_btnCrearcuentaActionPerformed
 
 
@@ -106,6 +103,7 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador {
 
     @Override
     public void actualizar(Object objeto) {
+        //preguntar
         
     }
 }

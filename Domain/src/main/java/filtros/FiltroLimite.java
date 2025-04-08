@@ -8,7 +8,6 @@ import Objetos.Partida;
  */
 public class FiltroLimite implements Filtro {
 
-    @Override
     public boolean aplicar(Partida partida) {
         if (partida.getJugadores() != null) {
             if (partida.getJugadores().length < 4) {

@@ -1,7 +1,5 @@
 package filtros;
 
-import Objetos.Partida;
-
 /**
  *
  * @author Equipo

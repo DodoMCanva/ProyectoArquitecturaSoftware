@@ -2,7 +2,8 @@ package iniciar;
 
 import Interfaz.Observado;
 import Interfaz.Observador;
-import Objetos.Jugador;
+import tuberias.TuberiaJugador;
+import tuberias.TuberiaRed;
 
 /**
  *
@@ -10,27 +11,20 @@ import Objetos.Jugador;
  */
 public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
 
-    Observador vista = new frmCrearCuenta(new ctrlCrearCuenta());
-    Jugador Jugador;
-
-    //preguntar a dominio o la red
+    Observador vista;
     
-    public void abrirVentana() {
-        if (vista instanceof frmCrearCuenta) {
-            ((frmCrearCuenta) vista).setVisible(true);
-        }
+    public void abrirVentana(ctrlCrearCuenta control) {
+        vista = new frmCrearCuenta(control);
+        notificar();
     }
-
-    public boolean crearCuenta() {
-        if (dominio.crearJugador()) {
-            if (vista instanceof frmCrearCuenta) {
-                ((frmCrearCuenta) vista).setVisible(true);
-            }
-            return true;
-        }
-        return false;
+    
+    public boolean crearJugador(String nombre, String avatar) {
+        TuberiaJugador dominio = new TuberiaJugador();
+        TuberiaRed red = new TuberiaRed();
+        notificar();
+        return dominio.procesar(nombre, avatar) && red.procesar(nombre);
     }
-
+    
     @Override
     public void notificar() {
         vista.actualizar(this);
