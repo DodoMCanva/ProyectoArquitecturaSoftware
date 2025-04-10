@@ -129,9 +129,7 @@ public class frmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-        frmCrearCuenta ini = new frmCrearCuenta();
-        ini.setVisible(true);
-        this.dispose();
+        
 
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 

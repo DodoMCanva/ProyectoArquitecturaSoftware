@@ -5,6 +5,9 @@ package Interfaz;
  *
  * @author Equipo
  */
-public interface Observador {
-    public void actualizar(Object objeto);
+public interface Observador<m>{
+    
+    public void actualizar(m modelo);
+
 }
+    

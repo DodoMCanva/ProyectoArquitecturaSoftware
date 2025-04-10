@@ -17,8 +17,10 @@ public class ctrlCrearCuenta {
     }
     
     public void crearJugador(String nombre, String avatar){
-        if (modelo.crearJugador(nombre, avatar)) {
-            modelo_menu.abrirVentana();
-        }
+        modelo.crearJugador(nombre, avatar);
+    }
+    
+    public void abrirVentanaSiguiente(){
+        modelo_menu.abrirVentana();
     }
 }

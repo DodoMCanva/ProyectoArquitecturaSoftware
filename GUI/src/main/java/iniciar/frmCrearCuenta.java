@@ -6,7 +6,7 @@ import Interfaz.Observador;
  *
  * @author Equipo
  */
-public class frmCrearCuenta extends javax.swing.JFrame implements Observador {
+public class frmCrearCuenta extends javax.swing.JFrame implements Observador<ImdlCrearCuenta>{
     
     private ctrlCrearCuenta control;
     
@@ -101,9 +101,20 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador {
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
 
+
     @Override
-    public void actualizar(Object objeto) {
-        //preguntar
-        
+    public void actualizar(ImdlCrearCuenta modelo) {
+        switch (modelo.obtenerEstado()) {
+            case "abrir":
+                this.setVisible(true);
+                break;
+            case "cambiar":
+                control.abrirVentanaSiguiente();
+                this.dispose();
+                break;
+            default:
+                System.out.println("n/a");
+        }
+
     }
 }
