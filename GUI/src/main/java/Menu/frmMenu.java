@@ -1,21 +1,21 @@
-
 package Menu;
 
-import iniciar.frmCrearCuenta;
+import Interfaz.Observador;
 
 /**
  *
  * @author Equipo
  */
-public class frmMenu extends javax.swing.JFrame {
+public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> {
 
-    public frmMenu() {
+    private ctrlMenu control;
+
+    public frmMenu(ctrlMenu control) {
         initComponents();
-        setSize(new java.awt.Dimension(900, 550));
-        setPreferredSize(new java.awt.Dimension(900, 550));
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
+        this.control = control;
     }
 
     @SuppressWarnings("unchecked")
@@ -129,7 +129,7 @@ public class frmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-        
+
 
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
@@ -142,11 +142,11 @@ public class frmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxTamañoTableroComponentAdded
 
     private void btnUnirsePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirsePartidaActionPerformed
-        
+
     }//GEN-LAST:event_btnUnirsePartidaActionPerformed
 
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
-        
+
 
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
 
@@ -166,4 +166,20 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lbtituloTamañoTab1;
     private javax.swing.JTextField txtCodigoPartida1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar(ImdlMenu modelo) {
+        switch (modelo.obtenerEstado()) {
+            case "abrir":
+                this.setVisible(true);
+                break;
+            case "cambiar":
+                control.abrirVentanaSiguiente();
+                this.dispose();
+                break;
+            default:
+                System.out.println("n/a");
+        }
+    }
 }
+

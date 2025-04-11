@@ -7,4 +7,6 @@ package Menu;
  */
 public interface ImdlMenu {
     
+    public String obtenerEstado();
+
 }

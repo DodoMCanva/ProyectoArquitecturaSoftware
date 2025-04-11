@@ -1,7 +1,7 @@
 
 package iniciar;
 
-import Menu.mdlMenu;
+import Menu.ctrlMenu;
 
 /**
  *
@@ -9,7 +9,7 @@ import Menu.mdlMenu;
  */
 public class ctrlCrearCuenta {
     mdlCrearCuenta modelo = new mdlCrearCuenta();
-    mdlMenu modelo_menu = new mdlMenu();
+    ctrlMenu control_menu = new ctrlMenu();
     
     
     public void abrirVentana(){
@@ -21,6 +21,6 @@ public class ctrlCrearCuenta {
     }
     
     public void abrirVentanaSiguiente(){
-        modelo_menu.abrirVentana();
+        control_menu.abrirVentana();
     }
 }
