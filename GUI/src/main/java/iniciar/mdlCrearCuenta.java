@@ -2,8 +2,7 @@ package iniciar;
 
 import Interfaz.Observado;
 import Interfaz.Observador;
-import tuberias.TuberiaJugador;
-import tuberias.TuberiaRed;
+import Tuberias.TuberiaJugador;
 
 /**
  *
@@ -24,10 +23,11 @@ public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
     
     @Override
     public void crearJugador(String nombre, String avatar) {
-        TuberiaJugador dominio = new TuberiaJugador();
-        TuberiaRed red = new TuberiaRed();
-        boolean r = dominio.procesar(nombre, avatar) && red.procesar(nombre);
-        if (r) {
+        TuberiaJugador tuberia = new TuberiaJugador();
+        String resultado = tuberia.procesar(nombre);
+        if (!resultado.equals("")) {
+            //crear jugador y mandarlo a la red
+            //cliente jugador crear y mandar
             estado = "cambiar";
             interfaz = this;
             notificar();
