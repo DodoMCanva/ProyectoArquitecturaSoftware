@@ -2,6 +2,7 @@ package Menu;
 
 import Interfaz.Observado;
 import Interfaz.Observador;
+import Objetos.*;
 
 /**
  *
@@ -12,6 +13,9 @@ public class mdlMenu implements Observado, ImdlMenu {
     private Observador vista;
     private ImdlMenu interfaz;
     private String estado = "";
+    
+    private Partida partida;
+    private Tablero tablero;
 
     public void abrirVentana(ctrlMenu control) {
         vista = new frmMenu(control);
@@ -20,12 +24,12 @@ public class mdlMenu implements Observado, ImdlMenu {
         notificar();
     }
 
-    public void crearPartida(){
-    
+    public void crearPartida(int tmn, int nj){
+        //conectarse a la red y mandar la partida
     }
     
     public void unirsePartida(){
-    
+        
     }
     
 

@@ -15,8 +15,16 @@ public class ctrlMenu {
         modelo.abrirVentana(this);
     }
     
-    public void abrirVentanaSiguiente() {
-        //control_lobby.abrirVentana();
+    public void crearPartida(int tmn, int nj) {
+        modelo.crearPartida(tmn, nj);
+    }
+    
+    public void unirsePartida() {
+        modelo.unirsePartida();
+    }
+
+    void abrirVentanaSiguiente() {
+        control_lobby.abrirVentana();
     }
     
 }
