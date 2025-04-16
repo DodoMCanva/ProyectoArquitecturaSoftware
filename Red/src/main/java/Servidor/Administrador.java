@@ -11,8 +11,8 @@ import java.net.Socket;
 public class Administrador implements Runnable {
 
     private Socket socket;
-    //private BufferedReader in;
-    //private PrintWriter out;
+    private BufferedReader in;
+    private PrintWriter out;
     private int playerId;
 
     public Administrador(Socket socket, int playerId) {
@@ -21,7 +21,7 @@ public class Administrador implements Runnable {
     }
 
     public void run() {
-        /*
+        
         try {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
@@ -48,6 +48,6 @@ public class Administrador implements Runnable {
 
     public void sendMessage(String message) {
         out.println(message);
-    }*/
+    
     }
 }
