@@ -1,5 +1,6 @@
 package iniciar;
 
+import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Tuberias.TuberiaJugador;
@@ -24,10 +25,10 @@ public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
     @Override
     public void crearJugador(String nombre, String avatar) {
         TuberiaJugador tuberia = new TuberiaJugador();
+        Cliente red = new Cliente();
         String resultado = tuberia.procesar(nombre);
         if (!resultado.equals("")) {
-            //crear jugador y mandarlo a la red
-            //cliente jugador crear y mandar
+            
             estado = "cambiar";
             interfaz = this;
             notificar();

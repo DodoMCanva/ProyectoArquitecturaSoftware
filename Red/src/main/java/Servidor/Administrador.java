@@ -2,7 +2,11 @@ package Servidor;
 
 import static Servidor.Servidor.nextTurn;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,43 +15,56 @@ import java.net.Socket;
 public class Administrador implements Runnable {
 
     private Socket socket;
-    private BufferedReader in;
-    private PrintWriter out;
-    private int playerId;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
+    private int jugador;
 
-    public Administrador(Socket socket, int playerId) {
+    public Administrador(Socket socket, int jugador) {
         this.socket = socket;
-        this.playerId = playerId;
+        this.jugador = jugador;
     }
 
     public void run() {
-        
+
         try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new ObjectInputStream(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
 
-            String input;
-            while ((input = in.readLine()) != null) {
-                System.out.println("Jugador " + (playerId + 1) + ": " + input);
+            Object obj;
+            while ((obj = in.readObject()) != null) {
 
-                if (players.get(currentPlayerIndex) == this) {
-                    // Es su turno, procesamos el movimiento
-                    for (ClientHandler player : players) {
-                        player.sendMessage("Jugador " + (playerId + 1) + ": " + input);
-                    }
-                    nextTurn();
-                } else {
-                    sendMessage("No es tu turno. Espera.");
-                }
+//                if (obj instanceof movimiento) {
+//                    movimiento mov = (movimiento) obj;
+//                    System.out.println("Jugador " + (jugador + 1) + " jugó: " + mov);
+//
+//                    // Verificamos si es su turno
+//                    if (Servidor.jugadores.get(Servidor.jugadorActual) == this) {
+//                        // Enviar la jugada a todos los jugadores
+//                        for (Administrador player : Servidor.jugadores) {
+//                            player.enviarMovimiento(mov);
+//                        }
+//                        Servidor.siguienteTurno();
+//                    } else {
+//                        enviarMensaje("No es tu turno. Espera.");
+//                    }
+//                }
             }
 
         } catch (IOException e) {
-            System.out.println("Jugador " + (playerId + 1) + " desconectado.");
+            System.out.println("Jugador " + (jugador + 1) + " desconectado.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void sendMessage(String message) {
-        out.println(message);
-    
+    //mov en vez de Object
+    public void enviarMovimiento(Object mov) throws IOException {
+        out.writeObject(mov);
+        out.flush();
+    }
+
+    public void enviarMensaje(String mensaje) throws IOException {
+        out.writeObject(mensaje); 
+        out.flush();
     }
 }
