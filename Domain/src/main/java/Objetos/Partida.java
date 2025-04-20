@@ -5,12 +5,13 @@ package Objetos;
  * @author Equipo
  */
 public class Partida {
+
     private Tablero tablero;
     private Jugador[] jugadores;
 
-    public Partida(Tablero tablero, Jugador[] jugadores) {
+    public Partida(Tablero tablero, int numero_jugadores) {
         this.tablero = tablero;
-        this.jugadores = jugadores;
+        this.jugadores = new Jugador[numero_jugadores];
     }
 
     public Tablero getTablero() {
@@ -25,11 +26,13 @@ public class Partida {
         return jugadores;
     }
 
-    public void setJugadores(Jugador[] jugadores) {
-        this.jugadores = jugadores;
+    public void agregarJugador(Jugador jugador) {
+        for (int i = 0; i < jugadores.length; i++) {
+            if (jugadores[i] == null) {
+                jugadores[i] = jugador;
+                break;
+            }
+        }
     }
-    
-    
-    
-    
+
 }

@@ -1,6 +1,7 @@
 
 package iniciar;
 
+import Cliente.Cliente;
 import Menu.ctrlMenu;
 
 /**
@@ -8,9 +9,16 @@ import Menu.ctrlMenu;
  * @author Equipo
  */
 public class ctrlCrearCuenta {
-    mdlCrearCuenta modelo = new mdlCrearCuenta();
-    ctrlMenu control_menu = new ctrlMenu();
     
+    private Cliente cli;
+    private mdlCrearCuenta modelo;
+    private ctrlMenu control_menu;
+
+    public ctrlCrearCuenta(Cliente cli) {
+        this.cli = cli;
+        modelo = new mdlCrearCuenta(cli);
+        control_menu = new ctrlMenu(cli);
+    }
     
     public void abrirVentana(){
         modelo.abrirVentana(this);

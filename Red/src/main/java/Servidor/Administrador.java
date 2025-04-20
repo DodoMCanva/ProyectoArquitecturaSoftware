@@ -1,10 +1,11 @@
 package Servidor;
 
-import static Servidor.Servidor.nextTurn;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,8 +16,9 @@ import java.util.logging.Logger;
 public class Administrador implements Runnable {
 
     private Socket socket;
-    private ObjectInputStream in;
     private ObjectOutputStream out;
+    private ObjectInputStream in;
+    private List<String> nombres = new ArrayList<>();
     private int jugador;
 
     public Administrador(Socket socket, int jugador) {
@@ -27,12 +29,21 @@ public class Administrador implements Runnable {
     public void run() {
 
         try {
-            in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
+            out.flush();
+            in = new ObjectInputStream(socket.getInputStream());
 
             Object obj;
             while ((obj = in.readObject()) != null) {
 
+                synchronized (Servidor.nombres) {
+                    if (!Servidor.nombres.contains((String) obj)) {
+                        Servidor.nombres.add((String) obj);
+                        enviar(true);
+                    } else {
+                        enviar(false);
+                    }
+                }
 //                if (obj instanceof movimiento) {
 //                    movimiento mov = (movimiento) obj;
 //                    System.out.println("Jugador " + (jugador + 1) + " jugó: " + mov);
@@ -57,14 +68,9 @@ public class Administrador implements Runnable {
         }
     }
 
-    //mov en vez de Object
-    public void enviarMovimiento(Object mov) throws IOException {
-        out.writeObject(mov);
+    public void enviar(Object obj) throws IOException {
+        out.writeObject(obj);
         out.flush();
     }
 
-    public void enviarMensaje(String mensaje) throws IOException {
-        out.writeObject(mensaje); 
-        out.flush();
-    }
 }

@@ -1,5 +1,6 @@
 package Menu;
 
+import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.*;
@@ -13,9 +14,13 @@ public class mdlMenu implements Observado, ImdlMenu {
     private Observador vista;
     private ImdlMenu interfaz;
     private String estado = "";
-    
     private Partida partida;
-    private Tablero tablero;
+
+    private Cliente cli;
+
+    public mdlMenu(Cliente cli) {
+        this.cli = cli;
+    }
 
     public void abrirVentana(ctrlMenu control) {
         vista = new frmMenu(control);
@@ -24,14 +29,28 @@ public class mdlMenu implements Observado, ImdlMenu {
         notificar();
     }
 
-    public void crearPartida(int tmn, int nj){
-        //conectarse a la red y mandar la partida
+    public void crearPartida(int tmn, int nj) {
+        partida = new Partida(new Tablero(tmn), nj);
+        partida.agregarJugador(cli.getJugadorCliente());
+        cli.enviarServidor(partida);
+
+        if (cli.esRespuestaValida()) {
+            estado = "cambiar";
+            interfaz = this;
+            notificar();
+        }
+
     }
-    
-    public void unirsePartida(){
+
+    public void unirsePartida() {
+        cli.enviarServidor(cli.getJugadorCliente());
         
+        if (cli.esRespuestaValida()) {
+            estado = "cambiar";
+            interfaz = this;
+            notificar();
+        }
     }
-    
 
     @Override
     public String obtenerEstado() {

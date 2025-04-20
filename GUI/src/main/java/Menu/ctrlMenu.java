@@ -1,14 +1,24 @@
 package Menu;
 
+import Cliente.Cliente;
 import Lobby.ctrlLobby;
+import iniciar.mdlCrearCuenta;
 
 /**
  *
  * @author Equipo
  */
 public class ctrlMenu {
-    mdlMenu modelo = new mdlMenu();
-    ctrlLobby control_lobby = new ctrlLobby();
+    private Cliente cli;
+    private mdlMenu modelo;
+    private ctrlLobby control_lobby = new ctrlLobby();
+
+    public ctrlMenu(Cliente cli) {
+        this.cli = cli;
+        modelo = new mdlMenu(cli);
+        //control_lobby = new ctrlLobby(cli);
+    }
+    
     
     
     public void abrirVentana() {

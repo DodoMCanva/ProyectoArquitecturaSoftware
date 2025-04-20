@@ -1,4 +1,3 @@
-
 package Objetos;
 
 /**
@@ -6,29 +5,18 @@ package Objetos;
  * @author Equipo
  */
 public class Tablero {
-    private Linea[][] lineas;
+
+    private Linea[][] horizontales;
+    private Linea[][] verticales;
     private Caja[][] cajas;
 
-    public Tablero(Linea[][] lineas, Caja[][] cajas) {
-        this.lineas = lineas;
-        this.cajas = cajas;
+    public Tablero(int tmn) {
+        horizontales = new Linea[tmn][(tmn - 1)];
+        verticales = new Linea[(tmn - 1)][tmn];
     }
 
-    public Linea[][] getLineas() {
-        return lineas;
+    public void crearCajas(){
+        
     }
 
-    public void setLineas(Linea[][] lineas) {
-        this.lineas = lineas;
-    }
-
-    public Caja[][] getCajas() {
-        return cajas;
-    }
-
-    public void setCajas(Caja[][] cajas) {
-        this.cajas = cajas;
-    }
-    
-    
 }
