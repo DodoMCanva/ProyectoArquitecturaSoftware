@@ -2,6 +2,7 @@ package Cliente;
 
 import Objetos.Jugador;
 import Objetos.Partida;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,6 +23,7 @@ public class Cliente {
     
     private Jugador JugadorCliente;
     private Partida PartidaCliente;
+    private Color preferencias;
 
     public Cliente(String host, int puerto) throws IOException {
         socket = new Socket(host, puerto);
