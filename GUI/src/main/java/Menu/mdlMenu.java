@@ -33,7 +33,6 @@ public class mdlMenu implements Observado, ImdlMenu {
         partida = new Partida(new Tablero(tmn), nj);
         partida.agregarJugador(cli.getJugadorCliente());
         cli.enviarServidor(partida);
-
         if (cli.esRespuestaValida()) {
             estado = "cambiar";
             interfaz = this;

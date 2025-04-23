@@ -23,6 +23,7 @@ public class Cliente {
     
     private Jugador JugadorCliente;
     private Partida PartidaCliente;
+    
     private Color preferencias;
 
     public Cliente(String host, int puerto) throws IOException {
@@ -44,6 +45,12 @@ public class Cliente {
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
+                    if (respuestaValida) {
+                        
+                    }
+                    // es string? y ya se lleno?
+                    // notificar al mdl Lobby
+                    //
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -103,6 +110,7 @@ public class Cliente {
     public static boolean esRespuestaRecibida() {
         return respuestaRecibida;
     }
+    
 
     public void setJugadorCliente(Jugador jugador) {
         this.JugadorCliente = jugador;
@@ -119,6 +127,8 @@ public class Cliente {
     public void setPartidaCliente(Partida PartidaCliente) {
         this.PartidaCliente = PartidaCliente;
     }
+    
+    public void interpretar(){}
     
     
 }

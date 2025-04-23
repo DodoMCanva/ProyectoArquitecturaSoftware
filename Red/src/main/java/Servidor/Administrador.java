@@ -1,5 +1,6 @@
 package Servidor;
 
+import Objetos.Partida;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -18,8 +19,12 @@ public class Administrador implements Runnable {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
+    
+    
     private List<String> nombres = new ArrayList<>();
     private int jugador;
+    
+    private Partida partida;
 
     public Administrador(Socket socket, int jugador) {
         this.socket = socket;
@@ -44,21 +49,15 @@ public class Administrador implements Runnable {
                         enviar(false);
                     }
                 }
-//                if (obj instanceof movimiento) {
-//                    movimiento mov = (movimiento) obj;
-//                    System.out.println("Jugador " + (jugador + 1) + " jugó: " + mov);
-//
-//                    // Verificamos si es su turno
-//                    if (Servidor.jugadores.get(Servidor.jugadorActual) == this) {
-//                        // Enviar la jugada a todos los jugadores
-//                        for (Administrador player : Servidor.jugadores) {
-//                            player.enviarMovimiento(mov);
-//                        }
-//                        Servidor.siguienteTurno();
-//                    } else {
-//                        enviarMensaje("No es tu turno. Espera.");
-//                    }
-//                }
+                if (obj instanceof Partida) {
+                    if (partida == null) {
+                        partida = (Partida) obj;
+                        enviar(true);
+                    }else{
+                        enviar(false);
+                    }
+                    
+                }
             }
 
         } catch (IOException e) {

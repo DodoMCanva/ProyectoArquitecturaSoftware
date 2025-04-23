@@ -1,4 +1,4 @@
-
+    
 package Partida;
 import Interfaz.Observado;
 import Interfaz.Observador;
@@ -9,7 +9,7 @@ import Interfaz.Observador;
  */
 public class mdlPartida implements Observado, ImdlPartida {
     private Observador vista = new frmPartida();
-    private ImdlPartida interfaz = this; 
+    private ImdlPartida interfaz = this;
     
     public mdlPartida(frmPartida vistaPartida){
         vista = vistaPartida;
