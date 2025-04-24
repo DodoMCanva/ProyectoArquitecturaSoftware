@@ -30,6 +30,7 @@ public class mdlMenu implements Observado, ImdlMenu {
     }
 
     public void crearPartida(int tmn, int nj) {
+        
         partida = new Partida(new Tablero(tmn), nj);
         partida.agregarJugador(cli.getJugadorCliente());
         cli.enviarServidor(partida);

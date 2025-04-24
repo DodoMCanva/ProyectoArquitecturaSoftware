@@ -10,6 +10,8 @@ public class Caja {
     private int[] sup;
     private int[] inf;
     private Jugador propietario;
+    
+    
 
     
     
