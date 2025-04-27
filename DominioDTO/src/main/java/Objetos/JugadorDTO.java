@@ -12,7 +12,7 @@ public class JugadorDTO implements Serializable{
     private String nombre;
     private int puntos;
 
-    public JugadorDTO(String avatar, String nombre, int puntos) {
+    public JugadorDTO(String nombre, String avatar, int puntos) {
         this.avatar = avatar;
         this.nombre = nombre;
         this.puntos = puntos;

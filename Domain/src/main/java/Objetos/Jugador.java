@@ -1,4 +1,3 @@
-
 package Objetos;
 
 /**
@@ -6,13 +5,14 @@ package Objetos;
  * @author Equipo
  */
 public class Jugador {
-    private String avatar;
+
     private String nombre;
+    private String avatar;
     private int puntos;
 
-    public Jugador(String avatar, String nombre, int puntos) {
-        this.avatar = avatar;
+    public Jugador(String nombre, String avatar, int puntos) {
         this.nombre = nombre;
+        this.avatar = avatar;
         this.puntos = puntos;
     }
 
@@ -28,17 +28,11 @@ public class Jugador {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public int getPuntos() {
         return puntos;
     }
 
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
+    public void incrementarPuntos() {
+        puntos++;
     }
-    
-    
 }
