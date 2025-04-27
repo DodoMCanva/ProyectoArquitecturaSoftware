@@ -6,11 +6,21 @@ package Objetos;
  */
 public class Tablero {
 
+    private int tamano;
     private Linea[][] horizontales;
     private Linea[][] verticales;
     private Caja[][] cajas;
 
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+
     public Tablero(int tamano) {
+        this.tamano = tamano;
         horizontales = new Linea[tamano][tamano - 1];
         verticales = new Linea[tamano - 1][tamano];
         cajas = new Caja[tamano - 1][tamano - 1];
@@ -99,12 +109,10 @@ public class Tablero {
             }
             System.out.println();
         }
-        
+
         for (int i = 0; i < verticales[verticales.length - 1].length; i++) {
             System.out.print(" _ ");
         }
         System.out.println();
     }
 }
-
-

@@ -11,24 +11,5 @@ public class LineaDTO implements Serializable {
     private boolean estaDibujada;
     private Jugador jugador;
 
-    public LineaDTO(boolean estaDibujada, Jugador jugador) {
-        this.estaDibujada = estaDibujada;
-        this.jugador = jugador;
-    }
-
-    public boolean isEstaDibujada() {
-        return estaDibujada;
-    }
-
-    public void setEstaDibujada(boolean estaDibujada) {
-        this.estaDibujada = estaDibujada;
-    }
-
-    public Jugador getJugador() {
-        return jugador;
-    }
-
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
-    }
+    
 }
