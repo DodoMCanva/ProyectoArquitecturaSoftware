@@ -206,7 +206,7 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
             case "abrir":
                 this.setVisible(true);
                 break;
-            case "cambio":
+            case "Partida Lista":
                 control.abrirVentanaSiguiente();
                 this.dispose();
                 break;
