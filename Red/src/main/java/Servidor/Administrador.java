@@ -19,11 +19,10 @@ public class Administrador implements Runnable {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-    
-    
+
     private List<String> nombres = new ArrayList<>();
     private int jugador;
-    
+
     private Partida partida;
 
     public Administrador(Socket socket, int jugador) {
@@ -49,13 +48,19 @@ public class Administrador implements Runnable {
                         enviar(false);
                     }
                 }
-                if (obj instanceof Partida) {
-                    if (partida == null) {
-                        partida = (Partida) obj;
-                        enviar(true);
-                    }else{
-                        enviar(false);
+                if (obj instanceof PartidaDTO) {
+
+                    partida = (Partida)TuberiaDominio.aplicar(obj);
+                    enviar(true);
+                }
+                if (obj instanceof Jugador) {
+                    if (partida != null) {
+                        //si esta llena
+                        //partida.agregarjugador(jugador)
+                        //enviartrue
                     }
+                }
+                if (obj instanceof movimiento) {
                     
                 }
             }

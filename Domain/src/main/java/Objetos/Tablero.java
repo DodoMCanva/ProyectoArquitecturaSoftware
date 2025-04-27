@@ -99,7 +99,7 @@ public class Tablero {
             }
             System.out.println();
         }
-
+        
         for (int i = 0; i < verticales[verticales.length - 1].length; i++) {
             System.out.print(" _ ");
         }

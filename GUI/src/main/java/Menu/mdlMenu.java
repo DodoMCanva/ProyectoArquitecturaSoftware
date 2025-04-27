@@ -30,11 +30,12 @@ public class mdlMenu implements Observado, ImdlMenu {
     }
 
     public void crearPartida(int tmn, int nj) {
-        
         partida = new Partida(new Tablero(tmn), nj);
-        partida.agregarJugador(cli.getJugadorCliente());
-        cli.enviarServidor(partida);
+        PartidaDTO dto TuberiaDTO.aplicar(partida);
+        cli.enviarServidor(dto);
         if (cli.esRespuestaValida()) {
+            partida.agregarJugador(cli.getJugadorCliente());
+            cli.enviarServidor(cli.getJugadorCliente())
             estado = "cambiar";
             interfaz = this;
             notificar();
@@ -44,7 +45,7 @@ public class mdlMenu implements Observado, ImdlMenu {
 
     public void unirsePartida() {
         cli.enviarServidor(cli.getJugadorCliente());
-        
+
         if (cli.esRespuestaValida()) {
             estado = "cambiar";
             interfaz = this;
