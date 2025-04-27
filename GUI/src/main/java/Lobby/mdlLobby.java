@@ -4,6 +4,7 @@ import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Partida;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,6 +50,15 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
                 vista.actualizar(interfaz);
                 
                 return;
+            }
+            if (cli.solicitudUnirse()) {
+                int respuesta= JOptionPane.showConfirmDialog(null,"¿Quieres aceptar otro jugador",
+                        "UnirsePartida", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    
+                    
+                    
+                }
             }
         }
 
