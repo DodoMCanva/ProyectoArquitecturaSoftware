@@ -16,7 +16,7 @@ public class ctrlLobby {
     public ctrlLobby(Cliente cli) {
         this.cli = cli;
         modelo = new mdlLobby(cli);
-        control_partida = new ctrlPartida();
+        control_partida = new ctrlPartida(cli);
     }
 
     public void abrirVentana() {
