@@ -66,7 +66,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     public void run() {
         while (!Terminada) {
             if (cli.cambioPartida()) {
-                interpretarMovimientoGraficamente(cli.getMovimiento);
+                //interpretarMovimientoGraficamente(cli.getMovimiento());
                 estado = "actualizar tablero";
                 vista.actualizar(interfaz);
             }
