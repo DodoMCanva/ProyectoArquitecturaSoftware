@@ -1,6 +1,8 @@
 package Menu;
 
 import Cliente.Cliente;
+import Convertidor.convertirJugador;
+import Convertidor.convertirPartida;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.*;
@@ -31,11 +33,12 @@ public class mdlMenu implements Observado, ImdlMenu {
 
     public void crearPartida(int tmn, int nj) {
         partida = new Partida(new Tablero(tmn), nj);
-        PartidaDTO dto TuberiaDTO.aplicar(partida);
-        cli.enviarServidor(dto);
+        convertirPartida convertir= new convertirPartida();
+        cli.enviarServidor(convertir.pasar_Dominio_a_DTO(partida));
         if (cli.esRespuestaValida()) {
             partida.agregarJugador(cli.getJugadorCliente());
-            cli.enviarServidor(cli.getJugadorCliente())
+            cli.setPartidaCliente(partida);
+            cli.enviarServidor(cli.getJugadorCliente());
             estado = "cambiar";
             interfaz = this;
             notificar();
@@ -44,8 +47,9 @@ public class mdlMenu implements Observado, ImdlMenu {
     }
 
     public void unirsePartida() {
-        cli.enviarServidor(cli.getJugadorCliente());
+        convertirJugador convertir = new convertirJugador();
 
+        cli.enviarServidor(convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
         if (cli.esRespuestaValida()) {
             estado = "cambiar";
             interfaz = this;
