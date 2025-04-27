@@ -251,8 +251,8 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     public void actualizar(ImdlPartida modelo) {
         switch (modelo.obtenerEstado()) {
             case "abrir":
+                
                 this.setVisible(true);
-                grafico.cargarDatos();
                 break;
             case "actualizar tablero":
                 
@@ -263,5 +263,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
             default:
                 throw new AssertionError();
         }
+    }
+    
+    public void graficar(){
+        
     }
 }

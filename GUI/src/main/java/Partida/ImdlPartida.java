@@ -6,5 +6,6 @@ package Partida;
  */
 public interface ImdlPartida {
 
+    
     public String obtenerEstado();
 }
