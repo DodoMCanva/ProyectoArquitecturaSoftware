@@ -1,17 +1,20 @@
 package Puntaje;
 
+import Interfaz.Observador;
 import Menu.frmMenu;
 
 /**
  *
  * @author Equipo
  */
-public class frmPuntaje extends javax.swing.JFrame {
+public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPuntaje> {
+
+    private ctrlPuntaje control;
 
     /**
      * Creates new form frmScores
      */
-    public frmPuntaje() {
+    public frmPuntaje(ctrlPuntaje control) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -78,7 +81,7 @@ public class frmPuntaje extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -89,4 +92,20 @@ public class frmPuntaje extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar(ImdlPuntaje modelo) {
+        switch (modelo.obtenerEstado()) {
+            case "abrir":
+                this.setVisible(true);
+                break;
+            case "cambio":
+                control.abrirVentanaSiguiente();
+                this.dispose();
+                break;
+            default:
+                System.out.println("n/a");
+        }
+    }
+
 }

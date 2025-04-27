@@ -25,8 +25,13 @@ public class Partida {
         turnoActual = (turnoActual + 1) % jugadores.length;
     }
 
-    public Jugador[] agregarJugador(Jugador jugadorCliente) {
-       return jugadores;
+    public void agregarJugador(Jugador jugadorCliente) {
+        for (int i = 0; i < jugadores.length; i++) {
+            if (jugadores[i] == null) {
+                jugadores[i] = jugadorCliente;
+                return;
+            }
+        }
     }
 
 }

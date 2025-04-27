@@ -1,6 +1,6 @@
-
 package Lobby;
 
+import Interfaz.Observador;
 import Menu.frmMenu;
 import javax.swing.JButton;
 
@@ -8,18 +8,21 @@ import javax.swing.JButton;
  *
  * @author Equipo
  */
-public class frmLobby extends javax.swing.JFrame {
+public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby> {
+
+    private ctrlLobby control;
 
     /**
      * Creates new form frmLobby
      */
-    public frmLobby() {
+    public frmLobby(ctrlLobby control) {
         initComponents();
         setSize(new java.awt.Dimension(900, 550));
         setPreferredSize(new java.awt.Dimension(900, 550));
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
+        this.control = control;
     }
 
     @SuppressWarnings("unchecked")
@@ -146,35 +149,27 @@ public class frmLobby extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
-        
+
     }//GEN-LAST:event_btnSolicitarInicioActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        frmColoresTablas col = new frmColoresTablas();
-        col.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        frmColoresTablas col1 = new frmColoresTablas();
-        col1.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        frmColoresTablas col = new frmColoresTablas();
-        col.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        frmColoresTablas col = new frmColoresTablas();
-        col.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public JButton getBtnSolicitarInicio() {
@@ -185,10 +180,6 @@ public class frmLobby extends javax.swing.JFrame {
         return btnSalir;
     }
 
-
-
-  
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
@@ -208,4 +199,19 @@ public class frmLobby extends javax.swing.JFrame {
     private javax.swing.JLabel lblImagenUsuario2;
     private javax.swing.JLabel lblImagenUsuario3;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar(ImdlLobby modelo) {
+        switch (modelo.obtenerEstado()) {
+            case "abrir":
+                this.setVisible(true);
+                break;
+            case "cambio":
+                control.abrirVentanaSiguiente();
+                this.dispose();
+                break;
+            default:
+                System.out.println("n/a");
+        }
+    }
 }
