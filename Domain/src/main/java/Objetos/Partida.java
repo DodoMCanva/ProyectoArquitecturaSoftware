@@ -17,8 +17,13 @@ public class Partida {
         this.jugadores = new Jugador[this.numeroJugadores];
     }
 
-    public Jugador[] agregarJugador(Jugador jugadorCliente) {
-       return jugadores;
+    public void agregarJugador(Jugador jugadorCliente) {
+        for (int i = 0; i < jugadores.length; i++) {
+            if (jugadores[i] == null) {
+                jugadores[i] = jugadorCliente;
+                return;
+            }
+        }
     }
 
     public int getNumeroJugadores() {

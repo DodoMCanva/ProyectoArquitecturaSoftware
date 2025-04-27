@@ -151,8 +151,7 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
     }//GEN-LAST:event_cboxTmnComponentAdded
 
     private void btnUnirsePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirsePartidaActionPerformed
-        
-        
+
         control.unirsePartida();
     }//GEN-LAST:event_btnUnirsePartidaActionPerformed
 
@@ -217,4 +216,3 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         }
     }
 }
-

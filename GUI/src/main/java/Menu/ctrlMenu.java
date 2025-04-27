@@ -11,15 +11,13 @@ import iniciar.mdlCrearCuenta;
 public class ctrlMenu {
     private Cliente cli;
     private mdlMenu modelo;
-    private ctrlLobby control_lobby = new ctrlLobby();
+    private ctrlLobby control_lobby = new ctrlLobby(cli);
 
     public ctrlMenu(Cliente cli) {
         this.cli = cli;
         modelo = new mdlMenu(cli);
-        //control_lobby = new ctrlLobby(cli);
+        control_lobby = new ctrlLobby(cli);
     }
-    
-    
     
     public void abrirVentana() {
         modelo.abrirVentana(this);
