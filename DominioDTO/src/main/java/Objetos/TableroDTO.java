@@ -8,37 +8,41 @@ import java.io.Serializable;
  */
 public class TableroDTO implements Serializable {
 
-    private Linea[][] horizontales;
-    private Linea[][] verticales;
-    private Caja[][] cajas;
+    private int tamano;
+    private LineaDTO[][] horizontales;
+    private LineaDTO[][] verticales;
+    private CajaDTO[][] cajas;
 
-    public TableroDTO(Linea[][] horizontales, Linea[][] verticales, Caja[][] cajas) {
-        this.horizontales = horizontales;
-        this.verticales = verticales;
-        this.cajas = cajas;
+    public int getTamano() {
+        return tamano;
     }
 
-    public Linea[][] getHorizontales() {
-        return horizontales;
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
     }
 
-    public void setHorizontales(Linea[][] horizontales) {
-        this.horizontales = horizontales;
-    }
+    public TableroDTO(int tamano) {
+        this.tamano = tamano;
+        horizontales = new LineaDTO[tamano][tamano - 1];
+        verticales = new LineaDTO[tamano - 1][tamano];
+        cajas = new CajaDTO[tamano - 1][tamano - 1];
 
-    public Linea[][] getVerticales() {
-        return verticales;
-    }
+        for (int i = 0; i < tamano - 1; i++) {
+            for (int j = 0; j < tamano - 1; j++) {
+                cajas[i][j] = new CajaDTO();
+            }
+        }
 
-    public void setVerticales(Linea[][] verticales) {
-        this.verticales = verticales;
-    }
+        for (int i = 0; i < tamano; i++) {
+            for (int j = 0; j < tamano - 1; j++) {
+                horizontales[i][j] = new LineaDTO();
+            }
+        }
 
-    public Caja[][] getCajas() {
-        return cajas;
-    }
-
-    public void setCajas(Caja[][] cajas) {
-        this.cajas = cajas;
+        for (int i = 0; i < tamano - 1; i++) {
+            for (int j = 0; j < tamano; j++) {
+                verticales[i][j] = new LineaDTO();
+            }
+        }
     }
 }

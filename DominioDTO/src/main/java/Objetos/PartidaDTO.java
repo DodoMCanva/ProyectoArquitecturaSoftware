@@ -8,37 +8,25 @@ import java.io.Serializable;
  */
 public class PartidaDTO implements Serializable {
 
-    private Tablero tablero;
-    private Jugador[] jugadores;
-    private int turnoActual;
+    private int numeroJugadores;
+    private TableroDTO tablero;
+    private JugadorDTO[] jugadores;
 
-    public PartidaDTO(Tablero tablero, Jugador[] jugadores, int turnoActual) {
+    public PartidaDTO(TableroDTO tablero, int numeroJugadores) {
         this.tablero = tablero;
-        this.jugadores = jugadores;
-        this.turnoActual = turnoActual;
+        this.numeroJugadores = numeroJugadores;
+        this.jugadores = new JugadorDTO[this.numeroJugadores];
     }
 
-    public Tablero getTablero() {
+    public int getNumeroJugadores() {
+        return numeroJugadores;
+    }
+
+    public TableroDTO getTablero() {
         return tablero;
     }
 
-    public void setTablero(Tablero tablero) {
-        this.tablero = tablero;
-    }
 
-    public Jugador[] getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(Jugador[] jugadores) {
-        this.jugadores = jugadores;
-    }
-
-    public int getTurnoActual() {
-        return turnoActual;
-    }
-
-    public void setTurnoActual(int turnoActual) {
-        this.turnoActual = turnoActual;
-    }
+    
+    
 }
