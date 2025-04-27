@@ -1,7 +1,7 @@
 package Cliente;
 
-import Objetos.Jugador;
-import Objetos.Partida;
+import Objetos.*;
+import Objetos.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,11 +19,11 @@ public class Cliente {
     private ObjectInputStream in;
 
     private static boolean respuestaValida = false;
-    private static boolean respuestaRecibida = false; 
-    
+    private static boolean respuestaRecibida = false;
+
     private Jugador JugadorCliente;
     private Partida PartidaCliente;
-    
+
     private Color preferencias;
 
     public Cliente(String host, int puerto) throws IOException {
@@ -40,14 +40,25 @@ public class Cliente {
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
-                    if (obj instanceof Partida) {
-                        PartidaCliente = (Partida)obj;
+                    if (obj instanceof PartidaDTO) {
+                        PartidaCliente = (Partida) obj;
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
-                    if (respuestaValida) {
-                        
+                    if (obj instanceof JugadorDTO) {
+                        PartidaCliente.agregarJugador(JugadorCliente);
+                        int registros;
+                        for (int i = 0; i < 10; i++) {
+
+                        }
+
                     }
+                    if (obj instanceof String) {
+                        if ((String) obj == "voto") {
+                            //partidaLista
+                        }
+                    }
+
                     // es string? y ya se lleno?
                     // notificar al mdl Lobby
                     //
@@ -95,6 +106,19 @@ public class Cliente {
         return out;
     }
 
+    //
+    public boolean partidaLista() {
+        return true;
+    }
+
+    public boolean solicitudUnirse() {
+        return true;
+    }
+
+    public boolean cambioPartida() {
+        return true;
+    }
+
     public static boolean esRespuestaValida() {
         long timeout = System.currentTimeMillis() + 5000;
         while (!esRespuestaRecibida() && System.currentTimeMillis() < timeout) {
@@ -110,7 +134,6 @@ public class Cliente {
     public static boolean esRespuestaRecibida() {
         return respuestaRecibida;
     }
-    
 
     public void setJugadorCliente(Jugador jugador) {
         this.JugadorCliente = jugador;
@@ -127,8 +150,8 @@ public class Cliente {
     public void setPartidaCliente(Partida PartidaCliente) {
         this.PartidaCliente = PartidaCliente;
     }
-    
-    public void interpretar(){}
-    
-    
+
+    public void interpretar() {
+    }
+
 }

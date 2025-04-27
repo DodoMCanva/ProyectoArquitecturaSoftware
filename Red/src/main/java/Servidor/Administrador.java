@@ -1,6 +1,6 @@
 package Servidor;
 
-import Objetos.Partida;
+import Objetos.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -48,21 +48,29 @@ public class Administrador implements Runnable {
                         enviar(false);
                     }
                 }
+                
                 if (obj instanceof PartidaDTO) {
 
-                    partida = (Partida)TuberiaDominio.aplicar(obj);
+                    //partida =;
                     enviar(true);
                 }
-                if (obj instanceof Jugador) {
+                
+                if (obj instanceof JugadorDTO) {
                     if (partida != null) {
+                        
+                        //enviar al administrador
                         //si esta llena
                         //partida.agregarjugador(jugador)
                         //enviartrue
                     }
                 }
-                if (obj instanceof movimiento) {
-                    
+                if (obj instanceof Movimiento) {
+
                 }
+                if (obj instanceof String) {
+
+                }
+
             }
 
         } catch (IOException e) {
