@@ -1,4 +1,3 @@
-
 package Partida;
 
 import Interfaz.Observador;
@@ -7,17 +6,21 @@ import Interfaz.Observador;
  *
  * @author Equipo
  */
-public class frmPartida extends javax.swing.JFrame implements Observador{
+public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPartida> {
+
     private ctrlPartida control;
-    
-    
-    public frmPartida() {
+    private Grafico grafico;
+
+    public frmPartida(ctrlPartida control) {
         initComponents();
-        
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultLookAndFeelDecorated(true);
+        this.control = control;
+        grafico = new Grafico(this);
+
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -245,7 +248,20 @@ public class frmPartida extends javax.swing.JFrame implements Observador{
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void actualizar(Object objeto) {
-        
+    public void actualizar(ImdlPartida modelo) {
+        switch (modelo.obtenerEstado()) {
+            case "abrir":
+                this.setVisible(true);
+                grafico.cargarDatos();
+                break;
+            case "actualizar tablero":
+                
+                break;
+            case "terminar":
+                
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 }
