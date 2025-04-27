@@ -1,20 +1,58 @@
-
 package iniciar;
+
 import Interfaz.Observador;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Equipo
  */
-public class frmCrearCuenta extends javax.swing.JFrame implements Observador<ImdlCrearCuenta>{
+public class frmCrearCuenta extends javax.swing.JFrame implements Observador<ImdlCrearCuenta> {
+
     private ctrlCrearCuenta control;
-    
+
     public frmCrearCuenta(ctrlCrearCuenta control) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
+    }
+
+    private void cargarAvatares() {
+        // Solo los nombres amigables
+        cboxAvatar.addItem("Avatar 1");
+        cboxAvatar.addItem("Avatar 2");
+        cboxAvatar.addItem("Avatar 3");
+        cboxAvatar.addItem("Avatar 4");
+        cboxAvatar.addItem("Avatar 5");
+        cboxAvatar.addItem("Avatar 6");
+        cboxAvatar.addItem("Avatar 7");
+        cboxAvatar.addItem("Avatar 8");
+        cboxAvatar.addItem("Avatar 9");
+        cboxAvatar.addItem("Avatar 10");
+    }
+
+    private String[] nombresArchivos = {
+        "1.png", "2.png", "3.png", "4.png", "5.png",
+        "6.png", "7.png", "8.png", "9.png", "10.png"
+    };
+
+    private void actualizarImagenAvatar() {
+        int indiceSeleccionado = cboxAvatar.getSelectedIndex();
+        if (indiceSeleccionado >= 0) {
+            String rutaImagen = "/imagenes/" + nombresArchivos[indiceSeleccionado];
+            ImageIcon icono = new ImageIcon(getClass().getResource(rutaImagen));
+
+            // Opcional: escalar la imagen para que no se vea gigante
+            Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblImagenAvatar.setIcon(new ImageIcon(imagen));
+        } else {
+            lblImagenAvatar.setIcon(null);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +66,7 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
         jLabel2 = new javax.swing.JLabel();
         cboxAvatar = new javax.swing.JComboBox<>();
         lbTituloAvatar = new javax.swing.JLabel();
+        lblImagenAvatar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,12 +93,18 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
         jpCrearCuenta.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 270, 120));
 
         cboxAvatar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpCrearCuenta.add(cboxAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 230, 50));
+        cboxAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxAvatarActionPerformed(evt);
+            }
+        });
+        jpCrearCuenta.add(cboxAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 230, 50));
 
         lbTituloAvatar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbTituloAvatar.setForeground(new java.awt.Color(255, 255, 255));
         lbTituloAvatar.setText("Avatar");
-        jpCrearCuenta.add(lbTituloAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        jpCrearCuenta.add(lbTituloAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jpCrearCuenta.add(lblImagenAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,8 +121,21 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearcuentaActionPerformed
-        control.crearJugador(txtNombreUsuario.getText(), "");
-    }//GEN-LAST:event_btnCrearcuentaActionPerformed
+        String nombreUsuario = txtNombreUsuario.getText();
+        int indiceSeleccionado = cboxAvatar.getSelectedIndex();
+
+        if (indiceSeleccionado >= 0) {
+            String nombreArchivo = nombresArchivos[indiceSeleccionado];
+            control.crearJugador(nombreUsuario, nombreArchivo);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un avatar");
+
+}    }//GEN-LAST:event_btnCrearcuentaActionPerformed
+
+    private void cboxAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxAvatarActionPerformed
+        actualizarImagenAvatar();
+
+    }//GEN-LAST:event_cboxAvatarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -87,9 +145,9 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
     private javax.swing.JPanel jpCrearCuenta;
     private javax.swing.JLabel lbTituloAvatar;
     private javax.swing.JLabel lbTituloNombreUsuario;
+    private javax.swing.JLabel lblImagenAvatar;
     private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
-
 
     @Override
     public void actualizar(ImdlCrearCuenta modelo) {
