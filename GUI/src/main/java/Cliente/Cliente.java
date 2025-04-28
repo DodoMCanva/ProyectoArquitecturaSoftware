@@ -41,7 +41,9 @@ public class Cliente {
                         respuestaRecibida = true;
                     }
                     if (obj instanceof PartidaDTO) {
-                        PartidaCliente = (Partida) obj;
+                     convertirPartida convertidor=  new convertirPartida();
+                     
+                        PartidaCliente = (convertidor.pasar_DTO_a_Dominio(Partida)) obj;
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
