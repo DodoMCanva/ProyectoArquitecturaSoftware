@@ -207,7 +207,7 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
             case "abrir":
                 this.setVisible(true);
                 break;
-            case "cambio":
+            case "cambiar":
                 control.abrirVentanaSiguiente();
                 this.dispose();
                 break;

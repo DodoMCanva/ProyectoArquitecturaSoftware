@@ -31,4 +31,8 @@ public class ctrlCrearCuenta {
     public void abrirVentanaSiguiente(){
         control_menu.abrirVentana();
     }
+    
+    public void cambiarAvatar(){
+        modelo.cambiarAvatar();
+    }
 }

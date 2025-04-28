@@ -34,11 +34,12 @@ public class mdlMenu implements Observado, ImdlMenu {
     public void crearPartida(int tmn, int nj) {
         partida = new Partida(new Tablero(tmn), nj);
         convertirPartida convertir = new convertirPartida();
+        convertirJugador convertirJuga= new convertirJugador();
         cli.enviarServidor(convertir.pasar_Dominio_a_DTO(partida));
         if (cli.esRespuestaValida()) {
             partida.agregarJugador(cli.getJugadorCliente());
             cli.setPartidaCliente(partida);
-            cli.enviarServidor(cli.getJugadorCliente());
+            cli.enviarServidor(convertirJuga.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
             estado = "cambiar";
             interfaz = this;
             notificar();

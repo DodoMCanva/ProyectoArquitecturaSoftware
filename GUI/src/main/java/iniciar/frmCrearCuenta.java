@@ -41,19 +41,7 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
         "6.png", "7.png", "8.png", "9.png", "10.png"
     };
 
-    private void actualizarImagenAvatar() {
-        int indiceSeleccionado = cboxAvatar.getSelectedIndex();
-        if (indiceSeleccionado >= 0) {
-            String rutaImagen = "/imagenes/" + nombresArchivos[indiceSeleccionado];
-            ImageIcon icono = new ImageIcon(getClass().getResource(rutaImagen));
-
-            // Opcional: escalar la imagen para que no se vea gigante
-            Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            lblImagenAvatar.setIcon(new ImageIcon(imagen));
-        } else {
-            lblImagenAvatar.setIcon(null);
-        }
-    }
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -133,7 +121,7 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
 }    }//GEN-LAST:event_btnCrearcuentaActionPerformed
 
     private void cboxAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxAvatarActionPerformed
-        actualizarImagenAvatar();
+        control.cambiarAvatar();
 
     }//GEN-LAST:event_cboxAvatarActionPerformed
 
@@ -159,6 +147,18 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
                 control.abrirVentanaSiguiente();
                 this.dispose();
                 break;
+            case "cambiar avatar":
+                int indiceSeleccionado = cboxAvatar.getSelectedIndex();
+                if (indiceSeleccionado >= 0) {
+                    String rutaImagen = "/imagenes/" + nombresArchivos[indiceSeleccionado];
+                    ImageIcon icono = new ImageIcon(getClass().getResource(rutaImagen));
+
+                    // Opcional: escalar la imagen para que no se vea gigante
+                    Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    lblImagenAvatar.setIcon(new ImageIcon(imagen));
+                } else {
+                    lblImagenAvatar.setIcon(null);
+                }
             default:
                 System.out.println("n/a");
         }

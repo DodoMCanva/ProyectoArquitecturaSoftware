@@ -31,6 +31,13 @@ public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
         interfaz = this;
         notificar();
     }
+    
+    public void cambiarAvatar(){
+     estado= "cambiar avatar";
+     interfaz= this;
+     notificar();
+             
+    }
 
     @Override
     public void crearJugador(String nombre, String avatar) {
