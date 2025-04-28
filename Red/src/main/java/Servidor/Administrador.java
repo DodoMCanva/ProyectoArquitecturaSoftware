@@ -50,9 +50,16 @@ public class Administrador implements Runnable {
                 }
                 
                 if (obj instanceof PartidaDTO) {
+                    convertirPartida convertidor=new convertirPartida();
+                    if (partida==null) {
+                        partida=convertidor.pasar_DTO_a_Dominio(obj);
+                        enviar(true);
+                    }else{
+                        enviar(false);
+                    }
 
-                    //partida =;
-                    enviar(true);
+                    
+                    
                 }
                 
                 if (obj instanceof JugadorDTO) {
