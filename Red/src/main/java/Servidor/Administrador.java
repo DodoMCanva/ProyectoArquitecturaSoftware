@@ -63,13 +63,14 @@ public class Administrador implements Runnable {
                 }
                 
                 if (obj instanceof JugadorDTO) {
-                    if (partida != null) {
-                        
-                        //enviar al administrador
-                        //si esta llena
-                        //partida.agregarjugador(jugador)
-                        //enviartrue
+                   convertirPartida convertidor1=new convertirPartida();
+                    if (partida==null) {
+                        partida=convertidor.pasar_DTO_a_Dominio(obj);
+                        enviar(true);
+                    }else{
+                        enviar(false);
                     }
+
                 }
                 if (obj instanceof Movimiento) {
 
