@@ -41,15 +41,18 @@ public class Cliente {
                         respuestaRecibida = true;
                     }
                     if (obj instanceof PartidaDTO) {
-                        PartidaCliente = (Partida) obj;
+                     convertirPartida convertidor=  new convertirPartida();
+                     
+                        PartidaCliente = (convertidor.pasar_DTO_a_Dominio(PartidaCliente)) obj;
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
                     if (obj instanceof JugadorDTO) {
-                        PartidaCliente.agregarJugador(JugadorCliente);
+                        convertirJugador convertidor1= new convertirJugador();
+                        PartidaCliente.agregarJugador(convertidor1.convertir_DTO_a_Dominio(JugadorCliente) obj);
                         int registros;
                         for (int i = 0; i < 10; i++) {
-
+                           
                         }
 
                     }
