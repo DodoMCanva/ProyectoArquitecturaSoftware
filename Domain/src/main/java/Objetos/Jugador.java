@@ -16,6 +16,14 @@ public class Jugador {
         this.puntos = puntos;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getAvatar() {
         return avatar;
     }
@@ -24,14 +32,16 @@ public class Jugador {
         this.avatar = avatar;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public int getPuntos() {
         return puntos;
     }
 
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    
+ 
     public void incrementarPuntos() {
         puntos++;
     }

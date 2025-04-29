@@ -11,13 +11,13 @@ import Objetos.TableroDTO;
  */
 public class convertirPartida {
 
-    public Partida pasar_DTO_a_Dominio(PartidaDTO dto) {
+    public Partida convertir_DTO_a_Dominio(PartidaDTO dto) {
         Tablero tablero = new Tablero(dto.getTablero().getTamano());
         Partida dominio = new Partida(tablero, dto.getNumeroJugadores());
         return dominio;
     }
 
-    public PartidaDTO pasar_Dominio_a_DTO(Partida dominio) {
+    public PartidaDTO convertir_Dominio_a_DTO(Partida dominio) {
         TableroDTO tablero = new TableroDTO(dominio.getTablero().getTamano());
         PartidaDTO dto = new PartidaDTO(tablero, dominio.getNumeroJugadores());
         return dto;

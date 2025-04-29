@@ -1,6 +1,5 @@
 package Objetos;
 
-
 /**
  *
  * @author Equipo
@@ -26,6 +25,14 @@ public class Partida {
         }
     }
 
+    public boolean partidaCompleta() {
+        if (jugadores[jugadores.length] != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int getNumeroJugadores() {
         return numeroJugadores;
     }
@@ -41,8 +48,5 @@ public class Partida {
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
     }
-    
-    
-    
 
 }

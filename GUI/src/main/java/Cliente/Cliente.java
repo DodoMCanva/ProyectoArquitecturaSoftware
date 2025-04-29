@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Cliente {
     private static boolean respuestaRecibida = false;
 
     private Jugador JugadorCliente;
+    private boolean administrador;
     private Partida PartidaCliente;
 
     private Color preferencias;
@@ -44,24 +46,33 @@ public class Cliente {
                     }
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidor = new convertirPartida();
-                        PartidaCliente = (convertidor.pasar_DTO_a_Dominio((PartidaDTO) obj));
+                        PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
                     if (obj instanceof JugadorDTO) {
-                        convertirJugador convertidor1 = new convertirJugador();
-                        PartidaCliente.agregarJugador(convertidor1.convertir_DTO_a_Dominio((JugadorDTO) obj)
+                        convertirJugador convertidor = new convertirJugador();
+                        PartidaCliente.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj)
                         );
                     }
+                    if (obj instanceof Movimiento) {
+                        //aqui se interpretaria
+                    }
                     if (obj instanceof String) {
-                        if ((String) obj == "voto") {
-                            //partidaLista
+                        switch ((String) obj) {
+                            case "Partida Lista":
+
+                                break;
+                            case "Solicitud":
+                                if (administrador) {
+                                    int respuesta = JOptionPane.showConfirmDialog(null, "Un usuario quiere unirse");
+                                    
+                                }
+                                break;
+                            default:
+                                throw new AssertionError();
                         }
                     }
-
-                    // es string? y ya se lleno?
-                    // notificar al mdl Lobby
-                    //
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

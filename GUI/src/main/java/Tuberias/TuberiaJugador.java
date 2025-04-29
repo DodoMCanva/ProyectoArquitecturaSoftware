@@ -1,7 +1,6 @@
 package Tuberias;
 
 import Filtros.FiltroCaracteres;
-import Filtros.FiltroNombreUnico;
 import Filtros.IFiltro;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,6 @@ public class TuberiaJugador {
     
     public TuberiaJugador(){
         filtros.add(new FiltroCaracteres());
-        filtros.add(new FiltroNombreUnico());
     }
     
     public String procesar(String nombre){

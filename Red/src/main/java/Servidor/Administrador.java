@@ -42,41 +42,39 @@ public class Administrador implements Runnable {
             Object obj;
             while ((obj = in.readObject()) != null) {
 
-                synchronized (Servidor.nombres) {
+                if (obj instanceof PartidaDTO) {
+                    convertirPartida convertidor = new convertirPartida();
+                    if (partida == null) {
+                        partida = convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj);
+                        enviar(true);
+                    } else {
+                        enviar(false);
+                    }
+                }
+                if (obj instanceof JugadorDTO) {
+                    convertirJugador convertidor = new convertirJugador();
+                    if (partida != null) {
+                        if (!partida.partidaCompleta()) {
+                            if (enviar_recibir("Solicitud")) {
+                                partida.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
+                                if (partida.partidaCompleta()) {
+                                    enviar("partida completa");
+                                }
+                            }
+
+                        }
+                    }
+                }
+                if (obj instanceof Movimiento) {
+                    
+                }
+                if (obj instanceof String) {
                     if (!Servidor.nombres.contains((String) obj)) {
                         Servidor.nombres.add((String) obj);
                         enviar(true);
                     } else {
                         enviar(false);
                     }
-                }
-
-                if (obj instanceof PartidaDTO) {
-                    convertirPartida convertidor = new convertirPartida();
-                    if (partida == null) {
-                        partida = convertidor.pasar_DTO_a_Dominio((PartidaDTO) obj);
-                        enviar(true);
-                    } else {
-                        enviar(false);
-                    }
-
-                }
-
-                if (obj instanceof JugadorDTO) {
-                    convertirJugador convertidor = new convertirJugador();
-                    if (partida != null) {
-                        //partida.agregarJugador(convertidor.pasar_DTO_a_Dominio(obj)); 
-                        enviar(true);
-                    } else {
-                        enviar(false);
-                    }
-
-                }
-                if (obj instanceof Movimiento) {
-
-                }
-                if (obj instanceof String) {
-
                 }
 
             }
@@ -91,6 +89,10 @@ public class Administrador implements Runnable {
     public void enviar(Object obj) throws IOException {
         out.writeObject(obj);
         out.flush();
+    }
+
+    public boolean enviar_recibir(Object obj) {
+        return true;
     }
 
 }
