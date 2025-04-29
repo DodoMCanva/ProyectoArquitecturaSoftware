@@ -1,5 +1,7 @@
 package Servidor;
 
+import Convertidor.convertirJugador;
+import Convertidor.convertirPartida;
 import Objetos.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -48,26 +50,24 @@ public class Administrador implements Runnable {
                         enviar(false);
                     }
                 }
-                
+
                 if (obj instanceof PartidaDTO) {
-                    convertirPartida convertidor=new convertirPartida();
-                    if (partida==null) {
-                        partida=convertidor.pasar_DTO_a_Dominio(obj);
+                    convertirPartida convertidor = new convertirPartida();
+                    if (partida == null) {
+                        partida = convertidor.pasar_DTO_a_Dominio((PartidaDTO) obj);
                         enviar(true);
-                    }else{
+                    } else {
                         enviar(false);
                     }
 
-                    
-                    
                 }
-                
+
                 if (obj instanceof JugadorDTO) {
-                   convertirPartida convertidor1=new convertirPartida();
-                    if (partida==null) {
-                        partida=convertidor.pasar_DTO_a_Dominio(obj);
+                    convertirJugador convertidor = new convertirJugador();
+                    if (partida != null) {
+                        //partida.agregarJugador(convertidor.pasar_DTO_a_Dominio(obj)); 
                         enviar(true);
-                    }else{
+                    } else {
                         enviar(false);
                     }
 

@@ -1,5 +1,7 @@
 package Cliente;
 
+import Convertidor.convertirJugador;
+import Convertidor.convertirPartida;
 import Objetos.*;
 import Objetos.*;
 import java.awt.Color;
@@ -41,20 +43,15 @@ public class Cliente {
                         respuestaRecibida = true;
                     }
                     if (obj instanceof PartidaDTO) {
-                     convertirPartida convertidor=  new convertirPartida();
-                     
-                        PartidaCliente = (convertidor.pasar_DTO_a_Dominio(PartidaCliente)) obj;
+                        convertirPartida convertidor = new convertirPartida();
+                        PartidaCliente = (convertidor.pasar_DTO_a_Dominio((PartidaDTO) obj));
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
                     if (obj instanceof JugadorDTO) {
-                        convertirJugador convertidor1= new convertirJugador();
-                        PartidaCliente.agregarJugador(convertidor1.convertir_DTO_a_Dominio(JugadorCliente) obj);
-                        int registros;
-                        for (int i = 0; i < 10; i++) {
-                           
-                        }
-
+                        convertirJugador convertidor1 = new convertirJugador();
+                        PartidaCliente.agregarJugador(convertidor1.convertir_DTO_a_Dominio((JugadorDTO) obj)
+                        );
                     }
                     if (obj instanceof String) {
                         if ((String) obj == "voto") {
