@@ -36,6 +36,7 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         rbtn4 = new javax.swing.JRadioButton();
         rbtn2 = new javax.swing.JRadioButton();
         rbtn3 = new javax.swing.JRadioButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 500));
@@ -108,20 +109,44 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         });
         jpMenu.add(btnCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 200, 50));
 
+        rbtn4.setBackground(new java.awt.Color(0, 0, 0));
         btnGroup.add(rbtn4);
+        rbtn4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rbtn4.setForeground(new java.awt.Color(255, 255, 255));
         rbtn4.setText("4");
         jpMenu.add(rbtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 280, -1, -1));
 
+        rbtn2.setBackground(new java.awt.Color(0, 0, 0));
         btnGroup.add(rbtn2);
+        rbtn2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rbtn2.setForeground(new java.awt.Color(255, 255, 255));
         rbtn2.setText("2");
         jpMenu.add(rbtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
 
+        rbtn3.setBackground(new java.awt.Color(0, 0, 0));
         btnGroup.add(rbtn3);
+        rbtn3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rbtn3.setForeground(new java.awt.Color(255, 255, 255));
         rbtn3.setText("3");
+        rbtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtn3ActionPerformed(evt);
+            }
+        });
         jpMenu.add(rbtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        jpMenu.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, 240, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,6 +208,10 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         control.crearPartida(tmn, nj);
     }//GEN-LAST:event_btnCrearPartidaActionPerformed
 
+    private void rbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtn3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearPartida;
@@ -190,6 +219,7 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
     private javax.swing.JButton btnUnirsePartida;
     private javax.swing.JButton btnVolverMenu;
     private javax.swing.JComboBox<String> cboxTmn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpMenu;
     private javax.swing.JLabel lbTituloNumeroJugadores;
     private javax.swing.JLabel lblLogoCrearPartida;
