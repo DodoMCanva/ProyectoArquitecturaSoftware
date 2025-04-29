@@ -2,6 +2,9 @@ package Lobby;
 
 import Interfaz.Observador;
 import Menu.frmMenu;
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 
 /**
@@ -11,6 +14,8 @@ import javax.swing.JButton;
 public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby> {
 
     private ctrlLobby control;
+
+    private Map<Integer, Color> coloresTableroPersonalizados = new HashMap<>();
 
     /**
      * Creates new form frmLobby
@@ -23,6 +28,38 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
+
+        inicializarCombosColor();
+        configurarColorPrevisualizacion();
+
+    }
+
+    private void inicializarCombosColor() {
+        String[] colores = {"Rojo", "Verde", "Azul", "Amarillo", "Naranja", "Rosa", "Morado", "Gris", "Negro"};
+
+        comboColor1.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
+        comboColor2.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
+        comboColor3.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
+        comboColor4.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
+    }
+
+    private void configurarColorPrevisualizacion() {
+        lblColor1.setOpaque(true);
+        lblColor2.setOpaque(true);
+        lblColor3.setOpaque(true);
+        lblColor4.setOpaque(true);
+
+        comboColor1.addActionListener(e -> lblColor1.setBackground(obtenerColorPorNombre((String) comboColor1.getSelectedItem())));
+        comboColor2.addActionListener(e -> lblColor2.setBackground(obtenerColorPorNombre((String) comboColor2.getSelectedItem())));
+        comboColor3.addActionListener(e -> lblColor3.setBackground(obtenerColorPorNombre((String) comboColor3.getSelectedItem())));
+        comboColor4.addActionListener(e -> lblColor4.setBackground(obtenerColorPorNombre((String) comboColor4.getSelectedItem())));
+    }
+
+    private void guardarColoresSeleccionados() {
+        coloresTableroPersonalizados.put(1, obtenerColorPorNombre((String) comboColor1.getSelectedItem()));
+        coloresTableroPersonalizados.put(2, obtenerColorPorNombre((String) comboColor2.getSelectedItem()));
+        coloresTableroPersonalizados.put(3, obtenerColorPorNombre((String) comboColor3.getSelectedItem()));
+        coloresTableroPersonalizados.put(4, obtenerColorPorNombre((String) comboColor4.getSelectedItem()));
     }
 
     @SuppressWarnings("unchecked")
@@ -33,10 +70,6 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jLabel1 = new javax.swing.JLabel();
         btnSolicitarInicio = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         lblImagenUsuario = new javax.swing.JLabel();
         lblImagenUsuario1 = new javax.swing.JLabel();
         lblImagenUsuario2 = new javax.swing.JLabel();
@@ -45,6 +78,18 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        comboColor1 = new javax.swing.JComboBox<>();
+        comboColor2 = new javax.swing.JComboBox<>();
+        comboColor3 = new javax.swing.JComboBox<>();
+        comboColor4 = new javax.swing.JComboBox<>();
+        lblColor1 = new javax.swing.JLabel();
+        lblColor2 = new javax.swing.JLabel();
+        lblColor3 = new javax.swing.JLabel();
+        lblColor4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,38 +122,6 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
-        jButton3.setText("Color del tablero");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, -1, -1));
-
-        jButton4.setText("Color del tablero");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, -1, -1));
-
-        jButton5.setText("Color del tablero");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
-
-        jButton6.setText("Color del tablero");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
-
         lblImagenUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPanel1.add(lblImagenUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 130, 120));
 
@@ -134,6 +147,48 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jLabel5.setText("Nombre");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
+        comboColor1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(comboColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
+
+        comboColor2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(comboColor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+
+        comboColor3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(comboColor3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
+
+        comboColor4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(comboColor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, -1, -1));
+
+        lblColor1.setPreferredSize(new java.awt.Dimension(20, 20));
+        jPanel1.add(lblColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+
+        lblColor2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblColor2.setDoubleBuffered(true);
+        lblColor2.setPreferredSize(new java.awt.Dimension(20, 20));
+        jPanel1.add(lblColor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+
+        lblColor3.setPreferredSize(new java.awt.Dimension(20, 20));
+        jPanel1.add(lblColor3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, -1, -1));
+
+        lblColor4.setPreferredSize(new java.awt.Dimension(20, 20));
+        jPanel1.add(lblColor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
+        jLabel6.setText("Color jugador");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 300, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
+        jLabel7.setText("Color jugador");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
+        jLabel8.setText("Color jugador");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
+        jLabel9.setText("Color jugador");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,24 +208,9 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
-
+        guardarColoresSeleccionados();  
+        control.abrirVentanaSiguiente();
     }//GEN-LAST:event_btnSolicitarInicioActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     public JButton getBtnSolicitarInicio() {
         return btnSolicitarInicio;
@@ -184,21 +224,54 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSolicitarInicio;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> comboColor1;
+    private javax.swing.JComboBox<String> comboColor2;
+    private javax.swing.JComboBox<String> comboColor3;
+    private javax.swing.JComboBox<String> comboColor4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblColor1;
+    private javax.swing.JLabel lblColor2;
+    private javax.swing.JLabel lblColor3;
+    private javax.swing.JLabel lblColor4;
     private javax.swing.JLabel lblImagenUsuario;
     private javax.swing.JLabel lblImagenUsuario1;
     private javax.swing.JLabel lblImagenUsuario2;
     private javax.swing.JLabel lblImagenUsuario3;
     // End of variables declaration//GEN-END:variables
+
+    private Color obtenerColorPorNombre(String nombre) {
+        switch (nombre) {
+            case "Rojo":
+                return Color.RED;
+            case "Verde":
+                return Color.GREEN;
+            case "Azul":
+                return Color.BLUE;
+            case "Amarillo":
+                return Color.YELLOW;
+            case "Naranja":
+                return Color.ORANGE;
+            case "Rosa":
+                return Color.PINK;
+            case "Morado":
+                return new Color(128, 0, 128); // púrpura
+            case "Gris":
+                return Color.GRAY;
+            case "Negro":
+                return Color.BLACK;
+            default:
+                return Color.WHITE;
+        }
+    }
 
     @Override
     public void actualizar(ImdlLobby modelo) {
