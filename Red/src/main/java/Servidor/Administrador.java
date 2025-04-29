@@ -39,30 +39,38 @@ public class Administrador implements Runnable {
 
             Object obj;
             while ((obj = in.readObject()) != null) {
-                if (obj instanceof String) {
-                    if (!Servidor.nombres.contains(obj)) {
+
+                synchronized (Servidor.nombres) {
+                    if (!Servidor.nombres.contains((String) obj)) {
                         Servidor.nombres.add((String) obj);
                         enviar(true);
                     } else {
                         enviar(false);
                     }
-
                 }
-
+                
                 if (obj instanceof PartidaDTO) {
-                   System.out.println("si entra"+ obj.toString());
-                    //partida =;
-                    enviar(true);
-                }
-
-                if (obj instanceof JugadorDTO) {
-                    if (partida != null) {
-
-                        //enviar al administrador
-                        //si esta llena
-                        //partida.agregarjugador(jugador)
-                        //enviartrue
+                    convertirPartida convertidor=new convertirPartida();
+                    if (partida==null) {
+                        partida=convertidor.pasar_DTO_a_Dominio(obj);
+                        enviar(true);
+                    }else{
+                        enviar(false);
                     }
+
+                    
+                    
+                }
+                
+                if (obj instanceof JugadorDTO) {
+                   convertirPartida convertidor1=new convertirPartida();
+                    if (partida==null) {
+                        partida=convertidor.pasar_DTO_a_Dominio(obj);
+                        enviar(true);
+                    }else{
+                        enviar(false);
+                    }
+
                 }
                 if (obj instanceof Movimiento) {
 
