@@ -54,19 +54,25 @@ public class Administrador implements Runnable {
                 if (obj instanceof JugadorDTO) {
                     convertirJugador convertidor = new convertirJugador();
                     if (partida != null) {
-                        if (!partida.partidaCompleta()) {
-                            if (enviar_recibir("Solicitud")) {
-                                partida.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
-                                if (partida.partidaCompleta()) {
-                                    enviar("partida completa");
+                        synchronized (partida) {
+                            if (!partida.partidaCompleta()) {
+                                if (enviar_recibir("solicitud")) {
+                                    partida.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
+                                    enviar(true);
+                                    if (partida.partidaCompleta()) {
+                                        enviar("partida completa");
+                                    }
+                                } else {
+                                    enviar(false);
                                 }
+                            } else {
+                                enviar(false);
                             }
-
                         }
                     }
                 }
                 if (obj instanceof Movimiento) {
-                    
+
                 }
                 if (obj instanceof String) {
                     if (!Servidor.nombres.contains((String) obj)) {
@@ -92,7 +98,16 @@ public class Administrador implements Runnable {
     }
 
     public boolean enviar_recibir(Object obj) {
-        return true;
-    }
+        try {
+            enviar(obj);
 
+            Object respuesta = in.readObject();
+            if (respuesta instanceof Boolean) {
+                return (Boolean) respuesta;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

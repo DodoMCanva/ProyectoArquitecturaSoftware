@@ -47,8 +47,6 @@ public class Cliente {
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
-                        respuestaValida = (Boolean) obj;
-                        respuestaRecibida = true;
                     }
                     if (obj instanceof JugadorDTO) {
                         convertirJugador convertidor = new convertirJugador();
@@ -60,13 +58,17 @@ public class Cliente {
                     }
                     if (obj instanceof String) {
                         switch ((String) obj) {
-                            case "Partida Lista":
+                            case "partida lista":
 
                                 break;
-                            case "Solicitud":
+                            case "solicitud":
                                 if (administrador) {
                                     int respuesta = JOptionPane.showConfirmDialog(null, "Un usuario quiere unirse");
-                                    
+                                    if (respuesta == JOptionPane.YES_OPTION) {
+                                        enviarServidor(true);
+                                    }else{
+                                        enviarServidor(false);
+                                    }
                                 }
                                 break;
                             default:
@@ -164,5 +166,15 @@ public class Cliente {
 
     public void interpretar() {
     }
+
+    public boolean esAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
+    }
+    
+    
 
 }

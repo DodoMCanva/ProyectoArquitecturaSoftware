@@ -6,6 +6,7 @@ import Convertidor.convertirPartida;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,14 +33,15 @@ public class mdlMenu implements Observado, ImdlMenu {
     }
 
     public void crearPartida(int tmn, int nj) {
-        partida = new Partida(new Tablero(tmn), nj);
-        convertirPartida convertir = new convertirPartida();
-        convertirJugador convertirJuga = new convertirJugador();
-        cli.enviarServidor(convertir.convertir_Dominio_a_DTO(partida));
+        convertirJugador convertir = new convertirJugador();
+        PartidaDTO partida = new PartidaDTO(new TableroDTO(tmn), nj);
+        partida.setCreador(convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
+        cli.enviarServidor(partida);
         if (cli.esRespuestaValida()) {
-            partida.agregarJugador(cli.getJugadorCliente());
-            cli.setPartidaCliente(partida);
-            cli.enviarServidor(convertirJuga.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
+            Partida cliP = new Partida(tmn, nj);
+            cliP.agregarJugador(cli.getJugadorCliente());
+            cli.setPartidaCliente(cliP);
+            cli.setAdministrador(true);
             estado = "cambiar";
             interfaz = this;
             notificar();
@@ -49,12 +51,13 @@ public class mdlMenu implements Observado, ImdlMenu {
 
     public void unirsePartida() {
         convertirJugador convertir = new convertirJugador();
-
         cli.enviarServidor(convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
         if (cli.esRespuestaValida()) {
             estado = "cambiar";
             interfaz = this;
             notificar();
+        }else{
+            JOptionPane.showConfirmDialog(null, "No se pudo acceder a la partida");
         }
     }
 
