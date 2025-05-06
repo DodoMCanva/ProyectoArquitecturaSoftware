@@ -1,7 +1,6 @@
 package Tuberias;
 
 import Filtros.FiltroCaracteres;
-import Filtros.FiltroNombreUnico;
 import Filtros.IFiltro;
 import java.util.ArrayList;
 import java.util.List;

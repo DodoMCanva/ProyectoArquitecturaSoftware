@@ -40,22 +40,31 @@ public class Cliente {
             try {
                 Object obj;
                 while ((obj = getIn().readObject()) != null) {
+                    //Valida
                     if (obj instanceof Boolean) {
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
+                    //Unirse Partida
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
                     }
+
+                    //Se unio a la partida
                     if (obj instanceof JugadorDTO) {
                         convertirJugador convertidor = new convertirJugador();
-                        PartidaCliente.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj)
-                        );
+                        PartidaCliente.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
+                        if (PartidaCliente.partidaCompleta()) {
+                            partidaLista();
+                        }
                     }
+
+                    //Ejerciero Turno
                     if (obj instanceof Movimiento) {
                         //aqui se interpretaria
                     }
+
                     if (obj instanceof String) {
                         switch ((String) obj) {
                             case "partida lista":
@@ -66,7 +75,7 @@ public class Cliente {
                                     int respuesta = JOptionPane.showConfirmDialog(null, "Un usuario quiere unirse");
                                     if (respuesta == JOptionPane.YES_OPTION) {
                                         enviarServidor(true);
-                                    }else{
+                                    } else {
                                         enviarServidor(false);
                                     }
                                 }
@@ -174,7 +183,5 @@ public class Cliente {
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
     }
-    
-    
 
 }

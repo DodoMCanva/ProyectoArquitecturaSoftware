@@ -18,22 +18,25 @@ import java.util.logging.Logger;
  */
 public class Administrador implements Runnable {
 
+    //Objetos
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
-
-    private List<String> nombres = new ArrayList<>();
     private int jugador;
+    private Servidor servidor;
 
-    private Partida partida;
+    //Utilidades
+    Protocolo protocolo = new Protocolo();
+    convertirPartida convertidorPartida = new convertirPartida();
+    convertirJugador convertidorJugador = new convertirJugador();
 
-    public Administrador(Socket socket, int jugador) {
+    public Administrador(Socket socket, int jugador, Servidor servidor) {
         this.socket = socket;
         this.jugador = jugador;
+        this.servidor = servidor;
     }
 
     public void run() {
-
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
             out.flush();
@@ -42,45 +45,32 @@ public class Administrador implements Runnable {
             Object obj;
             while ((obj = in.readObject()) != null) {
 
+                //Crear Usuario
+                if (obj instanceof String) {
+                    servidor.notificar(protocolo.nombreUnicoJugador((String) obj), jugador);
+                }
+
+                //Crear Partida
                 if (obj instanceof PartidaDTO) {
-                    convertirPartida convertidor = new convertirPartida();
-                    if (partida == null) {
-                        partida = convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj);
-                        enviar(true);
-                    } else {
-                        enviar(false);
-                    }
+                    servidor.notificar(protocolo.crearPartida(convertidorPartida.convertir_DTO_a_Dominio((PartidaDTO) obj)), jugador);
                 }
+
+                //Unirse Partida
                 if (obj instanceof JugadorDTO) {
-                    convertirJugador convertidor = new convertirJugador();
-                    if (partida != null) {
-                        synchronized (partida) {
-                            if (!partida.partidaCompleta()) {
-                                if (enviar_recibir("solicitud")) {
-                                    partida.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
-                                    enviar(true);
-                                    if (partida.partidaCompleta()) {
-                                        enviar("partida completa");
-                                    }
-                                } else {
-                                    enviar(false);
-                                }
-                            } else {
-                                enviar(false);
-                            }
-                        }
-                    }
+                    PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(protocolo.agregarJugador(convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj)));
+
+                    //corregir para que solo notifique a los que ya estan en la partida porque de esta forma con que esten conectados a la red ya les carga una partida
+                    servidor.notificarTodos(partidaDTO);
                 }
+
+                //Solicitar Inicio Partida
+                if (obj instanceof Boolean) {
+                    servidor.notificarTodos(protocolo.solicitarInicio());
+                }
+
+                //Ejercer Turno
                 if (obj instanceof Movimiento) {
 
-                }
-                if (obj instanceof String) {
-                    if (!Servidor.nombres.contains((String) obj)) {
-                        Servidor.nombres.add((String) obj);
-                        enviar(true);
-                    } else {
-                        enviar(false);
-                    }
                 }
 
             }
@@ -92,22 +82,8 @@ public class Administrador implements Runnable {
         }
     }
 
-    public void enviar(Object obj) throws IOException {
-        out.writeObject(obj);
-        out.flush();
+    public ObjectOutputStream getOut() {
+        return out;
     }
 
-    public boolean enviar_recibir(Object obj) {
-        try {
-            enviar(obj);
-
-            Object respuesta = in.readObject();
-            if (respuesta instanceof Boolean) {
-                return (Boolean) respuesta;
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 }

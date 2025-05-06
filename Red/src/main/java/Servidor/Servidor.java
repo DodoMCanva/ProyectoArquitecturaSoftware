@@ -1,5 +1,7 @@
 package Servidor;
+
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,15 +19,16 @@ public class Servidor {
     public static boolean ejecutando;
 
     public static void main(String[] args) {
+        Servidor servidor = new Servidor();
         try (ServerSocket serverSocket = new ServerSocket(12221)) {
             System.out.println("Servidor esperando jugadores...");
             int jugador = 0;
             ejecutando = true;
             while (ejecutando) {
                 Socket socket = serverSocket.accept();
-                Administrador admin = new Administrador(socket, jugador++);
+                Administrador admin = new Administrador(socket, jugador++, servidor);
                 jugadores.add(admin);
-                System.out.println("Se agrego jugador");
+                System.out.println("Se agregó un jugador");
                 new Thread(admin).start();
             }
             serverSocket.close();
@@ -34,8 +37,28 @@ public class Servidor {
         }
     }
 
-    static synchronized void siguienteTurno() {
-        jugadorActual = (jugadorActual + 1) % jugadores.size();
+    public void notificarTodos(Object mensaje) {
+        for (Administrador admin : jugadores) {
+            try {
+                ObjectOutputStream out = admin.getOut();
+                out.writeObject(mensaje);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("No se pudo notificar a un jugador.");
+            }
+        }
     }
-
+    
+    public void notificar(Object mensaje, int jugador){
+        for (Administrador admin : jugadores) {
+            try {
+                ObjectOutputStream out = admin.getOut();
+                out.writeObject(mensaje);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("No se pudo notificar a un jugador.");
+            }
+        }
+        
+    }
 }
