@@ -37,6 +37,7 @@ public class Servidor {
         }
     }
 
+    //No seria a todos sino a los que estan en partida
     public void notificarTodos(Object mensaje) {
         for (Administrador admin : jugadores) {
             try {
@@ -48,17 +49,15 @@ public class Servidor {
             }
         }
     }
-    
-    public void notificar(Object mensaje, int jugador){
-        for (Administrador admin : jugadores) {
-            try {
-                ObjectOutputStream out = admin.getOut();
-                out.writeObject(mensaje);
-                out.flush();
-            } catch (IOException e) {
-                System.out.println("No se pudo notificar a un jugador.");
-            }
+
+    public void notificar(Object mensaje, int jugador) {
+        try {
+            ObjectOutputStream out = jugadores.get(jugador).getOut();
+            out.writeObject(mensaje);
+            out.flush();
+        } catch (IOException e) {
+            System.out.println("No se pudo notificar.");
         }
-        
     }
+
 }

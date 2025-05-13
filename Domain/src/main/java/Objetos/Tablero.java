@@ -52,7 +52,7 @@ public class Tablero {
         Linea linea = horizontales[x][y];
         if (!linea.estaDibujada()) {
             linea.dibujar(jugador);
-            if (verificarCajaFormada(x, y)) {
+            if (verificarCajaFormada(x, y, true, jugador)) {
                 jugador.incrementarPuntos();
             }
             return true;
@@ -68,7 +68,7 @@ public class Tablero {
         Linea linea = verticales[x][y];
         if (!linea.estaDibujada()) {
             linea.dibujar(jugador);
-            if (verificarCajaFormada(x, y)) {
+            if (verificarCajaFormada(x, y, false, jugador)) {
                 jugador.incrementarPuntos();
             }
             return true;
@@ -76,20 +76,43 @@ public class Tablero {
         return false;
     }
 
-    private boolean verificarCajaFormada(int x, int y) {
+    private boolean verificarCajaFormada(int x, int y, boolean esHorizontal, Jugador jugador) {
         boolean cajaFormada = false;
 
-        if (x < horizontales.length - 1 && y < verticales[0].length - 1) {
-            Caja caja = cajas[x][y];
-            if (!caja.tienePropietario()
+        if (esHorizontal && x > 0) {
+            if (!cajas[x - 1][y].tienePropietario()
+                    && horizontales[x - 1][y].estaDibujada()
+                    && verticales[x - 1][y].estaDibujada()
+                    && verticales[x - 1][y + 1].estaDibujada()) {
+                cajas[x - 1][y].setPropietario(jugador);
+                cajaFormada = true;
+            }
+        }
+        if (!esHorizontal && y > 0) {
+            if (!cajas[x][y - 1].tienePropietario()
+                    && verticales[x][y - 1].estaDibujada()
+                    && horizontales[x][y - 1].estaDibujada()
+                    && horizontales[x + 1][y - 1].estaDibujada()) {
+                cajas[x][y - 1].setPropietario(jugador);
+                cajaFormada = true;
+            }
+        }
+
+        if (esHorizontal && x < cajas.length) {
+            if (!cajas[x][y].tienePropietario()
+                    && horizontales[x + 1][y].estaDibujada()
+                    && verticales[x][y].estaDibujada()
+                    && verticales[x][y + 1].estaDibujada()) {
+                cajas[x][y].setPropietario(jugador);
+                cajaFormada = true;
+            }
+        }
+        if (!esHorizontal && x < cajas.length && y < cajas[0].length) {
+            if (!cajas[x][y].tienePropietario()
+                    && verticales[x][y + 1].estaDibujada()
                     && horizontales[x][y].estaDibujada()
-                    && // Arriba
-                    verticales[x][y].estaDibujada()
-                    && // Izquierda
-                    horizontales[x + 1][y].estaDibujada()
-                    && // Abajo
-                    verticales[x][y + 1].estaDibujada()) { // Derecha
-                caja.setPropietario(verticales[x][y].getJugador());
+                    && horizontales[x + 1][y].estaDibujada()) {
+                cajas[x][y].setPropietario(jugador);
                 cajaFormada = true;
             }
         }

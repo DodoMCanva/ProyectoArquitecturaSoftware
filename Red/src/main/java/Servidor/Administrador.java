@@ -26,7 +26,7 @@ public class Administrador implements Runnable {
     private Servidor servidor;
 
     //Utilidades
-    Protocolo protocolo = new Protocolo();
+    private static final Protocolo protocolo = Protocolo.getInstancia();
     convertirPartida convertidorPartida = new convertirPartida();
     convertirJugador convertidorJugador = new convertirJugador();
 

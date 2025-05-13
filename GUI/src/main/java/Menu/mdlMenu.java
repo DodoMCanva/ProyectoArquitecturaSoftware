@@ -36,7 +36,9 @@ public class mdlMenu implements Observado, ImdlMenu {
         convertirJugador convertir = new convertirJugador();
         PartidaDTO partida = new PartidaDTO(new TableroDTO(tmn), nj);
         partida.setCreador(convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
+
         cli.enviarServidor(partida);
+
         if (cli.esRespuestaValida()) {
             Partida cliP = new Partida(tmn, nj);
             cliP.agregarJugador(cli.getJugadorCliente());
@@ -45,6 +47,8 @@ public class mdlMenu implements Observado, ImdlMenu {
             estado = "cambiar";
             interfaz = this;
             notificar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Ya hay una partida creada");
         }
 
     }
@@ -56,8 +60,8 @@ public class mdlMenu implements Observado, ImdlMenu {
             estado = "cambiar";
             interfaz = this;
             notificar();
-        }else{
-            JOptionPane.showConfirmDialog(null, "No se pudo acceder a la partida");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la partida");
         }
     }
 

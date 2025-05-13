@@ -15,8 +15,6 @@ public class Partida {
         this.numeroJugadores = numeroJugadores;
         this.jugadores = new Jugador[this.numeroJugadores];
     }
-    
-    
 
     public Partida(Tablero tablero, int numeroJugadores) {
         this.tablero = tablero;
@@ -34,11 +32,12 @@ public class Partida {
     }
 
     public boolean partidaCompleta() {
-        if (jugadores[jugadores.length] != null) {
-            return true;
-        } else {
-            return false;
+        for (Jugador jugador : jugadores) {
+            if (jugador == null) {
+                return false;
+            }
         }
+        return true;
     }
 
     public int getNumeroJugadores() {
@@ -64,7 +63,5 @@ public class Partida {
     public void setJugadores(Jugador[] jugadores) {
         this.jugadores = jugadores;
     }
-    
-    
 
 }
