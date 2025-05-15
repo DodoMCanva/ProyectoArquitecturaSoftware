@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +27,7 @@ public class Cliente {
 
     private Jugador JugadorCliente;
     private boolean administrador;
+    private boolean actualizarvista;
     private Partida PartidaCliente;
 
     private Color preferencias;
@@ -49,6 +51,7 @@ public class Cliente {
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
+                        actualizarvista = true;
                     }
 
                     //Se unio a la partida
@@ -173,7 +176,19 @@ public class Cliente {
         this.PartidaCliente = PartidaCliente;
     }
 
-    public void interpretar() {
+    public boolean actualizar_vista_lobby() {
+        return actualizarvista;
+    }
+
+    public ArrayList<String> datosotrosjugadores() {
+        ArrayList<String> nombres = new ArrayList<>();
+        for (Jugador jugador : PartidaCliente.getJugadores()) {
+            if (jugador != null) {
+                nombres.add(jugador.getNombre());
+            }
+        }
+        actualizarvista = false;
+        return nombres;
     }
 
     public boolean esAdministrador() {
