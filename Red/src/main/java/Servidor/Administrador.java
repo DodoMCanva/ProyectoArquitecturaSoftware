@@ -57,10 +57,13 @@ public class Administrador implements Runnable {
 
                 //Unirse Partida
                 if (obj instanceof JugadorDTO) {
-                    PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(protocolo.agregarJugador(convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj)));
+                    if (protocolo.agregarJugador(convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj)) != null) {
+                        PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(protocolo.agregarJugador(convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj)));
+                        
+                        servidor.notificarTodos(partidaDTO);
+                    }
 
-                    //corregir para que solo notifique a los que ya estan en la partida porque de esta forma con que esten conectados a la red ya les carga una partida
-                    servidor.notificarTodos(partidaDTO);
+                    
                 }
 
                 //Solicitar Inicio Partida

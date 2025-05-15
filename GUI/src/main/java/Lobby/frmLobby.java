@@ -2,7 +2,9 @@ package Lobby;
 
 import Interfaz.Observador;
 import Menu.frmMenu;
+import Objetos.Jugador;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
@@ -70,14 +72,14 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jLabel1 = new javax.swing.JLabel();
         btnSolicitarInicio = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        lblImagenUsuario = new javax.swing.JLabel();
-        lblImagenUsuario1 = new javax.swing.JLabel();
-        lblImagenUsuario2 = new javax.swing.JLabel();
-        lblImagenUsuario3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        imgJ4 = new javax.swing.JLabel();
+        imgJ3 = new javax.swing.JLabel();
+        imgJ2 = new javax.swing.JLabel();
+        imgJ1 = new javax.swing.JLabel();
+        lblJ4 = new javax.swing.JLabel();
+        lblJ3 = new javax.swing.JLabel();
+        lblJ2 = new javax.swing.JLabel();
+        lblJ1 = new javax.swing.JLabel();
         comboColor1 = new javax.swing.JComboBox<>();
         comboColor2 = new javax.swing.JComboBox<>();
         comboColor3 = new javax.swing.JComboBox<>();
@@ -122,30 +124,30 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
-        lblImagenUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel1.add(lblImagenUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 130, 120));
+        imgJ4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.add(imgJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 130, 120));
 
-        lblImagenUsuario1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel1.add(lblImagenUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 130, 120));
+        imgJ3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.add(imgJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 130, 120));
 
-        lblImagenUsuario2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel1.add(lblImagenUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 130, 120));
+        imgJ2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.add(imgJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 130, 120));
 
-        lblImagenUsuario3.setBackground(new java.awt.Color(255, 255, 255));
-        lblImagenUsuario3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel1.add(lblImagenUsuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 130, 120));
+        imgJ1.setBackground(new java.awt.Color(255, 255, 255));
+        imgJ1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel1.add(imgJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 130, 120));
 
-        jLabel2.setText("Nombre");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, -1, -1));
+        lblJ4.setText("Nombre");
+        jPanel1.add(lblJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, -1, -1));
 
-        jLabel3.setText("Nombre");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
+        lblJ3.setText("Nombre");
+        jPanel1.add(lblJ3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
 
-        jLabel4.setText("Nombre");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+        lblJ2.setText("Nombre");
+        jPanel1.add(lblJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
-        jLabel5.setText("Nombre");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
+        lblJ1.setText("Nombre");
+        jPanel1.add(lblJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
         comboColor1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(comboColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
@@ -208,7 +210,7 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
-        guardarColoresSeleccionados();  
+        guardarColoresSeleccionados();
         control.abrirVentanaSiguiente();
     }//GEN-LAST:event_btnSolicitarInicioActionPerformed
 
@@ -228,11 +230,11 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     private javax.swing.JComboBox<String> comboColor2;
     private javax.swing.JComboBox<String> comboColor3;
     private javax.swing.JComboBox<String> comboColor4;
+    private javax.swing.JLabel imgJ1;
+    private javax.swing.JLabel imgJ2;
+    private javax.swing.JLabel imgJ3;
+    private javax.swing.JLabel imgJ4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -242,10 +244,10 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     private javax.swing.JLabel lblColor2;
     private javax.swing.JLabel lblColor3;
     private javax.swing.JLabel lblColor4;
-    private javax.swing.JLabel lblImagenUsuario;
-    private javax.swing.JLabel lblImagenUsuario1;
-    private javax.swing.JLabel lblImagenUsuario2;
-    private javax.swing.JLabel lblImagenUsuario3;
+    private javax.swing.JLabel lblJ1;
+    private javax.swing.JLabel lblJ2;
+    private javax.swing.JLabel lblJ3;
+    private javax.swing.JLabel lblJ4;
     // End of variables declaration//GEN-END:variables
 
     private Color obtenerColorPorNombre(String nombre) {
@@ -279,7 +281,41 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
             case "abrir":
                 this.setVisible(true);
                 break;
-            case "Partida Lista":
+            case "datos":
+                Jugador[] jugadores = modelo.obtenerJugadores();
+                for (int i = 0; i < 4; i++) {
+                    switch (i) {
+                        case 0:
+                            if (jugadores[0] != null) {
+                                lblJ1.setText(jugadores[0].getNombre());
+                                //cargar imagen del avatarque es un lb
+                            }
+
+                            break;
+                        case 1:
+                            if (jugadores[1] != null) {
+                                lblJ2.setText(jugadores[1].getNombre());
+                                //cargar imagen del avatarque es un lb
+                            }
+                            break;
+                        case 2:
+                            if (jugadores[2] != null) {
+                                lblJ3.setText(jugadores[2].getNombre());
+                                //cargar imagen del avatarque es un lb
+                            }
+                            break;
+                        case 3:
+                            if (jugadores[3] != null) {
+                                lblJ4.setText(jugadores[3].getNombre());
+                                //cargar imagen del avatarque es un lb
+                            }
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                }
+
+            case "cambio":
                 control.abrirVentanaSiguiente();
                 this.dispose();
                 break;

@@ -3,7 +3,9 @@ package Lobby;
 import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
+import Objetos.Jugador;
 import Objetos.Partida;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +23,7 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
     private Cliente cli;
 
     public mdlLobby(Cliente cli) {
-
+        this.cli = cli;
     }
 
     public void abrirVentana(ctrlLobby control) {
@@ -31,12 +33,14 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
         notificar();
     }
 
-    public void actualizarTodosCompletos() {
-    }
-
     @Override
     public String obtenerEstado() {
         return estado;
+    }
+
+    @Override
+    public Jugador[] obtenerJugadores() {
+        return cli.getPartidaCliente().getJugadores();
     }
 
     public void notificar() {
@@ -46,21 +50,24 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
     public void run() {
         while (true) {
             if (cli.partidaLista()) {
-                estado = "Partida Lista";
+                estado = "cambio";
+                interfaz = this;
                 vista.actualizar(interfaz);
-                
-                return;
+
             }
             if (cli.solicitudUnirse()) {
-                int respuesta= JOptionPane.showConfirmDialog(null,"¿Quieres aceptar otro jugador",
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Quieres aceptar otro jugador",
                         "UnirsePartida", JOptionPane.YES_NO_OPTION);
                 if (respuesta == JOptionPane.YES_OPTION) {
-                    
-                    
-                    
+                    cli.enviarServidor("aceptado");
                 }
             }
+            if (cli.cambioLobby()) {
+                estado = "datos";
+                interfaz = this;
+                vista.actualizar(interfaz);
+            }
         }
-
     }
+
 }

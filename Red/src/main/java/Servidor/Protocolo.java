@@ -50,6 +50,8 @@ public class Protocolo {
         return null;
     }
 
+   
+
     // Solicitar Inicio de Partida
     public synchronized boolean solicitarInicio() {
         votos.add(true);

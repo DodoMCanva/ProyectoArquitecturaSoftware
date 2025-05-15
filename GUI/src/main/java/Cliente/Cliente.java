@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,18 +18,24 @@ import javax.swing.JOptionPane;
  */
 public class Cliente {
 
+    //Variables de red
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
 
+    //Variables de logica de red
     private static boolean respuestaValida = false;
     private static boolean respuestaRecibida = false;
 
+    //Variables unicas de cliente
     private Jugador JugadorCliente;
     private boolean administrador;
     private Partida PartidaCliente;
+    private ArrayList<Color> preferencias;
 
-    private Color preferencias;
+    //variables logica cliente
+    private boolean cambiograficoPartida = false;
+    private boolean cambiograficoLobby = false;
 
     public Cliente(String host, int puerto) throws IOException {
         socket = new Socket(host, puerto);
@@ -45,19 +52,20 @@ public class Cliente {
                         respuestaValida = (Boolean) obj;
                         respuestaRecibida = true;
                     }
-                    //Unirse Partida
+                    //Te uniste a la partida
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
                     }
 
-                    //Se unio a la partida
+                    //Se unio alguien mas a la partida
                     if (obj instanceof JugadorDTO) {
                         convertirJugador convertidor = new convertirJugador();
                         PartidaCliente.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
-                        if (PartidaCliente.partidaCompleta()) {
-                            partidaLista();
-                        }
+                        cambiograficoLobby = true;
+//                        if (PartidaCliente.partidaCompleta()) {
+//                            partidaLista();
+//                        }
                     }
 
                     //Ejerciero Turno
@@ -92,6 +100,83 @@ public class Cliente {
 
     }
 
+    //Logica de red
+    public boolean partidaLista() {
+        //ajustar
+        return true;
+    }
+
+    public boolean solicitudUnirse() {
+        //ajustar
+        return true;
+    }
+
+    public boolean cambioPartida() {
+        return cambiograficoPartida;
+    }
+
+    public boolean cambioLobby() {
+        return cambiograficoLobby;
+    }
+
+    public static boolean esRespuestaValida() {
+        long timeout = System.currentTimeMillis() + 5000;
+        while (!esRespuestaRecibida() && System.currentTimeMillis() < timeout) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        respuestaRecibida=false;
+        return respuestaValida;
+    }
+    
+    public static boolean esAceptado() {
+        long timeout = System.currentTimeMillis() + 5000;
+        while (!esRespuestaRecibida() && System.currentTimeMillis() < timeout) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return respuestaValida;
+    }
+
+    public static boolean esRespuestaRecibida() {
+        return respuestaRecibida;
+    }
+
+    public void interpretar() {
+    }
+
+    //getters y setters
+    public boolean esAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
+    }
+
+    public void setJugadorCliente(Jugador jugador) {
+        this.JugadorCliente = jugador;
+    }
+
+    public Jugador getJugadorCliente() {
+        return this.JugadorCliente;
+    }
+
+    public Partida getPartidaCliente() {
+        return PartidaCliente;
+    }
+
+    public void setPartidaCliente(Partida PartidaCliente) {
+        this.PartidaCliente = PartidaCliente;
+    }
+
+    //Metodos de red
     public boolean enviarServidor(Object objeto) {
         try {
             out.writeObject(objeto);
@@ -128,60 +213,13 @@ public class Cliente {
         return out;
     }
 
-    //
-    public boolean partidaLista() {
-        return true;
+    public void setCambiograficoPartida(boolean cambiograficoPartida) {
+        this.cambiograficoPartida = cambiograficoPartida;
     }
 
-    public boolean solicitudUnirse() {
-        return true;
+    public void setCambiograficoLobby(boolean cambiograficoLobby) {
+        this.cambiograficoLobby = cambiograficoLobby;
     }
 
-    public boolean cambioPartida() {
-        return true;
-    }
-
-    public static boolean esRespuestaValida() {
-        long timeout = System.currentTimeMillis() + 5000;
-        while (!esRespuestaRecibida() && System.currentTimeMillis() < timeout) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return respuestaValida;
-    }
-
-    public static boolean esRespuestaRecibida() {
-        return respuestaRecibida;
-    }
-
-    public void setJugadorCliente(Jugador jugador) {
-        this.JugadorCliente = jugador;
-    }
-
-    public Jugador getJugadorCliente() {
-        return this.JugadorCliente;
-    }
-
-    public Partida getPartidaCliente() {
-        return PartidaCliente;
-    }
-
-    public void setPartidaCliente(Partida PartidaCliente) {
-        this.PartidaCliente = PartidaCliente;
-    }
-
-    public void interpretar() {
-    }
-
-    public boolean esAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
-    }
-
+    
 }

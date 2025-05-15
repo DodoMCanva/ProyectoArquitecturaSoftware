@@ -11,7 +11,6 @@ public class PartidaDTO implements Serializable {
     private int numeroJugadores;
     private TableroDTO tablero;
     private JugadorDTO[] jugadores;
-    private JugadorDTO creador;
     
 
     public PartidaDTO(TableroDTO tablero, int numeroJugadores) {
@@ -36,13 +35,6 @@ public class PartidaDTO implements Serializable {
         this.jugadores = jugadores;
     }
 
-    public JugadorDTO getCreador() {
-        return creador;
-    }
-
-    public void setCreador(JugadorDTO creador) {
-        this.creador = creador;
-    }
 
 
     

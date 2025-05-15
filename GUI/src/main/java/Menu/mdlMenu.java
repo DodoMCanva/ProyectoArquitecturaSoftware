@@ -33,24 +33,19 @@ public class mdlMenu implements Observado, ImdlMenu {
     }
 
     public void crearPartida(int tmn, int nj) {
-        convertirJugador convertir = new convertirJugador();
-        PartidaDTO partida = new PartidaDTO(new TableroDTO(tmn), nj);
-        partida.setCreador(convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
-
-        cli.enviarServidor(partida);
-
+        convertirPartida convertir = new convertirPartida();
+        Partida partida = new Partida(tmn, nj);
+        partida.agregarJugador(cli.getJugadorCliente());
+        cli.enviarServidor(convertir.convertir_Dominio_a_DTO(partida));
         if (cli.esRespuestaValida()) {
-            Partida cliP = new Partida(tmn, nj);
-            cliP.agregarJugador(cli.getJugadorCliente());
-            cli.setPartidaCliente(cliP);
+            cli.setPartidaCliente(partida);
             cli.setAdministrador(true);
             estado = "cambiar";
             interfaz = this;
             notificar();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ya hay una partida creada");
         }
-
     }
 
     public void unirsePartida() {

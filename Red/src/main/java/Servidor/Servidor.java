@@ -51,6 +51,7 @@ public class Servidor {
     }
 
     public void notificar(Object mensaje, int jugador) {
+        //solo debe notificar a los de la partida
         try {
             ObjectOutputStream out = jugadores.get(jugador).getOut();
             out.writeObject(mensaje);
