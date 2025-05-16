@@ -1,14 +1,14 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package Lobby;
-
-import java.util.ArrayList;
 
 /**
  *
- * @author Equipo
+ * @author cesar
  */
 public interface ImdlLobby {
 
     public String obtenerEstado();
-
-    public ArrayList<String> obtenerDatos();
 }

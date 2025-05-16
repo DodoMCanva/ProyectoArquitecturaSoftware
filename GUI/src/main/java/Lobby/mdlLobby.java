@@ -4,7 +4,6 @@ import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Partida;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,10 +31,7 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
         notificar();
     }
 
-    public void rellenarCampos() {
-        estado = "rellenar";
-        interfaz = this;
-        notificar();
+    public void actualizarTodosCompletos() {
     }
 
     @Override
@@ -47,49 +43,24 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
         vista.actualizar(interfaz);
     }
 
-    @Override
-    public ArrayList<String> obtenerDatos() {
-        return cli.datosotrosjugadores();
-    }
-
     public void run() {
         while (true) {
             if (cli.partidaLista()) {
                 estado = "Partida Lista";
                 vista.actualizar(interfaz);
-
+                
                 return;
             }
             if (cli.solicitudUnirse()) {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Quieres aceptar otro jugador",
+                int respuesta= JOptionPane.showConfirmDialog(null,"¿Quieres aceptar otro jugador",
                         "UnirsePartida", JOptionPane.YES_NO_OPTION);
                 if (respuesta == JOptionPane.YES_OPTION) {
-
+                    
+                    
+                    
                 }
-            }
-            if (cli.actualizar_vista_lobby()) {
-                for (int i = 0; i < 4; i++) {
-                    switch (i) {
-                        case 0:
-
-                            break;
-                        case 1:
-
-                            break;
-                        case 2:
-
-                            break;
-                        case 3:
-
-                            break;
-                        default:
-                            throw new AssertionError();
-                    }
-                }
-
             }
         }
 
     }
-
 }
