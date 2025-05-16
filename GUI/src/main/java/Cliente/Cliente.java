@@ -56,17 +56,9 @@ public class Cliente {
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
+                        cambiograficoLobby = true;
                     }
 
-                    //Se unio alguien mas a la partida
-                    if (obj instanceof JugadorDTO) {
-                        convertirJugador convertidor = new convertirJugador();
-                        PartidaCliente.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
-                        cambiograficoLobby = true;
-//                        if (PartidaCliente.partidaCompleta()) {
-//                            partidaLista();
-//                        }
-                    }
 
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
@@ -103,7 +95,7 @@ public class Cliente {
     //Logica de red
     public boolean partidaLista() {
         //ajustar
-        return true;
+        return false;
     }
 
     public boolean solicitudUnirse() {
@@ -128,10 +120,10 @@ public class Cliente {
                 e.printStackTrace();
             }
         }
-        respuestaRecibida=false;
+        respuestaRecibida = false;
         return respuestaValida;
     }
-    
+
     public static boolean esAceptado() {
         long timeout = System.currentTimeMillis() + 5000;
         while (!esRespuestaRecibida() && System.currentTimeMillis() < timeout) {
@@ -221,5 +213,4 @@ public class Cliente {
         this.cambiograficoLobby = cambiograficoLobby;
     }
 
-    
 }

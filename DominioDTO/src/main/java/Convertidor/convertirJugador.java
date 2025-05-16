@@ -10,12 +10,18 @@ import Objetos.JugadorDTO;
 public class convertirJugador {
 
     public Jugador convertir_DTO_a_Dominio(JugadorDTO dto) {
-        Jugador dominio = new Jugador(dto.getNombre(), dto.getAvatar(), dto.getPuntos());
-        return dominio;
+        if (dto != null) {
+            Jugador dominio = new Jugador(dto.getNombre(), dto.getAvatar(), dto.getPuntos());
+            return dominio;
+        }
+        return null;
     }
 
     public JugadorDTO convertir_Dominio_a_DTO(Jugador dominio) {
-        JugadorDTO dto = new JugadorDTO(dominio.getNombre(), dominio.getAvatar(), dominio.getPuntos());
-        return dto;
+        if (dominio != null) {
+            JugadorDTO dto = new JugadorDTO(dominio.getNombre(), dominio.getAvatar(), dominio.getPuntos());
+            return dto;
+        }
+        return null;
     }
 }

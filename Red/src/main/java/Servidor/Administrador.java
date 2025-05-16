@@ -57,13 +57,13 @@ public class Administrador implements Runnable {
 
                 //Unirse Partida
                 if (obj instanceof JugadorDTO) {
-                    if (protocolo.agregarJugador(convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj)) != null) {
-                        PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(protocolo.agregarJugador(convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj)));
-                        
+                    Jugador jugador = convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj);
+                    Partida partida = protocolo.agregarJugador(jugador);
+
+                    if (partida != null) {
+                        PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(partida);
                         servidor.notificarTodos(partidaDTO);
                     }
-
-                    
                 }
 
                 //Solicitar Inicio Partida

@@ -22,26 +22,11 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
         this.control = control;
     }
 
-    private void cargarAvatares() {
-        // Solo los nombres amigables
-        cboxAvatar.addItem("Avatar 1");
-        cboxAvatar.addItem("Avatar 2");
-        cboxAvatar.addItem("Avatar 3");
-        cboxAvatar.addItem("Avatar 4");
-        cboxAvatar.addItem("Avatar 5");
-        cboxAvatar.addItem("Avatar 6");
-        cboxAvatar.addItem("Avatar 7");
-        cboxAvatar.addItem("Avatar 8");
-        cboxAvatar.addItem("Avatar 9");
-        cboxAvatar.addItem("Avatar 10");
-    }
 
     private String[] nombresArchivos = {
         "1.png", "2.png", "3.png", "4.png", "5.png",
         "6.png", "7.png", "8.png", "9.png", "10.png"
     };
-
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,7 +65,7 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logonuevo.jpg"))); // NOI18N
         jpCrearCuenta.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 270, 120));
 
-        cboxAvatar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboxAvatar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Avatar 1", "Avatar 2", "Avatar 3", "Avatar 4", "Avatar 5", "Avatar 6", "Avatar 7", "Avatar 8", "Avatar 9", "Avatar 10" }));
         cboxAvatar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxAvatarActionPerformed(evt);
@@ -92,6 +77,8 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
         lbTituloAvatar.setForeground(new java.awt.Color(255, 255, 255));
         lbTituloAvatar.setText("Avatar");
         jpCrearCuenta.add(lbTituloAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+
+        lblImagenAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1.png"))); // NOI18N
         jpCrearCuenta.add(lblImagenAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,7 +98,6 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
     private void btnCrearcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearcuentaActionPerformed
         String nombreUsuario = txtNombreUsuario.getText();
         int indiceSeleccionado = cboxAvatar.getSelectedIndex();
-
         if (indiceSeleccionado >= 0) {
             String nombreArchivo = nombresArchivos[indiceSeleccionado];
             control.crearJugador(nombreUsuario, nombreArchivo);
@@ -152,7 +138,6 @@ public class frmCrearCuenta extends javax.swing.JFrame implements Observador<Imd
                 if (indiceSeleccionado >= 0) {
                     String rutaImagen = "/imagenes/" + nombresArchivos[indiceSeleccionado];
                     ImageIcon icono = new ImageIcon(getClass().getResource(rutaImagen));
-
                     // Opcional: escalar la imagen para que no se vea gigante
                     Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                     lblImagenAvatar.setIcon(new ImageIcon(imagen));

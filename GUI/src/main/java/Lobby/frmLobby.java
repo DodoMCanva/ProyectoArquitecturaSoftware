@@ -4,9 +4,11 @@ import Interfaz.Observador;
 import Menu.frmMenu;
 import Objetos.Jugador;
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -277,10 +279,10 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
 
     @Override
     public void actualizar(ImdlLobby modelo) {
+        System.out.println("Actualizo");
         switch (modelo.obtenerEstado()) {
             case "abrir":
                 this.setVisible(true);
-                break;
             case "datos":
                 Jugador[] jugadores = modelo.obtenerJugadores();
                 for (int i = 0; i < 4; i++) {
@@ -288,33 +290,41 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
                         case 0:
                             if (jugadores[0] != null) {
                                 lblJ1.setText(jugadores[0].getNombre());
-                                //cargar imagen del avatarque es un lb
+                                ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[0].getAvatar()));
+                                Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                                imgJ1.setIcon(new ImageIcon(imagen));
                             }
 
                             break;
                         case 1:
                             if (jugadores[1] != null) {
                                 lblJ2.setText(jugadores[1].getNombre());
-                                //cargar imagen del avatarque es un lb
+                                ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[1].getAvatar()));
+                                Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                                imgJ2.setIcon(new ImageIcon(imagen));
                             }
                             break;
                         case 2:
                             if (jugadores[2] != null) {
                                 lblJ3.setText(jugadores[2].getNombre());
-                                //cargar imagen del avatarque es un lb
+                                ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[2].getAvatar()));
+                                Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                                imgJ3.setIcon(new ImageIcon(imagen));
                             }
                             break;
                         case 3:
                             if (jugadores[3] != null) {
                                 lblJ4.setText(jugadores[3].getNombre());
-                                //cargar imagen del avatarque es un lb
+                                ImageIcon icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[3].getAvatar()));
+                                Image imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                                imgJ4.setIcon(new ImageIcon(imagen));
                             }
                             break;
                         default:
                             throw new AssertionError();
                     }
                 }
-
+                break;
             case "cambio":
                 control.abrirVentanaSiguiente();
                 this.dispose();

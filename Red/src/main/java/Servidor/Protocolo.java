@@ -43,16 +43,20 @@ public class Protocolo {
 
     // Unirse a Partida
     public synchronized Partida agregarJugador(Jugador jugador) {
-        if (partida != null && !partida.partidaCompleta()) {
-            partida.agregarJugador(jugador);
-            return partida;
+        if (partida != null) {
+            if (!partida.partidaCompleta()) {
+                partida.agregarJugador(jugador);
+                return partida;
+            }else{
+                System.out.println("Partida llena");
+            }
+        }else{
+            System.out.println("Partida nula");
         }
         return null;
     }
-
-   
-
     // Solicitar Inicio de Partida
+
     public synchronized boolean solicitarInicio() {
         votos.add(true);
         return votos.size() == partida.getNumeroJugadores();

@@ -4,9 +4,6 @@ import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
-import Objetos.Partida;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +14,8 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
     private Observador vista;
     private ImdlLobby interfaz;
     private String estado = "";
-    private Partida partida;
-    private boolean Terminada = false;
-
     private Cliente cli;
+    private boolean activo = true;
 
     public mdlLobby(Cliente cli) {
         this.cli = cli;
@@ -31,6 +26,10 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
         estado = "abrir";
         interfaz = this;
         notificar();
+        System.out.println("Antes del hilo");
+        this.start();
+        System.out.println("Despues de iniciar el hilo");
+
     }
 
     @Override
@@ -48,26 +47,27 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
     }
 
     public void run() {
-        while (true) {
+        while (activo) {
+            System.out.println(activo);
             if (cli.partidaLista()) {
+                activo = false;
                 estado = "cambio";
                 interfaz = this;
                 vista.actualizar(interfaz);
-
-            }
-            if (cli.solicitudUnirse()) {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Quieres aceptar otro jugador",
-                        "UnirsePartida", JOptionPane.YES_NO_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION) {
-                    cli.enviarServidor("aceptado");
-                }
             }
             if (cli.cambioLobby()) {
                 estado = "datos";
                 interfaz = this;
                 vista.actualizar(interfaz);
+                cli.setCambiograficoLobby(false);
+            }
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                break;
             }
         }
     }
-
 }
