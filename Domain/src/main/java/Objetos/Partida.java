@@ -40,6 +40,14 @@ public class Partida {
         return true;
     }
 
+    public boolean jugarMovimiento(int x, int y, boolean esHorizontal, Jugador jugador) {
+        if (esHorizontal) {
+            return tablero.dibujarLineaHorizontal(x, y, jugador);
+        } else {
+            return tablero.dibujarLineaVertical(x, y, jugador);
+        }
+    }
+
     public int getNumeroJugadores() {
         return numeroJugadores;
     }
