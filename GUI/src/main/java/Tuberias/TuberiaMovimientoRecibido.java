@@ -10,17 +10,15 @@ import Objetos.Linea;
 
 
 public class TuberiaMovimientoRecibido {
-        private IFiltro<String, Linea> verificarLinea;
+private IFiltro<Linea, Boolean> verificarLinea;
 
-    public TuberiaMovimientoRecibido(IFiltro<String, Linea> verificarLinea) {
+    public TuberiaMovimientoRecibido(IFiltro<Linea, Boolean> verificarLinea) {
         this.verificarLinea = verificarLinea;
     }
 
     public boolean procesar(Linea linea) {
-        if (verificarLinea.aplicar(linea)) {
-            return true;
-        }
-        return false;
+        return verificarLinea.aplicar(linea);
     }
+
 
 }

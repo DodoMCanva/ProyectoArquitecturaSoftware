@@ -138,4 +138,14 @@ public class Tablero {
         }
         System.out.println();
     }
+
+    public Linea[][] getHorizontales() {
+        return horizontales;
+    }
+
+    public Linea[][] getVerticales() {
+        return verticales;
+    }
+
+    
 }

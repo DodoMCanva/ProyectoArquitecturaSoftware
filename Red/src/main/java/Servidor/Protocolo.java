@@ -1,5 +1,6 @@
 package Servidor;
 
+import Objetos.Movimiento;
 import Objetos.*;
 import java.util.ArrayList;
 import java.util.List;

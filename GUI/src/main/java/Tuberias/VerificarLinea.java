@@ -13,24 +13,16 @@ import Filtros.IFiltro;
 import Objetos.Linea;
 import Objetos.Tablero;
 
-public class VerificarLinea implements  IFiltro<String, Linea> {
-     private Tablero tablero;
-
-    public VerificarLinea(Tablero tablero) {
-        this.tablero = tablero;
-    }
-
-    
+public class VerificarLinea implements IFiltro<Linea, Boolean> {
 
     @Override
-    public boolean esValido(String var) {
-        return IFiltro.super.esValido(var); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    public Boolean aplicar(Linea linea) {
+        return linea != null && !linea.estaDibujada();
     }
 
-     @Override
-    public boolean aplicar(Linea linea) {
-        // Verifica si la línea está dentro de los límites del tablero y si no está dibujada
-        return !linea.estaDibujada();
+    @Override
+    public boolean esValido(Linea linea) {
+        return linea != null; // Valida que la línea exista
     }
 
 

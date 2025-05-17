@@ -1,5 +1,6 @@
 package Cliente;
 
+import Objetos.Movimiento;
 import Convertidor.convertirJugador;
 import Convertidor.convertirPartida;
 import Objetos.*;

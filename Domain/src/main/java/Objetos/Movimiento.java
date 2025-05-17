@@ -1,6 +1,9 @@
 
 package Objetos;
 
+import Objetos.Jugador;
+import Objetos.Linea;
+import Objetos.Tablero;
 import java.io.Serializable;
 
 /**
