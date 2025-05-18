@@ -32,20 +32,10 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
-
-        inicializarCombosColor();
         configurarColorPrevisualizacion();
 
     }
 
-    private void inicializarCombosColor() {
-        String[] colores = {"Rojo", "Verde", "Azul", "Amarillo", "Naranja", "Rosa", "Morado", "Gris", "Negro"};
-
-        comboColor1.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
-        comboColor2.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
-        comboColor3.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
-        comboColor4.setModel(new javax.swing.DefaultComboBoxModel<>(colores));
-    }
 
     private void configurarColorPrevisualizacion() {
         lblColor1.setOpaque(true);
@@ -151,16 +141,16 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         lblJ1.setText("Nombre");
         jPanel1.add(lblJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
-        comboColor1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboColor1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Verde", "Azul", "Amarillo", "Naranja", "Rosa", "Morado", "Gris ", "Negro" }));
         jPanel1.add(comboColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
-        comboColor2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboColor2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Verde", "Azul", "Amarillo", "Naranja", "Rosa", "Morado", "Gris ", "Negro" }));
         jPanel1.add(comboColor2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
-        comboColor3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboColor3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Verde", "Azul", "Amarillo", "Naranja", "Rosa", "Morado", "Gris ", "Negro" }));
         jPanel1.add(comboColor3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
 
-        comboColor4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboColor4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo", "Verde", "Azul", "Amarillo", "Naranja", "Rosa", "Morado", "Gris ", "Negro" }));
         jPanel1.add(comboColor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, -1, -1));
 
         lblColor1.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -213,16 +203,14 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
 
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
         guardarColoresSeleccionados();
-        control.abrirVentanaSiguiente();
+        control.solicitarInicio();
+        btnSolicitarInicio.setBackground(Color.GREEN);
+        btnSolicitarInicio.setEnabled(false);
     }//GEN-LAST:event_btnSolicitarInicioActionPerformed
 
-    public JButton getBtnSolicitarInicio() {
-        return btnSolicitarInicio;
-    }
+    
 
-    public JButton getBtnSalir() {
-        return btnSalir;
-    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -267,7 +255,7 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
             case "Rosa":
                 return Color.PINK;
             case "Morado":
-                return new Color(128, 0, 128); // púrpura
+                return new Color(128, 0, 128); 
             case "Gris":
                 return Color.GRAY;
             case "Negro":

@@ -47,23 +47,36 @@ public class Protocolo {
             if (!partida.partidaCompleta()) {
                 partida.agregarJugador(jugador);
                 return partida;
-            }else{
+            } else {
                 System.out.println("Partida llena");
             }
-        }else{
+        } else {
             System.out.println("Partida nula");
         }
         return null;
     }
     // Solicitar Inicio de Partida
 
-    public synchronized boolean solicitarInicio() {
+    public synchronized String solicitarInicio() {
         votos.add(true);
-        return votos.size() == partida.getNumeroJugadores();
+        if (votos.size() == jugadoresDentro()) {
+            return "voto";
+        }
+        return "";
     }
 
     // Ejercer Turno
     public synchronized Movimiento ejercerTurno() {
         return null;
+    }
+
+    public int jugadoresDentro() {
+        int cant = 0;
+        for (Jugador jugador : partida.getJugadores()) {
+            if (jugador != null) {
+                cant++;
+            }
+        }
+        return cant;
     }
 }

@@ -31,11 +31,13 @@ public class Cliente {
     private Jugador JugadorCliente;
     private boolean administrador;
     private Partida PartidaCliente;
-    private ArrayList<Color> preferencias;
+    private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
     //variables logica cliente
     private boolean cambiograficoPartida = false;
     private boolean cambiograficoLobby = false;
+    private boolean partidalista = false;
+    private boolean partidaTerminada = false;
 
     public Cliente(String host, int puerto) throws IOException {
         socket = new Socket(host, puerto);
@@ -57,8 +59,10 @@ public class Cliente {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
                         cambiograficoLobby = true;
+                        System.out.println("Partida lista "+    PartidaCliente.partidaCompleta());
+                        partidalista = PartidaCliente.partidaCompleta();
+                        
                     }
-
 
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
@@ -67,9 +71,6 @@ public class Cliente {
 
                     if (obj instanceof String) {
                         switch ((String) obj) {
-                            case "partida lista":
-
-                                break;
                             case "solicitud":
                                 if (administrador) {
                                     int respuesta = JOptionPane.showConfirmDialog(null, "Un usuario quiere unirse");
@@ -80,8 +81,11 @@ public class Cliente {
                                     }
                                 }
                                 break;
+                            case "voto":
+                                partidalista = true;
+                                break;
                             default:
-                                throw new AssertionError();
+                                System.out.println("N/A");
                         }
                     }
                 }
@@ -93,11 +97,22 @@ public class Cliente {
     }
 
     //Logica de red
-    public boolean partidaLista() {
-        //ajustar
-        return false;
+    public boolean isPartidalista() {
+        return partidalista;
     }
 
+    public void setPartidalista(boolean partidalista) {
+        this.partidalista = partidalista;
+    }
+
+    public boolean isPartidaTerminada() {
+        return partidaTerminada;
+    }
+
+    public void setPartidaTerminada(boolean partidaTerminada) {
+        this.partidaTerminada = partidaTerminada;
+    }
+    
     public boolean solicitudUnirse() {
         //ajustar
         return true;
@@ -168,6 +183,8 @@ public class Cliente {
         this.PartidaCliente = PartidaCliente;
     }
 
+    
+
     //Metodos de red
     public boolean enviarServidor(Object objeto) {
         try {
@@ -211,6 +228,13 @@ public class Cliente {
 
     public void setCambiograficoLobby(boolean cambiograficoLobby) {
         this.cambiograficoLobby = cambiograficoLobby;
+    }
+
+    public void ajustarPreferencias(Color J1, Color J2, Color J3, Color J4) {
+        preferencias[0] = J1;
+        preferencias[1] = J2;
+        preferencias[2] = J3;
+        preferencias[3] = J4;
     }
 
 }

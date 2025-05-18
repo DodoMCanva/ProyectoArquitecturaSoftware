@@ -4,6 +4,7 @@ import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
+import java.awt.Color;
 
 /**
  *
@@ -26,10 +27,11 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
         estado = "abrir";
         interfaz = this;
         notificar();
-        System.out.println("Antes del hilo");
         this.start();
-        System.out.println("Despues de iniciar el hilo");
+    }
 
+    public void solicitarInicio() {
+        cli.enviarServidor(true);
     }
 
     @Override
@@ -48,20 +50,21 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
 
     public void run() {
         while (activo) {
-            System.out.println(activo);
-            if (cli.partidaLista()) {
-                activo = false;
-                estado = "cambio";
-                interfaz = this;
-                vista.actualizar(interfaz);
-            }
             if (cli.cambioLobby()) {
                 estado = "datos";
                 interfaz = this;
                 vista.actualizar(interfaz);
                 cli.setCambiograficoLobby(false);
             }
-
+            
+            if (cli.isPartidalista()) {
+                activo = false;
+                estado = "cambio";
+                interfaz = this;
+                vista.actualizar(interfaz);
+                cli.setCambiograficoLobby(false);
+            }
+            
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -69,5 +72,9 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
                 break;
             }
         }
+    }
+
+    void ajustarPreferencias(Color J1, Color J2, Color J3, Color j4) {
+        cli.ajustarPreferencias(J1, J2, J3, j4);
     }
 }

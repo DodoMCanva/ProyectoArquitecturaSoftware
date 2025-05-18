@@ -2,6 +2,7 @@ package Lobby;
 
 import Cliente.Cliente;
 import Partida.ctrlPartida;
+import java.awt.Color;
 
 /**
  *
@@ -22,9 +23,17 @@ public class ctrlLobby {
     public void abrirVentana() {
         modelo.abrirVentana(this);
     }
+    
+    public void solicitarInicio(){
+        modelo.solicitarInicio();
+    }
+    
+    public void ajustarPreferencias(Color J1, Color J2, Color J3, Color j4){
+        modelo.ajustarPreferencias(J1,  J2, J3, j4);
+    }
 
     void abrirVentanaSiguiente() {
-        // control_partida.abrirVentana();
+        control_partida.abrirVentana();
     }
 
 }

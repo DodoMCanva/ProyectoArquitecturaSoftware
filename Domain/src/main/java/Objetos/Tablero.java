@@ -48,7 +48,6 @@ public class Tablero {
         if (x < 0 || x >= horizontales.length || y < 0 || y >= horizontales[0].length) {
             return false;
         }
-
         Linea linea = horizontales[x][y];
         if (!linea.estaDibujada()) {
             linea.dibujar(jugador);
@@ -64,7 +63,6 @@ public class Tablero {
         if (x < 0 || x >= verticales.length || y < 0 || y >= verticales[0].length) {
             return false;
         }
-
         Linea linea = verticales[x][y];
         if (!linea.estaDibujada()) {
             linea.dibujar(jugador);
@@ -120,22 +118,5 @@ public class Tablero {
         return cajaFormada;
     }
 
-    public void imprimirTablero() {
-        for (int i = 0; i < horizontales.length; i++) {
-            for (int j = 0; j < horizontales[i].length; j++) {
-                System.out.print(horizontales[i][j].estaDibujada() ? " _ " : "   ");
-            }
-            System.out.println();
-
-            for (int j = 0; j < verticales[i].length; j++) {
-                System.out.print(verticales[i][j].estaDibujada() ? "| " : "  ");
-            }
-            System.out.println();
-        }
-
-        for (int i = 0; i < verticales[verticales.length - 1].length; i++) {
-            System.out.print(" _ ");
-        }
-        System.out.println();
-    }
+    
 }
