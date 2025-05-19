@@ -1,6 +1,12 @@
 package Partida;
 
 import Interfaz.Observador;
+import Objetos.Jugador;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 /**
  *
@@ -9,7 +15,6 @@ import Interfaz.Observador;
 public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPartida> {
 
     private ctrlPartida control;
-    private Grafico grafico;
 
     public frmPartida(ctrlPartida control) {
         initComponents();
@@ -17,7 +22,6 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
-        grafico = new Grafico(this);
 
     }
 
@@ -217,7 +221,8 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnlDibujoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDibujoMouseReleased
-        control.clickPanel(evt.getY(), evt.getX());
+        control.clickPanel(evt.getX(), evt.getY());
+
     }//GEN-LAST:event_pnlDibujoMouseReleased
 
     private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
@@ -252,19 +257,63 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         switch (modelo.obtenerEstado()) {
             case "abrir":
                 this.setVisible(true);
+                for (punto punto : modelo.obtenerPuntos()) {
+                    pintarCirculo(this.pnlDibujo.getGraphics(), punto.getX(), punto.getY());
+                }
                 break;
             case "actualizar tablero":
-
+                punto punto1 = modelo.obtenerLinea().getPunto_1();
+                punto punto2 = modelo.obtenerLinea().getPunto_2();
+                Jugador jugador = modelo.obtenerLinea().getJgdr();
+                pintarLinea(this.pnlDibujo.getGraphics(), punto1.getX(), punto1.getY(), punto1.getX(), punto1.getY(), Color.BLACK);
                 break;
             case "terminar":
 
+                break;
+            case "refrescar":
+                for (punto punto : modelo.obtenerPuntos()) {
+                    pintarCirculo(this.pnlDibujo.getGraphics(), punto.getX(), punto.getY());
+                }
                 break;
             default:
                 throw new AssertionError();
         }
     }
 
-    public void graficar() {
+    public void graficarPuntos() {
 
     }
+
+    public static void pintarCirculo(Graphics g, int x, int y) {
+        g.setColor(Color.BLACK);
+        g.fillOval(x, y, 15, 15);
+    }
+
+    public static void pintarLinea(Graphics g, int x1, int y1, int x2, int y2, Color color) {
+        int xAux = 0;
+        int yAux = 0;
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.setColor(color);
+        g2d.setStroke(new BasicStroke(2));
+        g2d.drawLine(x1 + 10, y1 + 10, x2 + 10, y2 + 10);
+
+        // Este cálculo parece ser para hallar el punto medio, pero actualmente no se usa
+        if (x1 <= x2) {
+            xAux = ((x2 - x1) / 2) + x1;
+        } else {
+            xAux = ((x1 - x2) / 2) + x2;
+        }
+
+        if (y1 < y2) {
+            yAux = ((y2 - y1) / 2) + y1;
+        } else {
+            yAux = ((y1 - y2) / 2) + y2;
+        }
+
+        // Puedes usar xAux, yAux si deseas pintar algo al centro de la línea
+    }
+
 }

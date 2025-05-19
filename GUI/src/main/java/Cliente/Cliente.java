@@ -31,6 +31,9 @@ public class Cliente {
     private Jugador JugadorCliente;
     private boolean administrador;
     private Partida PartidaCliente;
+    private int numeroCliente = -1;
+
+    private Movimiento ultimo;
     private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
     //variables logica cliente
@@ -59,14 +62,16 @@ public class Cliente {
                         convertirPartida convertidor = new convertirPartida();
                         PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
                         cambiograficoLobby = true;
-                        System.out.println("Partida lista "+    PartidaCliente.partidaCompleta());
                         partidalista = PartidaCliente.partidaCompleta();
-                        
                     }
 
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
-                        //aqui se interpretaria
+                        ultimo = (Movimiento) obj;
+                        cambiograficoPartida = true;
+                    }
+                    if (respuestaValida) {
+
                     }
 
                     if (obj instanceof String) {
@@ -86,6 +91,16 @@ public class Cliente {
                                 break;
                             default:
                                 System.out.println("N/A");
+                        }
+                    }
+//                    if (obj instanceof JugadorDTO) {
+//                        
+//                    }
+                    if (obj instanceof Integer) {
+                        if (numeroCliente == -1) {
+                            numeroCliente = (int) obj;
+                        } else {
+
                         }
                     }
                 }
@@ -112,7 +127,7 @@ public class Cliente {
     public void setPartidaTerminada(boolean partidaTerminada) {
         this.partidaTerminada = partidaTerminada;
     }
-    
+
     public boolean solicitudUnirse() {
         //ajustar
         return true;
@@ -183,8 +198,6 @@ public class Cliente {
         this.PartidaCliente = PartidaCliente;
     }
 
-    
-
     //Metodos de red
     public boolean enviarServidor(Object objeto) {
         try {
@@ -235,6 +248,14 @@ public class Cliente {
         preferencias[1] = J2;
         preferencias[2] = J3;
         preferencias[3] = J4;
+    }
+
+    public boolean esTurno() {
+        return false;
+    }
+
+    public Movimiento getUltimo() {
+        return ultimo;
     }
 
 }

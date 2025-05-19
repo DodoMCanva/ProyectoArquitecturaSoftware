@@ -14,7 +14,8 @@ public class ctrlCrearCuenta {
     private mdlCrearCuenta modelo;
     private ctrlMenu control_menu;
 
-    public ctrlCrearCuenta(Cliente cli) {
+    
+   public ctrlCrearCuenta(Cliente cli) {
         this.cli = cli;
         modelo = new mdlCrearCuenta(cli);
         control_menu = new ctrlMenu(cli);

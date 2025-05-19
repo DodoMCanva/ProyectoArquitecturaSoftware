@@ -16,7 +16,9 @@ public class Arranque {
             ctrlCrearCuenta control = new ctrlCrearCuenta(cliente);
             control.abrirVentana();
         } catch (Exception e) {
+            //System.out.println(e.toString());
             JOptionPane.showMessageDialog(null, "No se pudo establecer conexion");
+            //e.printStackTrace(); 
         }
 
     }

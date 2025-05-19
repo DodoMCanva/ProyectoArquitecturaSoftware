@@ -11,14 +11,6 @@ public class Tablero {
     private Linea[][] verticales;
     private Caja[][] cajas;
 
-    public int getTamano() {
-        return tamano;
-    }
-
-    public void setTamano(int tamano) {
-        this.tamano = tamano;
-    }
-
     public Tablero(int tamano) {
         this.tamano = tamano;
         horizontales = new Linea[tamano][tamano - 1];
@@ -118,5 +110,12 @@ public class Tablero {
         return cajaFormada;
     }
 
-    
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+
 }

@@ -3,6 +3,7 @@ package Lobby;
 import Cliente.Cliente;
 import Partida.ctrlPartida;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
