@@ -1,8 +1,12 @@
 package Partida;
 
 import Cliente.Cliente;
+import Filtros.IFiltro;
 import Interfaz.Observado;
 import Interfaz.Observador;
+import Objetos.Linea;
+import Objetos.Movimiento;
+import Tuberias.TuberiaMovimientoRecibido;
 
 /**
  *
@@ -14,6 +18,8 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private ImdlPartida interfaz;
     private String estado = "";
     private boolean Terminada = false;
+    private TuberiaMovimientoRecibido tuberiaMovimientoRecibido;
+
 
     private Cliente cli;
     private Grafico grafico;
@@ -32,6 +38,10 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
         interfaz = this;
         notificar();
     }
+        public mdlPartida(IFiltro<Linea, Boolean> verificarLinea) {
+        this.tuberiaMovimientoRecibido = new TuberiaMovimientoRecibido(verificarLinea);
+    }
+
 
     public void Terminar() {
 
@@ -72,4 +82,16 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             }
         }
     }
+
+    public void recibirMovimiento(Movimiento movimiento) {
+        Linea lineaProcesada = tuberiaMovimientoRecibido.procesarMovimiento(movimiento);
+
+        if (lineaProcesada != null) {
+            System.out.println("Movimiento válido. Línea creada: " + lineaProcesada);
+        } else {
+            System.out.println("Movimiento inválido. No se generó línea.");
+        }
+    }
+
+
 }

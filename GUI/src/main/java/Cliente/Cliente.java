@@ -5,6 +5,7 @@ import Convertidor.convertirJugador;
 import Convertidor.convertirPartida;
 import Objetos.*;
 import Objetos.*;
+import Tuberias.TuberiaConversorPartida;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,6 +19,11 @@ import javax.swing.JOptionPane;
  * @author Equipo
  */
 public class Cliente {
+ private TuberiaConversorPartida tuberiaConversorPartida;
+
+    public Cliente() {
+        this.tuberiaConversorPartida = new TuberiaConversorPartida();
+    }
 
     //Variables de red
     private Socket socket;
@@ -222,5 +228,8 @@ public class Cliente {
         this.cambiograficoLobby = cambiograficoLobby;
     }
 
-    
+    public Partida recibirDatosPartida(PartidaDTO partidaDTO) {
+        return tuberiaConversorPartida.procesar(partidaDTO);
+    }
+
 }

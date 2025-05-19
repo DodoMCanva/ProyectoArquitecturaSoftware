@@ -8,15 +8,12 @@ package Tuberias;
  *
  * @author delll
  */
-
 import Objetos.Linea;
-import Objetos.Movimiento;
 
-public class FormarMovimiento {
-    public Movimiento aplicar(Linea linea) {
-        return new Movimiento(linea);
+
+public class FormarLinea {
+    public Linea construirLinea(int[] primerPunto, int[] segundoPunto, boolean esHorizontal) {
+        return new Linea(primerPunto[0], primerPunto[1], segundoPunto[0], segundoPunto[1], esHorizontal);
     }
-    
-   
 
 }

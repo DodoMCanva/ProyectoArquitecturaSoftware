@@ -10,6 +10,11 @@ public class Partida {
     private Tablero tablero;
     private Jugador[] jugadores;
 
+    public Partida(Jugador[] jugadores, Tablero tablero) {
+        this.jugadores = jugadores;
+        this.tablero = tablero;
+    }
+
     public Partida(int tamano, int numeroJugadores) {
         this.tablero = new Tablero(tamano);
         this.numeroJugadores = numeroJugadores;

@@ -26,4 +26,5 @@ public class VerificarLinea implements IFiltro<Linea, Boolean> {
     }
 
 
+
 }

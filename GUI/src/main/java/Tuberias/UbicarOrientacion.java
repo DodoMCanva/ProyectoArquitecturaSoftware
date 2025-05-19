@@ -9,6 +9,7 @@ package Tuberias;
  * @author delll
  */
 import Objetos.Linea;
+import Objetos.Movimiento;
 public class UbicarOrientacion {
       public boolean esHorizontal(Linea linea) {
         // Lógica para determinar si la línea es horizontal
@@ -18,6 +19,9 @@ public class UbicarOrientacion {
     public boolean esVertical(Linea linea) {
         // Lógica para determinar si la línea es vertical
         return true;  // Implementación real basada en coordenadas
+    }
+    public boolean definirOrientacion(Movimiento movimiento) {
+        return movimiento.esHorizontal();
     }
 
 }

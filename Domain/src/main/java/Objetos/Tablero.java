@@ -10,6 +10,7 @@ public class Tablero {
     private Linea[][] horizontales;
     private Linea[][] verticales;
     private Caja[][] cajas;
+    private String[][] estructura;
 
     public int getTamano() {
         return tamano;
@@ -17,6 +18,11 @@ public class Tablero {
 
     public void setTamano(int tamano) {
         this.tamano = tamano;
+    }
+
+     public Tablero(int tamano, String[][] estructura) {
+        this.tamano = tamano;
+        this.estructura = estructura;
     }
 
     public Tablero(int tamano) {

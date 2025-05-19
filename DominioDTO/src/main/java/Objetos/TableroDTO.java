@@ -12,6 +12,11 @@ public class TableroDTO implements Serializable {
     private LineaDTO[][] horizontales;
     private LineaDTO[][] verticales;
     private CajaDTO[][] cajas;
+    private String[][] estructura;
+
+    public String[][] getEstructura() { 
+        return estructura; 
+    }
 
     public int getTamano() {
         return tamano;

@@ -10,6 +10,7 @@ package Tuberias;
  */
 
 import Objetos.Linea;
+import Objetos.Movimiento;
 import Objetos.Tablero;
 
 
@@ -18,6 +19,9 @@ public class UbicarPrmeraPosicion {
         int x = 0; // Lógica real para calcular X
         int y = 0; // Lógica real para calcular Y
         return new int[]{x, y};
+    }
+ public int[] obtenerCoordenada(Movimiento movimiento) {
+        return new int[]{movimiento.getX(), movimiento.getY()};
     }
 
 }
