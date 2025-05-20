@@ -17,5 +17,7 @@ public interface ImdlPartida {
     
     public linea obtenerLinea();
     
+    public String obtenerTurnoActual();
+    
     
 }

@@ -33,7 +33,7 @@ public class Cliente {
     private Partida PartidaCliente;
     private int numeroCliente = -1;
 
-    private Jugador jugadorTurnoActual;
+    private String jugadorTurnoActual;
 
     private Movimiento ultimo;
     private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
@@ -69,7 +69,7 @@ public class Cliente {
                     }
                     if (obj instanceof JugadorDTO) {
                         convertirJugador convertidorJ = new convertirJugador();
-                        jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj);
+                        jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj).getNombre();
                         cambiograficoPartida = true;
                     }
 
@@ -262,5 +262,11 @@ public class Cliente {
     public Movimiento getUltimo() {
         return ultimo;
     }
+
+    public String getJugadorTurnoActual() {
+        return jugadorTurnoActual;
+    }
+    
+    
 
 }

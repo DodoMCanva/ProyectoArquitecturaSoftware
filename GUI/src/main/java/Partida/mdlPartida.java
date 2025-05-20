@@ -149,6 +149,11 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     public linea obtenerLinea() {
         return linea;
     }
+    
+    @Override
+    public String obtenerTurnoActual() {
+        return cli.getJugadorTurnoActual();
+    }
 
     @Override
     public void notificar() {
@@ -171,6 +176,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             estado = "refrescar";
             interfaz = this;
             vista.actualizar(interfaz);
+            
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
