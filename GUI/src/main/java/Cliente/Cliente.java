@@ -70,6 +70,7 @@ public class Cliente {
                     if (obj instanceof JugadorDTO) {
                         convertirJugador convertidorJ = new convertirJugador();
                         jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj).getNombre();
+                        System.out.println("Jugador actual" + jugadorTurnoActual);
                         cambiograficoPartida = true;
                     }
 
@@ -106,7 +107,7 @@ public class Cliente {
                         if (numeroCliente == -1) {
                             numeroCliente = (int) obj;
                         } else {
-
+                            
                         }
                     }
                 }
