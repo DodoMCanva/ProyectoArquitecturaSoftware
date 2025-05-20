@@ -128,7 +128,9 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
 
     private void btnUnirsePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirsePartidaActionPerformed
 
+        btnUnirsePartida.setEnabled(false);
         control.unirsePartida();
+        btnUnirsePartida.setEnabled(true);
     }//GEN-LAST:event_btnUnirsePartidaActionPerformed
 
     private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
