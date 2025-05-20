@@ -45,4 +45,30 @@ public class TableroDTO implements Serializable {
             }
         }
     }
+
+    public LineaDTO[][] getHorizontales() {
+        return horizontales;
+    }
+
+    public void setHorizontales(LineaDTO[][] horizontales) {
+        this.horizontales = horizontales;
+    }
+
+    public LineaDTO[][] getVerticales() {
+        return verticales;
+    }
+
+    public void setVerticales(LineaDTO[][] verticales) {
+        this.verticales = verticales;
+    }
+
+    public CajaDTO[][] getCajas() {
+        return cajas;
+    }
+
+    public void setCajas(CajaDTO[][] cajas) {
+        this.cajas = cajas;
+    }
+    
+    
 }
