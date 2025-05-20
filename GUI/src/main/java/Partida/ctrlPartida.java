@@ -32,7 +32,7 @@ public class ctrlPartida {
     }
 
     void abandonar() {
-
+        modelo.abandonar();
     }
 
 }

@@ -281,8 +281,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
                 cargarDatosJugadores(modelo);
                 break;
 
-            case "terminar":
-                // Aquí puedes poner un mensaje o cerrar la ventana, si lo necesitas
+            case "terminada":
+                control.abrirVentanaSiguiente();
+                this.dispose();
                 break;
 
             default:
