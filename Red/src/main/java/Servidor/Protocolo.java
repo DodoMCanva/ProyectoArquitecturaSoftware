@@ -84,6 +84,7 @@ public class Protocolo {
     }
 
     public JugadorDTO obtenerJugador(int index) {
+        System.out.println("Jugador actual "+ partida.getJugadores()[index]);
         return convertir.convertir_Dominio_a_DTO(partida.getJugadores()[index]);
     }
 
