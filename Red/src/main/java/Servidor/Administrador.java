@@ -69,7 +69,7 @@ public class Administrador implements Runnable {
                             synchronized (Administrador.class) {
                                 clientesAbandono.add(cliente);
                             }
-                            
+
                             break;
                         default:
                             servidor.notificar(protocolo.nombreUnicoJugador((String) obj), cliente);
@@ -131,7 +131,7 @@ public class Administrador implements Runnable {
                 // Movimiento
                 if (obj instanceof Movimiento) {
                     System.out.println("-------------------------------------");
-                    System.out.println("Movimiento #"+mov);
+                    System.out.println("Movimiento #" + mov);
                     mov++;
                     System.out.println("cliente que envio " + cliente);
                     synchronized (Administrador.class) {
@@ -179,17 +179,17 @@ public class Administrador implements Runnable {
     private void avanzarTurno() {
         System.out.println("turno anterior " + turnoActual);
         turnoActual = (turnoActual + 1) % totalJugadores;
-        
+
         // corregir no es del todo eficiente
 //        if (clientesAbandono.contains(turnoActual)) {
 //            turnoActual = (turnoActual + 1) % totalJugadores;
 //        }
         System.out.println("turno actual " + turnoActual);
-        
+
         //Aqui se mandaria el index
         int j = 0;
         for (int i = 0; i < clientesPartida.length; i++) {
-            if (clientesPartida[i] == turnoActual) {
+            if (clientesPartida[i] == ordenTurnos[turnoActual]) {
                 j = i;
             }
         }
