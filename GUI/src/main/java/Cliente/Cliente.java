@@ -311,4 +311,21 @@ public class Cliente {
         this.preferencias = preferencias;
     }
 
+    public static boolean isRespuestaValida() {
+        return respuestaValida;
+    }
+
+    public static void setRespuestaValida(boolean respuestaValida) {
+        Cliente.respuestaValida = respuestaValida;
+    }
+
+    public static boolean isRespuestaRecibida() {
+        return respuestaRecibida;
+    }
+
+    public static void setRespuestaRecibida(boolean respuestaRecibida) {
+        Cliente.respuestaRecibida = respuestaRecibida;
+    }
+    
+
 }
