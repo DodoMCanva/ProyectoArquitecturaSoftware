@@ -16,7 +16,7 @@ public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
     private Observador vista;
     private ImdlCrearCuenta interfaz;
     private String estado = "";
-    
+
     //
     private Cliente cli;
 
@@ -31,22 +31,22 @@ public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
         interfaz = this;
         notificar();
     }
-    
-    public void cambiarAvatar(){
-     estado= "cambiar avatar";
-     interfaz= this;
-     notificar();
-             
+
+    public void cambiarAvatar() {
+        estado = "cambiar avatar";
+        interfaz = this;
+        notificar();
+
     }
 
     @Override
     public void crearJugador(String nombre, String avatar) {
         TuberiaJugador tuberia = new TuberiaJugador();
         nombre = tuberia.procesar(nombre);
-        
+
         cli.enviarServidor(nombre);
-        cli.setJugadorCliente(new Jugador(avatar, nombre, 0));
-        
+        cli.setJugadorCliente(new Jugador(nombre, avatar, 0));
+
         if (!nombre.equals("") && cli.esRespuestaValida()) {
             estado = "cambiar";
             interfaz = this;
@@ -55,6 +55,7 @@ public class mdlCrearCuenta implements ImdlCrearCuenta, Observado {
             JOptionPane.showMessageDialog(null, "Nombre ya registrado");
         }
     }
+
     @Override
     public String obtenerEstado() {
         return this.estado;

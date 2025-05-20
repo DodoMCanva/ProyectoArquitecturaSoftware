@@ -38,11 +38,18 @@ public class Cliente {
     private Jugador JugadorCliente;
     private boolean administrador;
     private Partida PartidaCliente;
-    private ArrayList<Color> preferencias;
+    private int numeroCliente = -1;
+
+    private String jugadorTurnoActual;
+
+    private Movimiento ultimo;
+    private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
     //variables logica cliente
     private boolean cambiograficoPartida = false;
     private boolean cambiograficoLobby = false;
+    private boolean partidalista = false;
+    private boolean partidaTerminada = false;
 
     public Cliente(String host, int puerto) throws IOException {
         socket = new Socket(host, puerto);
@@ -61,30 +68,28 @@ public class Cliente {
                     }
                     //Te uniste a la partida
                     if (obj instanceof PartidaDTO) {
-                        convertirPartida convertidor = new convertirPartida();
-                        PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
-                    }
-
-                    //Se unio alguien mas a la partida
-                    if (obj instanceof JugadorDTO) {
-                        convertirJugador convertidor = new convertirJugador();
-                        PartidaCliente.agregarJugador(convertidor.convertir_DTO_a_Dominio((JugadorDTO) obj));
+                        convertirPartida convertidorP = new convertirPartida();
+                        PartidaCliente = (convertidorP.convertir_DTO_a_Dominio((PartidaDTO) obj));
                         cambiograficoLobby = true;
-//                        if (PartidaCliente.partidaCompleta()) {
-//                            partidaLista();
-//                        }
+                        //Corregir
+                        partidalista = PartidaCliente.partidaCompleta();
+                    }
+                    if (obj instanceof JugadorDTO) {
+                        convertirJugador convertidorJ = new convertirJugador();
+                        jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj).getNombre();
+                        System.out.println("Jugador actual" + jugadorTurnoActual);
+                        cambiograficoPartida = true;
                     }
 
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
-                        //aqui se interpretaria
+                        ultimo = (Movimiento) obj;
+                        ejercerTurno(ultimo);
+                        cambiograficoPartida = true;
                     }
 
                     if (obj instanceof String) {
                         switch ((String) obj) {
-                            case "partida lista":
-
-                                break;
                             case "solicitud":
                                 if (administrador) {
                                     int respuesta = JOptionPane.showConfirmDialog(null, "Un usuario quiere unirse");
@@ -95,8 +100,21 @@ public class Cliente {
                                     }
                                 }
                                 break;
+                            case "voto":
+                                partidalista = true;
+                                break;
                             default:
-                                throw new AssertionError();
+                                System.out.println("N/A");
+                        }
+                    }
+//                    if (obj instanceof JugadorDTO) {
+//                        
+//                    }
+                    if (obj instanceof Integer) {
+                        if (numeroCliente == -1) {
+                            numeroCliente = (int) obj;
+                        } else {
+
                         }
                     }
                 }
@@ -108,9 +126,20 @@ public class Cliente {
     }
 
     //Logica de red
-    public boolean partidaLista() {
-        //ajustar
-        return true;
+    public boolean isPartidalista() {
+        return partidalista;
+    }
+
+    public void setPartidalista(boolean partidalista) {
+        this.partidalista = partidalista;
+    }
+
+    public boolean isPartidaTerminada() {
+        return partidaTerminada;
+    }
+
+    public void setPartidaTerminada(boolean partidaTerminada) {
+        this.partidaTerminada = partidaTerminada;
     }
 
     public boolean solicitudUnirse() {
@@ -135,10 +164,10 @@ public class Cliente {
                 e.printStackTrace();
             }
         }
-        respuestaRecibida=false;
+        respuestaRecibida = false;
         return respuestaValida;
     }
-    
+
     public static boolean esAceptado() {
         long timeout = System.currentTimeMillis() + 5000;
         while (!esRespuestaRecibida() && System.currentTimeMillis() < timeout) {
@@ -228,8 +257,89 @@ public class Cliente {
         this.cambiograficoLobby = cambiograficoLobby;
     }
 
+ 
     public Partida recibirDatosPartida(PartidaDTO partidaDTO) {
         return tuberiaConversorPartida.procesar(partidaDTO);
     }
+
+
+    public void ajustarPreferencias(Color J1, Color J2, Color J3, Color J4) {
+        preferencias[0] = J1;
+        preferencias[1] = J2;
+        preferencias[2] = J3;
+        preferencias[3] = J4;
+    }
+
+    public Movimiento getUltimo() {
+        return ultimo;
+    }
+
+    public String getJugadorTurnoActual() {
+        return jugadorTurnoActual;
+    }
+
+    public void ejercerTurno(Movimiento mov) {
+        convertirJugador convertir = new convertirJugador();
+        Jugador jugadorMovimiento = convertir.convertir_DTO_a_Dominio(mov.getJugador());
+
+        // Buscar el jugador real dentro de la partida
+        Jugador jugadorReal = null;
+        for (Jugador j : PartidaCliente.getJugadores()) {
+            if (j != null && j.getNombre().equals(jugadorMovimiento.getNombre())) {
+                jugadorReal = j;
+                break;
+            }
+        }
+
+        if (jugadorReal == null) {
+            System.out.println("Jugador no encontrado en la partida");
+            return;
+        }
+
+        boolean aplico;
+        if (mov.isEsHorizontal()) {
+            aplico = PartidaCliente.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), jugadorReal);
+        } else {
+            aplico = PartidaCliente.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), jugadorReal);
+        }
+
+        if (aplico) {
+            System.out.println("Movimiento aplicado correctamente");
+        } else {
+            System.out.println("Movimiento inválido");
+        }
+
+        if (aplico) {
+            System.out.println("Movimiento aplicado correctamente");
+        } else {
+            System.out.println("Movimiento inválido");
+        }
+    }
+
+    public Color[] getPreferencias() {
+        return preferencias;
+    }
+
+    public void setPreferencias(Color[] preferencias) {
+        this.preferencias = preferencias;
+    }
+
+    public static boolean isRespuestaValida() {
+        return respuestaValida;
+    }
+
+    public static void setRespuestaValida(boolean respuestaValida) {
+        Cliente.respuestaValida = respuestaValida;
+    }
+
+    public static boolean isRespuestaRecibida() {
+        return respuestaRecibida;
+    }
+
+    public static void setRespuestaRecibida(boolean respuestaRecibida) {
+        Cliente.respuestaRecibida = respuestaRecibida;
+    }
+    
+
 
 }

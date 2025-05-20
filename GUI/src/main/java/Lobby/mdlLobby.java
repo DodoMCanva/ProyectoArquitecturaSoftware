@@ -4,9 +4,7 @@ import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
-import Objetos.Partida;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.awt.Color;
 
 /**
  *
@@ -17,10 +15,8 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
     private Observador vista;
     private ImdlLobby interfaz;
     private String estado = "";
-    private Partida partida;
-    private boolean Terminada = false;
-
     private Cliente cli;
+    private boolean activo = true;
 
     public mdlLobby(Cliente cli) {
         this.cli = cli;
@@ -31,6 +27,11 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
         estado = "abrir";
         interfaz = this;
         notificar();
+        this.start();
+    }
+
+    public void solicitarInicio() {
+        cli.enviarServidor(true);
     }
 
     @Override
@@ -48,26 +49,32 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
     }
 
     public void run() {
-        while (true) {
-            if (cli.partidaLista()) {
-                estado = "cambio";
-                interfaz = this;
-                vista.actualizar(interfaz);
-
-            }
-            if (cli.solicitudUnirse()) {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Quieres aceptar otro jugador",
-                        "UnirsePartida", JOptionPane.YES_NO_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION) {
-                    cli.enviarServidor("aceptado");
-                }
-            }
+        while (activo) {
             if (cli.cambioLobby()) {
                 estado = "datos";
                 interfaz = this;
                 vista.actualizar(interfaz);
+                cli.setCambiograficoLobby(false);
+            }
+            
+            if (cli.isPartidalista()) {
+                activo = false;
+                estado = "cambio";
+                interfaz = this;
+                vista.actualizar(interfaz);
+                cli.setCambiograficoLobby(false);
+            }
+            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                break;
             }
         }
     }
 
+    void ajustarPreferencias(Color J1, Color J2, Color J3, Color j4) {
+        cli.ajustarPreferencias(J1, J2, J3, j4);
+    }
 }

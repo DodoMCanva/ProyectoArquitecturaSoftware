@@ -1,6 +1,14 @@
 package Partida;
 
 import Interfaz.Observador;
+import Objetos.Jugador;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -9,7 +17,8 @@ import Interfaz.Observador;
 public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPartida> {
 
     private ctrlPartida control;
-    private Grafico grafico;
+    private ImageIcon icono;
+    private Image imagen;
 
     public frmPartida(ctrlPartida control) {
         initComponents();
@@ -17,8 +26,6 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
-        grafico = new Grafico(this);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -217,7 +224,8 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnlDibujoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDibujoMouseReleased
-        control.clickPanel(evt.getY(), evt.getX());
+        control.clickPanel(evt.getX(), evt.getY());
+
     }//GEN-LAST:event_pnlDibujoMouseReleased
 
     private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
@@ -249,23 +257,103 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
     @Override
     public void actualizar(ImdlPartida modelo) {
+        Graphics g = this.pnlDibujo.getGraphics();
+        g.clearRect(0, 0, pnlDibujo.getWidth(), pnlDibujo.getHeight());
+
         switch (modelo.obtenerEstado()) {
             case "abrir":
-                
                 this.setVisible(true);
+                for (punto punto : modelo.obtenerPuntos()) {
+                    pintarCirculo(g, punto.getX(), punto.getY());
+                }
                 break;
-            case "actualizar tablero":
-                
+
+            case "refrescar":
+                for (punto punto : modelo.obtenerPuntos()) {
+                    pintarCirculo(g, punto.getX(), punto.getY());
+                }
+                for (linea l : modelo.obtenerLineas()) {
+                    punto p1 = l.getPunto_1();
+                    punto p2 = l.getPunto_2();
+                    pintarLinea(g, p1.getX(), p1.getY(), p2.getX(), p2.getY(), l.getColor());
+                }
+
+                cargarDatosJugadores(modelo);
                 break;
+
             case "terminar":
-                
+                // Aquí puedes poner un mensaje o cerrar la ventana, si lo necesitas
                 break;
+
             default:
-                throw new AssertionError();
+                throw new AssertionError("Estado desconocido: " + modelo.obtenerEstado());
         }
     }
-    
-    public void graficar(){
-        
+
+    public static void pintarCirculo(Graphics g, int x, int y) {
+        g.setColor(Color.BLACK);
+        g.fillOval(x, y, 15, 15);
+    }
+
+    public static void pintarLinea(Graphics g, int x1, int y1, int x2, int y2, Color color) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.setColor(color);
+        g2d.setStroke(new BasicStroke(2));
+        g2d.drawLine(x1 + 10, y1 + 10, x2 + 10, y2 + 10);
+    }
+
+    public void cargarDatosJugadores(ImdlPartida modelo) {
+        Jugador[] jugadores = modelo.obtenerJugadores();
+
+        lblNombreJ1.setText(jugadores[0].getNombre());
+        lblScoreJ1.setText(Integer.toString(jugadores[0].getPuntos()));
+        icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[0].getAvatar()));
+        imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        lblJ1.setIcon(new ImageIcon(imagen));
+        if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
+            lblJ1.setBackground(Color.red);
+        } else {
+            lblJ1.setBackground(Color.white);
+        }
+
+        lblNombreJ2.setText(jugadores[1].getNombre());
+        lblScoreJ2.setText(Integer.toString(jugadores[1].getPuntos()));
+        icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[1].getAvatar()));
+        imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        lblJ2.setIcon(new ImageIcon(imagen));
+        if (jugadores[1].getNombre().equals(modelo.obtenerTurnoActual())) {
+            lblJ2.setBackground(Color.BLUE);
+        } else {
+            lblJ2.setBackground(Color.white);
+        }
+
+        if (jugadores[2] != null) {
+            lblNombreJ3.setText(jugadores[2].getNombre());
+            lblScoreJ3.setText(Integer.toString(jugadores[2].getPuntos()));
+            icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[2].getAvatar()));
+            imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblJ3.setIcon(new ImageIcon(imagen));
+            if (jugadores[2].getNombre().equals(modelo.obtenerTurnoActual())) {
+                lblJ3.setBackground(Color.PINK);
+            } else {
+                lblJ3.setBackground(Color.white);
+            }
+        }
+
+        if (jugadores[3] != null) {
+            lblNombreJ4.setText(jugadores[3].getNombre());
+            lblScoreJ4.setText(Integer.toString(jugadores[3].getPuntos()));
+            icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[3].getAvatar()));
+            imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblJ4.setIcon(new ImageIcon(imagen));
+            if (jugadores[3].getNombre().equals(modelo.obtenerTurnoActual())) {
+                lblJ4.setBackground(Color.red);
+            } else {
+                lblJ4.setBackground(Color.white);
+            }
+        }
+
     }
 }

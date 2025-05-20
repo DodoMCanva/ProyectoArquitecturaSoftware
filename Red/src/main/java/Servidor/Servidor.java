@@ -14,8 +14,6 @@ import java.util.List;
 public class Servidor {
 
     public static List<Administrador> jugadores = new ArrayList<>();
-    public static List<String> nombres = new ArrayList<>();
-    public static int jugadorActual = 0;
     public static boolean ejecutando;
 
     public static void main(String[] args) {
@@ -28,7 +26,7 @@ public class Servidor {
                 Socket socket = serverSocket.accept();
                 Administrador admin = new Administrador(socket, jugador++, servidor);
                 jugadores.add(admin);
-                System.out.println("Se agregó un jugador");
+                System.out.println("Se agrego un jugador");
                 new Thread(admin).start();
             }
             serverSocket.close();
@@ -51,7 +49,6 @@ public class Servidor {
     }
 
     public void notificar(Object mensaje, int jugador) {
-        //solo debe notificar a los de la partida
         try {
             ObjectOutputStream out = jugadores.get(jugador).getOut();
             out.writeObject(mensaje);
@@ -60,5 +57,4 @@ public class Servidor {
             System.out.println("No se pudo notificar.");
         }
     }
-
 }

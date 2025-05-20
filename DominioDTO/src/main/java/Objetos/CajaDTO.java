@@ -9,4 +9,14 @@ import java.io.Serializable;
 public class CajaDTO implements Serializable {
     private Jugador propietario;
 
+    public Jugador getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Jugador propietario) {
+        this.propietario = propietario;
+    }
+
+    
+    
 }

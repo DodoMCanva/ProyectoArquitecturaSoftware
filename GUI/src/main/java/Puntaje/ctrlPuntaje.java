@@ -16,7 +16,6 @@ public class ctrlPuntaje {
     public ctrlPuntaje(Cliente cli) {
         this.cli = cli;
         modelo = new mdlPuntaje(cli);
-        control_menu = new ctrlMenu(cli);
     }
 
     public void abrirVentana() {
