@@ -220,7 +220,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             this.linea = nuevaLinea;
             this.lineas.add(nuevaLinea);
 
-            turno = (turno + 1) % 3;
+            turno = (turno + 1) % cli.getJugadoresenPartida();
         }
     }
 

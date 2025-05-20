@@ -328,6 +328,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     public void cargarDatosJugadores(ImdlPartida modelo) {
         Jugador[] jugadores = modelo.obtenerJugadores();
 
+        lblNombreJ1.setText(jugadores[0].getNombre());
         lblScoreJ1.setText(Integer.toString(jugadores[0].getPuntos()));
         icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[0].getAvatar()));
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
