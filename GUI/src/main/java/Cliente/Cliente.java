@@ -31,6 +31,7 @@ public class Cliente {
     private Jugador JugadorCliente;
     private Partida PartidaCliente;
     private int numeroCliente = -1;
+    private int jugadoresenPartida=0;
 
     private String jugadorTurnoActual;
 
@@ -231,6 +232,11 @@ public class Cliente {
     }
 
     public void ajustarPreferencias(Color J1, Color J2, Color J3, Color J4) {
+        for (int i = 0; i < PartidaCliente.getJugadores().length; i++) {
+            if (PartidaCliente.getJugadores()[i]!=null) {
+                jugadoresenPartida++;
+            }
+        }
         preferencias[0] = J1;
         preferencias[1] = J2;
         preferencias[2] = J3;
@@ -307,8 +313,16 @@ public class Cliente {
         Cliente.respuestaRecibida = respuestaRecibida;
     }
 
+    public int getJugadoresenPartida() {
+        return jugadoresenPartida;
+    }
+
+    public void setJugadoresenPartida(int jugadoresenPartida) {
+        this.jugadoresenPartida = jugadoresenPartida;
+    }
+
     public void restaurar() {
-    
+        PartidaCliente = null;
     }
     
 
