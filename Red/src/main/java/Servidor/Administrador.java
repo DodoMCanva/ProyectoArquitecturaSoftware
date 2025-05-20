@@ -42,6 +42,7 @@ public class Administrador implements Runnable {
     private static final Protocolo protocolo = Protocolo.getInstancia();
     convertirPartida convertidorPartida = new convertirPartida();
     convertirJugador convertidorJugador = new convertirJugador();
+    private static int mov;
 
     public Administrador(Socket socket, int cliente, Servidor servidor) {
         this.socket = socket;
@@ -129,8 +130,9 @@ public class Administrador implements Runnable {
 
                 // Movimiento
                 if (obj instanceof Movimiento) {
+                    System.out.println("Movimiento #"+mov);
+                    mov++;
                     System.out.println("cliente que envio " + cliente);
-                    System.out.println("numero de cliente en el turno actual " + ordenTurnos[turnoActual]);
                     synchronized (Administrador.class) {
                         if (ordenTurnos[turnoActual] == cliente) {
                             if (protocolo.ejercerTurno((Movimiento) obj)) {
@@ -173,16 +175,15 @@ public class Administrador implements Runnable {
     }
 
     private void avanzarTurno() {
-        System.out.println("Total jugadores " + totalJugadores);
-        System.out.println("Se cambio el turno");
         System.out.println("turno anterior " + turnoActual);
         turnoActual = (turnoActual + 1) % totalJugadores;
         
         // corregir no es del todo eficiente
-        if (clientesAbandono.contains(turnoActual)) {
-            turnoActual = (turnoActual + 1) % totalJugadores;
-        }
+//        if (clientesAbandono.contains(turnoActual)) {
+//            turnoActual = (turnoActual + 1) % totalJugadores;
+//        }
         System.out.println("turno actual " + turnoActual);
+        
         //Aqui se mandaria el index
         int j = 0;
         for (int i = 0; i < clientesPartida.length; i++) {

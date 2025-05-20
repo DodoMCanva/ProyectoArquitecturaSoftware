@@ -76,7 +76,7 @@ public class Cliente {
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
                         ultimo = (Movimiento) obj;
-
+                        ejercerTurno(ultimo);
                         cambiograficoPartida = true;
                     }
 
