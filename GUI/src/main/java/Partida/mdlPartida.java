@@ -23,6 +23,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     //Datos de logica
     private boolean Terminada = true;
     private List<punto> puntos = new ArrayList<>();
+    private List<linea> lineas = new ArrayList<>();
 
     //private List<linea> lineas = new ArrayList<>();
     private linea linea;
@@ -146,10 +147,15 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     }
 
     @Override
+    public List<linea> obtenerLineas() {
+        return lineas;
+    }
+
+    @Override
     public linea obtenerLinea() {
         return linea;
     }
-    
+
     @Override
     public String obtenerTurnoActual() {
         return cli.getJugadorTurnoActual();
@@ -176,7 +182,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             estado = "refrescar";
             interfaz = this;
             vista.actualizar(interfaz);
-            
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -201,6 +207,10 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             p2 = new punto(x, y + separador);
         }
         linea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()));
+
+        linea nuevaLinea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()));
+        this.linea = nuevaLinea;
+        this.lineas.add(nuevaLinea);
     }
 
 }

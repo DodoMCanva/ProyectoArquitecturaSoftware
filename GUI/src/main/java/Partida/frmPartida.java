@@ -22,7 +22,6 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
-
     }
 
     @SuppressWarnings("unchecked")
@@ -254,34 +253,36 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
     @Override
     public void actualizar(ImdlPartida modelo) {
+        Graphics g = this.pnlDibujo.getGraphics();
+        g.clearRect(0, 0, pnlDibujo.getWidth(), pnlDibujo.getHeight());
+
         switch (modelo.obtenerEstado()) {
             case "abrir":
                 this.setVisible(true);
                 for (punto punto : modelo.obtenerPuntos()) {
-                    pintarCirculo(this.pnlDibujo.getGraphics(), punto.getX(), punto.getY());
+                    pintarCirculo(g, punto.getX(), punto.getY());
                 }
                 break;
-            case "actualizar tablero":
-                punto punto1 = modelo.obtenerLinea().getPunto_1();
-                punto punto2 = modelo.obtenerLinea().getPunto_2();
-                Jugador jugador = modelo.obtenerLinea().getJgdr();
-                pintarLinea(this.pnlDibujo.getGraphics(), punto1.getX(), punto1.getY(), punto1.getX(), punto1.getY(), Color.BLACK);
-                break;
-            case "terminar":
 
-                break;
             case "refrescar":
                 for (punto punto : modelo.obtenerPuntos()) {
-                    pintarCirculo(this.pnlDibujo.getGraphics(), punto.getX(), punto.getY());
+                    pintarCirculo(g, punto.getX(), punto.getY());
+                }
+                for (linea l : modelo.obtenerLineas()) {
+                    punto p1 = l.getPunto_1();
+                    punto p2 = l.getPunto_2();
+                    Color c = obtenerColorPorJugador(l.getJgdr().getNombre());
+                    pintarLinea(g, p1.getX(), p1.getY(), p2.getX(), p2.getY(), c);
                 }
                 break;
+
+            case "terminar":
+                // Aquí puedes poner un mensaje o cerrar la ventana, si lo necesitas
+                break;
+
             default:
-                throw new AssertionError();
+                throw new AssertionError("Estado desconocido: " + modelo.obtenerEstado());
         }
-    }
-
-    public void graficarPuntos() {
-
     }
 
     public static void pintarCirculo(Graphics g, int x, int y) {
@@ -290,30 +291,26 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     }
 
     public static void pintarLinea(Graphics g, int x1, int y1, int x2, int y2, Color color) {
-        int xAux = 0;
-        int yAux = 0;
-
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2d.setColor(color);
         g2d.setStroke(new BasicStroke(2));
         g2d.drawLine(x1 + 10, y1 + 10, x2 + 10, y2 + 10);
-
-        // Este cálculo parece ser para hallar el punto medio, pero actualmente no se usa
-        if (x1 <= x2) {
-            xAux = ((x2 - x1) / 2) + x1;
-        } else {
-            xAux = ((x1 - x2) / 2) + x2;
-        }
-
-        if (y1 < y2) {
-            yAux = ((y2 - y1) / 2) + y1;
-        } else {
-            yAux = ((y1 - y2) / 2) + y2;
-        }
-
-        // Puedes usar xAux, yAux si deseas pintar algo al centro de la línea
     }
 
+    public static Color obtenerColorPorJugador(String nombreJugador) {
+        switch (nombreJugador) {
+            case "Jugador1":
+                return Color.RED;
+            case "Jugador2":
+                return Color.BLUE;
+            case "Jugador3":
+                return Color.GREEN;
+            case "Jugador4":
+                return Color.ORANGE;
+            default:
+                return Color.BLACK;
+        }
+    }
 }

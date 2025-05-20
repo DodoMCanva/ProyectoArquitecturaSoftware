@@ -1,4 +1,4 @@
-package Partida;
+ package Partida;
 
 import Cliente.Cliente;
 import Puntaje.ctrlPuntaje;
