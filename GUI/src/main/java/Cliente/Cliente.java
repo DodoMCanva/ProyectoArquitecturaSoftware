@@ -33,6 +33,8 @@ public class Cliente {
     private Partida PartidaCliente;
     private int numeroCliente = -1;
 
+    private Jugador jugadorTurnoActual;
+
     private Movimiento ultimo;
     private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
@@ -59,19 +61,22 @@ public class Cliente {
                     }
                     //Te uniste a la partida
                     if (obj instanceof PartidaDTO) {
-                        convertirPartida convertidor = new convertirPartida();
-                        PartidaCliente = (convertidor.convertir_DTO_a_Dominio((PartidaDTO) obj));
+                        convertirPartida convertidorP = new convertirPartida();
+                        PartidaCliente = (convertidorP.convertir_DTO_a_Dominio((PartidaDTO) obj));
                         cambiograficoLobby = true;
+                        //Corregir
                         partidalista = PartidaCliente.partidaCompleta();
+                    }
+                    if (obj instanceof JugadorDTO) {
+                        convertirJugador convertidorJ = new convertirJugador();
+                        jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj);
+                        cambiograficoPartida = true;
                     }
 
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
                         ultimo = (Movimiento) obj;
                         cambiograficoPartida = true;
-                    }
-                    if (respuestaValida) {
-
                     }
 
                     if (obj instanceof String) {

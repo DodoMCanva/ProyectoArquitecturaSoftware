@@ -25,6 +25,7 @@ public class Administrador implements Runnable {
 
     // Máximo 4 jugadores por partida
     private static final int MAX_JUGADORES = 4;
+    //Esta en el mismo orden que la que entraron los jugadores
     private static int[] clientesPartida = new int[MAX_JUGADORES];
     private static int totalJugadores = 0;
     private static int votosInicio = 0;
@@ -76,6 +77,7 @@ public class Administrador implements Runnable {
 
                 //Unirse Partida 
                 if (obj instanceof JugadorDTO) {
+
                     Jugador jugador = convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj);
                     Partida partida = protocolo.agregarJugador(jugador);
                     if (partida.partidaCompleta()) {
@@ -156,6 +158,13 @@ public class Administrador implements Runnable {
         System.out.println("turno anterior " + turnoActual);
         turnoActual = (turnoActual + 1) % totalJugadores;
         System.out.println("turno actual " + turnoActual);
-        servidor.notificarTodos(turnoActual);
+        //Aqui se mandaria el index
+        int j = 0;
+        for (int i = 0; i < clientesPartida.length; i++) {
+            if (clientesPartida[i] == turnoActual) {
+                j = i;
+            }
+        }
+        servidor.notificarTodos(protocolo.obtenerJugador(j));
     }
 }

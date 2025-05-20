@@ -23,10 +23,7 @@ public class Protocolo {
     private final List<String> nombres = new ArrayList<>();
     private final List<Boolean> votos = new ArrayList<>();
 
-    private Partida partida;
-
-    private Jugador[] ordenTurnos;
-    private int turnoActual = 0;
+    private static Partida partida;
 
     convertirJugador convertir = new convertirJugador();
 
@@ -75,6 +72,7 @@ public class Protocolo {
 
     // Ejercer Turno
     public synchronized boolean ejercerTurno(Movimiento mov) {
+        //corregir true
         if (true) {
             if (mov.isEsHorizontal()) {
                 partida.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
@@ -87,7 +85,10 @@ public class Protocolo {
         } else {
             return false;
         }
+    }
 
+    public JugadorDTO obtenerJugador(int index) {
+        return convertir.convertir_Dominio_a_DTO(partida.getJugadores()[index]);
     }
 
     public int jugadoresDentro() {
@@ -98,44 +99,6 @@ public class Protocolo {
             }
         }
         return cant;
-    }
-
-    public synchronized void inicializarTurnos() {
-        Jugador[] jugadores = partida.getJugadores();
-        int n = jugadores.length;
-
-        // Contar jugadores válidos (no null)
-        int reales = 0;
-        for (Jugador j : jugadores) {
-            if (j != null) {
-                reales++;
-            }
-        }
-
-        ordenTurnos = new Jugador[reales];
-
-        int index = 0;
-        for (Jugador j : jugadores) {
-            if (j != null) {
-                ordenTurnos[index++] = j;
-            }
-        }
-
-        // Mezclar el arreglo ordenTurnos (Fisher–Yates shuffle)
-        java.util.Random rand = new java.util.Random();
-        for (int i = ordenTurnos.length - 1; i > 0; i--) {
-            int j = rand.nextInt(i + 1);
-            Jugador temp = ordenTurnos[i];
-            ordenTurnos[i] = ordenTurnos[j];
-            ordenTurnos[j] = temp;
-        }
-
-        turnoActual = 0;
-
-        System.out.println("Orden aleatorio generado:");
-        for (Jugador j : ordenTurnos) {
-            System.out.println(j.getNombre());
-        }
     }
 
 }
