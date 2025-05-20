@@ -1,7 +1,6 @@
 package Servidor;
 
-
-import Convertidor.convertirJugador; 
+import Convertidor.convertirJugador;
 import Objetos.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,8 @@ public class Protocolo {
 
     private static final Protocolo instancia = new Protocolo();
 
-    private Protocolo() {}
+    private Protocolo() {
+    }
 
     public static Protocolo getInstancia() {
         return instancia;
@@ -74,8 +74,12 @@ public class Protocolo {
     }
 
     public synchronized boolean ejercerTurno(MovimientoDTO mov, int clienteSolicitante) {
-        if (ordenTurnos == null || ordenTurnos.length == 0) return false;
-        if (ordenTurnos[turnoActual] != clienteSolicitante) return false;
+        if (ordenTurnos == null || ordenTurnos.length == 0) {
+            return false;
+        }
+        if (ordenTurnos[turnoActual] != clienteSolicitante) {
+            return false;
+        }
 
         boolean aplico;
         Jugador jugador = convertir.convertir_DTO_a_Dominio(mov.getJugador());
@@ -106,9 +110,20 @@ public class Protocolo {
         return convertir.convertir_Dominio_a_DTO(partida.getJugadores()[index]);
     }
 
-    public synchronized void marcarAbandono(int cliente) {
+    public synchronized String marcarAbandono(int cliente) {
         if (!clientesAbandono.contains(cliente)) {
             clientesAbandono.add(cliente);
+        }
+        if (!clientesAbandono.contains(cliente)) {
+            clientesAbandono.add(cliente);
+        }
+
+        int jugadoresActivos = jugadoresDentro() - clientesAbandono.size();
+
+        if (jugadoresActivos <= 1) {
+            return "forzarterminar";
+        } else {
+            return "abandono registrado";
         }
     }
 
