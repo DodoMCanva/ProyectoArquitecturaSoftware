@@ -130,6 +130,7 @@ public class Administrador implements Runnable {
 
                 // Movimiento
                 if (obj instanceof Movimiento) {
+                    System.out.println("-------------------------------------");
                     System.out.println("Movimiento #"+mov);
                     mov++;
                     System.out.println("cliente que envio " + cliente);
@@ -144,6 +145,7 @@ public class Administrador implements Runnable {
                             System.out.println("No es el turno del cliente " + cliente);
                         }
                     }
+                    System.out.println("-------------------------------------");
                 }
             }
 
