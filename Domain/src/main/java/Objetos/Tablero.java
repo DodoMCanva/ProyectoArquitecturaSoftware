@@ -7,7 +7,7 @@ package Objetos;
 public class Tablero {
 
     private int tamano;
-    private Linea[][] horizontales;
+    public Linea[][] horizontales;
     private Linea[][] verticales;
     private Caja[][] cajas;
 
@@ -69,41 +69,49 @@ public class Tablero {
     private boolean verificarCajaFormada(int x, int y, boolean esHorizontal, Jugador jugador) {
         boolean cajaFormada = false;
 
-        if (esHorizontal && x > 0) {
-            if (!cajas[x - 1][y].tienePropietario()
-                    && horizontales[x - 1][y].estaDibujada()
-                    && verticales[x - 1][y].estaDibujada()
-                    && verticales[x - 1][y + 1].estaDibujada()) {
-                cajas[x - 1][y].setPropietario(jugador);
-                cajaFormada = true;
+        if (esHorizontal) {
+            // Verificar caja arriba
+            if (x > 0 && y < tamano - 1) {
+                if (!cajas[x - 1][y].tienePropietario()
+                        && horizontales[x - 1][y].estaDibujada()
+                        && verticales[x - 1][y].estaDibujada()
+                        && verticales[x - 1][y + 1].estaDibujada()) {
+                    cajas[x - 1][y].setPropietario(jugador);
+                    cajaFormada = true;
+                }
             }
-        }
-        if (!esHorizontal && y > 0) {
-            if (!cajas[x][y - 1].tienePropietario()
-                    && verticales[x][y - 1].estaDibujada()
-                    && horizontales[x][y - 1].estaDibujada()
-                    && horizontales[x + 1][y - 1].estaDibujada()) {
-                cajas[x][y - 1].setPropietario(jugador);
-                cajaFormada = true;
-            }
-        }
 
-        if (esHorizontal && x < cajas.length) {
-            if (!cajas[x][y].tienePropietario()
-                    && horizontales[x + 1][y].estaDibujada()
-                    && verticales[x][y].estaDibujada()
-                    && verticales[x][y + 1].estaDibujada()) {
-                cajas[x][y].setPropietario(jugador);
-                cajaFormada = true;
+            // Verificar caja abajo
+            if (x < tamano - 1 && y < tamano - 1) {
+                if (!cajas[x][y].tienePropietario()
+                        && horizontales[x + 1][y].estaDibujada()
+                        && verticales[x][y].estaDibujada()
+                        && verticales[x][y + 1].estaDibujada()) {
+                    cajas[x][y].setPropietario(jugador);
+                    cajaFormada = true;
+                }
             }
-        }
-        if (!esHorizontal && x < cajas.length && y < cajas[0].length) {
-            if (!cajas[x][y].tienePropietario()
-                    && verticales[x][y + 1].estaDibujada()
-                    && horizontales[x][y].estaDibujada()
-                    && horizontales[x + 1][y].estaDibujada()) {
-                cajas[x][y].setPropietario(jugador);
-                cajaFormada = true;
+        } else {
+            // Verificar caja a la izquierda
+            if (x < tamano - 1 && y > 0) {
+                if (!cajas[x][y - 1].tienePropietario()
+                        && verticales[x][y - 1].estaDibujada()
+                        && horizontales[x][y - 1].estaDibujada()
+                        && horizontales[x + 1][y - 1].estaDibujada()) {
+                    cajas[x][y - 1].setPropietario(jugador);
+                    cajaFormada = true;
+                }
+            }
+
+            // Verificar caja a la derecha
+            if (x < tamano - 1 && y < tamano - 1) {
+                if (!cajas[x][y].tienePropietario()
+                        && verticales[x][y + 1].estaDibujada()
+                        && horizontales[x][y].estaDibujada()
+                        && horizontales[x + 1][y].estaDibujada()) {
+                    cajas[x][y].setPropietario(jugador);
+                    cajaFormada = true;
+                }
             }
         }
 
@@ -117,5 +125,31 @@ public class Tablero {
     public void setTamano(int tamano) {
         this.tamano = tamano;
     }
+
+    public Linea[][] getHorizontales() {
+        return horizontales;
+    }
+
+    public void setHorizontales(Linea[][] horizontales) {
+        this.horizontales = horizontales;
+    }
+
+    public Linea[][] getVerticales() {
+        return verticales;
+    }
+
+    public void setVerticales(Linea[][] verticales) {
+        this.verticales = verticales;
+    }
+
+    public Caja[][] getCajas() {
+        return cajas;
+    }
+
+    public void setCajas(Caja[][] cajas) {
+        this.cajas = cajas;
+    }
+    
+    
 
 }
