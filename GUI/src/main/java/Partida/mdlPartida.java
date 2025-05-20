@@ -219,7 +219,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             interfaz = this;
             vista.actualizar(interfaz);
 
-            if (cli.getPartidaCliente().getTablero().terminarPartida()) {
+            if (cli.getPartidaCliente().getTablero().terminarPartida() || cli.partidaForzada()) {
                 estado = "terminada";
                 interfaz = this;
                 vista.actualizar(interfaz);

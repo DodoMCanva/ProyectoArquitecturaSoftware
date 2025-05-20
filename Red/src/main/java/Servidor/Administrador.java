@@ -45,7 +45,7 @@ public class Administrador implements Runnable {
                 if (obj instanceof String) {
                     switch ((String) obj) {
                         case "abandono":
-                            protocolo.marcarAbandono(cliente);
+                            servidor.notificarTodos(protocolo.marcarAbandono(cliente));
                             break;
                         default:
                             servidor.notificar(protocolo.nombreUnicoJugador((String) obj), cliente);
