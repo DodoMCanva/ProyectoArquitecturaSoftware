@@ -6,7 +6,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -15,6 +17,8 @@ import java.awt.RenderingHints;
 public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPartida> {
 
     private ctrlPartida control;
+    private ImageIcon icono;
+    private Image imagen;
 
     public frmPartida(ctrlPartida control) {
         initComponents();
@@ -305,6 +309,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
         lblNombreJ1.setText(jugadores[0].getNombre());
         lblScoreJ1.setText(Integer.toString(jugadores[0].getPuntos()));
+        icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[0].getAvatar()));
+        imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        lblJ1.setIcon(new ImageIcon(imagen));
         if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
             lblJ1.setBackground(Color.red);
         } else {
@@ -313,6 +320,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
         lblNombreJ2.setText(jugadores[1].getNombre());
         lblScoreJ2.setText(Integer.toString(jugadores[1].getPuntos()));
+        icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[1].getAvatar()));
+        imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        lblJ2.setIcon(new ImageIcon(imagen));
         if (jugadores[1].getNombre().equals(modelo.obtenerTurnoActual())) {
             lblJ2.setBackground(Color.BLUE);
         } else {
@@ -322,6 +332,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         if (jugadores[2] != null) {
             lblNombreJ3.setText(jugadores[2].getNombre());
             lblScoreJ3.setText(Integer.toString(jugadores[2].getPuntos()));
+            icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[2].getAvatar()));
+            imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblJ3.setIcon(new ImageIcon(imagen));
             if (jugadores[2].getNombre().equals(modelo.obtenerTurnoActual())) {
                 lblJ3.setBackground(Color.PINK);
             } else {
@@ -332,6 +345,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         if (jugadores[3] != null) {
             lblNombreJ4.setText(jugadores[3].getNombre());
             lblScoreJ4.setText(Integer.toString(jugadores[3].getPuntos()));
+            icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[3].getAvatar()));
+            imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblJ4.setIcon(new ImageIcon(imagen));
             if (jugadores[3].getNombre().equals(modelo.obtenerTurnoActual())) {
                 lblJ4.setBackground(Color.red);
             } else {
