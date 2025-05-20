@@ -271,9 +271,10 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
                 for (linea l : modelo.obtenerLineas()) {
                     punto p1 = l.getPunto_1();
                     punto p2 = l.getPunto_2();
-                    Color c = obtenerColorPorJugador(l.getJgdr().getNombre());
-                    pintarLinea(g, p1.getX(), p1.getY(), p2.getX(), p2.getY(), c);
+                    pintarLinea(g, p1.getX(), p1.getY(), p2.getX(), p2.getY(), l.getColor());
                 }
+
+                cargarDatosJugadores(modelo);
                 break;
 
             case "terminar":
@@ -299,52 +300,44 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         g2d.drawLine(x1 + 10, y1 + 10, x2 + 10, y2 + 10);
     }
 
-    public  Color obtenerColorPorJugador(String nombreJugador) {
-        switch (nombreJugador) {
-            case "Jugador1":
-                return Color.RED;
-            case "Jugador2":
-                return Color.BLUE;
-            case "Jugador3":
-                return Color.GREEN;
-            case "Jugador4":
-                return Color.ORANGE;
-            default:
-                return Color.BLACK;
-        }
-    }
-    
-    public void cargarDatosJugadores(ImdlPartida modelo){
+    public void cargarDatosJugadores(ImdlPartida modelo) {
         Jugador[] jugadores = modelo.obtenerJugadores();
-        
+
         lblNombreJ1.setText(jugadores[0].getNombre());
-        lblJ1.setText(Integer.toString(jugadores[0].getPuntos()));
+        lblScoreJ1.setText(Integer.toString(jugadores[0].getPuntos()));
         if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
             lblJ1.setBackground(Color.red);
-        }else{
+        } else {
             lblJ1.setBackground(Color.white);
         }
-        lblNombreJ2.setText(jugadores[0].getNombre());
-        lblJ1.setText(Integer.toString(jugadores[0].getPuntos()));
-        if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
-            lblJ2.setBackground(Color.red);
-        }else{
+
+        lblNombreJ2.setText(jugadores[1].getNombre());
+        lblScoreJ2.setText(Integer.toString(jugadores[1].getPuntos()));
+        if (jugadores[1].getNombre().equals(modelo.obtenerTurnoActual())) {
+            lblJ2.setBackground(Color.BLUE);
+        } else {
             lblJ2.setBackground(Color.white);
         }
-        lblNombreJ3.setText(jugadores[0].getNombre());
-        lblJ1.setText(Integer.toString(jugadores[0].getPuntos()));
-        if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
-            lblJ3.setBackground(Color.red);
-        }else{
-            lblJ3.setBackground(Color.white);
+
+        if (jugadores[2] != null) {
+            lblNombreJ3.setText(jugadores[2].getNombre());
+            lblScoreJ3.setText(Integer.toString(jugadores[2].getPuntos()));
+            if (jugadores[2].getNombre().equals(modelo.obtenerTurnoActual())) {
+                lblJ3.setBackground(Color.PINK);
+            } else {
+                lblJ3.setBackground(Color.white);
+            }
         }
-        lblNombreJ4.setText(jugadores[0].getNombre());
-        lblJ1.setText(Integer.toString(jugadores[0].getPuntos()));
-        if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
-            lblJ4.setBackground(Color.red);
-        }else{
-            lblJ4.setBackground(Color.white);
+
+        if (jugadores[3] != null) {
+            lblNombreJ4.setText(jugadores[3].getNombre());
+            lblScoreJ4.setText(Integer.toString(jugadores[3].getPuntos()));
+            if (jugadores[3].getNombre().equals(modelo.obtenerTurnoActual())) {
+                lblJ4.setBackground(Color.red);
+            } else {
+                lblJ4.setBackground(Color.white);
+            }
         }
-        
+
     }
 }

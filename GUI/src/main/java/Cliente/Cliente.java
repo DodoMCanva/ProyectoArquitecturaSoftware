@@ -283,4 +283,14 @@ public class Cliente {
         }
     }
 
+    public Color[] getPreferencias() {
+        return preferencias;
+    }
+
+    public void setPreferencias(Color[] preferencias) {
+        this.preferencias = preferencias;
+    }
+
+    
+    
 }

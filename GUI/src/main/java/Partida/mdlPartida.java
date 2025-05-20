@@ -6,6 +6,7 @@ import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
 import Objetos.Movimiento;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private Observador vista;
     private ImdlPartida interfaz;
     private String estado = "";
+    
+    
 
     //Datos de logica
     private boolean Terminada = true;
@@ -37,6 +40,8 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private int tmn;
     private int tmnTablero = 635;
     private int separador = 0;
+    private Color[] colores;
+    private int turno;
 
     //RED
     private Cliente cli;
@@ -49,6 +54,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
         tmn = cli.getPartidaCliente().getTablero().getTamano();
         separador = tmnTablero / tmn;
         tmn = this.cli.getPartidaCliente().getTablero().getTamano();
+        colores= cli.getPreferencias();
         agregarPuntos();
         vista = new frmPartida(control);
         estado = "abrir";
@@ -201,9 +207,9 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             p1 = new punto(x, y);
             p2 = new punto(x, y + separador);
         }
-        linea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()));
+        linea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()),colores[turno]);
 
-        linea nuevaLinea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()));
+        linea nuevaLinea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()),colores[turno]);
         this.linea = nuevaLinea;
         this.lineas.add(nuevaLinea);
     }
