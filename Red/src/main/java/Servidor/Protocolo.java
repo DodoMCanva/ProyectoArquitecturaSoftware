@@ -72,19 +72,16 @@ public class Protocolo {
 
     // Ejercer Turno
     public synchronized boolean ejercerTurno(Movimiento mov) {
-        //corregir true
-        if (true) {
-            if (mov.isEsHorizontal()) {
-                partida.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
-                System.out.println("Es horizontal");
-            } else {
-                partida.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
-                System.out.println("Es vertical");
-            }
-            return true;
+        boolean aplico;
+        if (mov.isEsHorizontal()) {
+            aplico = partida.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
+            System.out.println("Es horizontal");
         } else {
-            return false;
+            aplico = partida.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
+            System.out.println("Es vertical");
         }
+        return aplico;
+
     }
 
     public JugadorDTO obtenerJugador(int index) {
