@@ -149,7 +149,16 @@ public class Tablero {
     public void setCajas(Caja[][] cajas) {
         this.cajas = cajas;
     }
-    
-    
+
+    public boolean terminarPartida() {
+        for (int i = 0; i < cajas.length; i++) {
+            for (int j = 0; j < cajas[i].length; j++) {
+                if (!cajas[i][j].tienePropietario()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 }

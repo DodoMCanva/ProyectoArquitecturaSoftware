@@ -22,7 +22,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private String estado = "";
 
     //Datos de logica
-    private boolean Terminada = true;
+    private boolean Terminada = false;
     private List<punto> puntos = new ArrayList<>();
     private List<linea> lineas = new ArrayList<>();
 
@@ -84,11 +84,12 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
         }
     }
 
-    public void Terminar() {
-
-    }
-
     public void abandonar() {
+        cli.enviarServidor("abandono");
+        estado = "terminada";
+        interfaz = this;
+        vista.actualizar(interfaz);
+        Terminada = true;
 
     }
 
@@ -172,7 +173,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
 
     @Override
     public void run() {
-        while (Terminada) {
+        while (!Terminada) {
             if (cli.cambioPartida()) {
                 interpretarMovimiento(cli.getUltimo());
                 cli.setCambiograficoPartida(false);
@@ -181,6 +182,13 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             estado = "refrescar";
             interfaz = this;
             vista.actualizar(interfaz);
+
+            if (cli.getPartidaCliente().getTablero().terminarPartida()) {
+                estado = "terminada";
+                interfaz = this;
+                vista.actualizar(interfaz);
+                Terminada = true;
+            }
 
             try {
                 Thread.sleep(1000);

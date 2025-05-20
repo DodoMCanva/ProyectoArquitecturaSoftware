@@ -19,7 +19,7 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
 
     private ctrlLobby control;
 
-    private Map<Integer, Color> coloresTableroPersonalizados = new HashMap<>();
+    private Color[] colorpref = new Color[4];
 
     /**
      * Creates new form frmLobby
@@ -33,6 +33,9 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         setDefaultLookAndFeelDecorated(true);
         this.control = control;
         configurarColorPrevisualizacion();
+        comboColor2.setSelectedIndex(1);
+        comboColor3.setSelectedIndex(2);
+        comboColor4.setSelectedIndex(3);
 
     }
 
@@ -50,10 +53,10 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     }
 
     private void guardarColoresSeleccionados() {
-        coloresTableroPersonalizados.put(1, obtenerColorPorNombre((String) comboColor1.getSelectedItem()));
-        coloresTableroPersonalizados.put(2, obtenerColorPorNombre((String) comboColor2.getSelectedItem()));
-        coloresTableroPersonalizados.put(3, obtenerColorPorNombre((String) comboColor3.getSelectedItem()));
-        coloresTableroPersonalizados.put(4, obtenerColorPorNombre((String) comboColor4.getSelectedItem()));
+        colorpref[0]=(obtenerColorPorNombre((String) comboColor1.getSelectedItem()));
+        colorpref[1]=(obtenerColorPorNombre((String) comboColor2.getSelectedItem()));
+        colorpref[2]=(obtenerColorPorNombre((String) comboColor3.getSelectedItem()));
+        colorpref[3]=(obtenerColorPorNombre((String) comboColor4.getSelectedItem()));
     }
 
     @SuppressWarnings("unchecked")
@@ -172,15 +175,15 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 300, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
-        jLabel7.setText("Color jugador");
+        jLabel7.setText("Color Tercero");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
-        jLabel8.setText("Color jugador");
+        jLabel8.setText("Color Segundo");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
-        jLabel9.setText("Color jugador");
+        jLabel9.setText("Color Primero");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,7 +205,7 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
-        guardarColoresSeleccionados();
+        
         control.solicitarInicio();
         btnSolicitarInicio.setBackground(Color.GREEN);
         btnSolicitarInicio.setEnabled(false);
@@ -314,6 +317,8 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
                 }
                 break;
             case "cambio":
+                guardarColoresSeleccionados();
+                control.ajustarPreferencias(colorpref[0], colorpref[1], colorpref[2], colorpref[3]);
                 control.abrirVentanaSiguiente();
                 this.dispose();
                 break;
