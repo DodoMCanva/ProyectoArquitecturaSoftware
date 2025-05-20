@@ -50,7 +50,9 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         ls3 = new javax.swing.JLabel();
         lblScoreJ4 = new javax.swing.JLabel();
         btnAbandonar = new javax.swing.JButton();
-        pnlDibujo = new javax.swing.JPanel();
+        pnlDibujo = new PanelDibujo();
+        jLabel1 = new javax.swing.JLabel();
+        lblTurno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,35 +121,47 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
             .addGap(0, 633, Short.MAX_VALUE)
         );
 
+        jLabel1.setText("TURNO DEL JUGADOR...");
+
+        lblTurno.setText("Jugador");
+
         javax.swing.GroupLayout pnlJuegoLayout = new javax.swing.GroupLayout(pnlJuego);
         pnlJuego.setLayout(pnlJuegoLayout);
         pnlJuegoLayout.setHorizontalGroup(
             pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlJuegoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblNombreJ3)
-                        .addComponent(lblJ3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnlJuegoLayout.createSequentialGroup()
-                            .addComponent(ls2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblScoreJ3)))
-                    .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnlJuegoLayout.createSequentialGroup()
-                            .addGap(46, 46, 46)
-                            .addComponent(lblNombreJ1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlJuegoLayout.createSequentialGroup()
-                            .addComponent(ls)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblScoreJ1))))
                 .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlJuegoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblNombreJ3)
+                                .addComponent(lblJ3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlJuegoLayout.createSequentialGroup()
+                                    .addComponent(ls2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblScoreJ3)))
+                            .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlJuegoLayout.createSequentialGroup()
+                                    .addGap(46, 46, 46)
+                                    .addComponent(lblNombreJ1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlJuegoLayout.createSequentialGroup()
+                                    .addComponent(ls)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblScoreJ1))))
                         .addGap(290, 290, 290)
                         .addComponent(btnAbandonar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlJuegoLayout.createSequentialGroup()
-                        .addGap(124, 124, 124)
+                        .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlJuegoLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlJuegoLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)))
                         .addComponent(pnlDibujo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,6 +206,10 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
                                 .addGroup(pnlJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(ls)
                                     .addComponent(lblScoreJ1))
+                                .addGap(91, 91, 91)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTurno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblJ3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
@@ -235,6 +253,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbandonar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblJ1;
     private javax.swing.JLabel lblJ2;
     private javax.swing.JLabel lblJ3;
@@ -247,6 +266,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     private javax.swing.JLabel lblScoreJ2;
     private javax.swing.JLabel lblScoreJ3;
     private javax.swing.JLabel lblScoreJ4;
+    private javax.swing.JLabel lblTurno;
     private javax.swing.JLabel ls;
     private javax.swing.JLabel ls1;
     private javax.swing.JLabel ls2;
@@ -277,7 +297,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
                     punto p2 = l.getPunto_2();
                     pintarLinea(g, p1.getX(), p1.getY(), p2.getX(), p2.getY(), l.getColor());
                 }
-
+                lblTurno.setText(modelo.obtenerTurnoActual());
                 cargarDatosJugadores(modelo);
                 break;
 
@@ -314,8 +334,10 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         lblJ1.setIcon(new ImageIcon(imagen));
         if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
+            System.out.println("Son iguales");
             lblJ1.setBackground(Color.red);
         } else {
+            System.out.println("no son iguales");
             lblJ1.setBackground(Color.white);
         }
 

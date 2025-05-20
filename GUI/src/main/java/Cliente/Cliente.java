@@ -70,7 +70,6 @@ public class Cliente {
                         convertirJugador convertidorJ = new convertirJugador();
                         jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj).getNombre();
                         System.out.println("Jugador actual" + jugadorTurnoActual);
-                        cambiograficoPartida = true;
                     }
 
                     //Ejerciero Turno
