@@ -29,7 +29,6 @@ public class Cliente {
 
     //Variables unicas de cliente
     private Jugador JugadorCliente;
-    private boolean administrador;
     private Partida PartidaCliente;
     private int numeroCliente = -1;
 
@@ -83,16 +82,7 @@ public class Cliente {
 
                     if (obj instanceof String) {
                         switch ((String) obj) {
-                            case "solicitud":
-                                if (administrador) {
-                                    int respuesta = JOptionPane.showConfirmDialog(null, "Un usuario quiere unirse");
-                                    if (respuesta == JOptionPane.YES_OPTION) {
-                                        enviarServidor(true);
-                                    } else {
-                                        enviarServidor(false);
-                                    }
-                                }
-                                break;
+                            
                             case "voto":
                                 partidalista = true;
                                 break;
@@ -178,15 +168,6 @@ public class Cliente {
     }
 
     public void interpretar() {
-    }
-
-    //getters y setters
-    public boolean esAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
     }
 
     public void setJugadorCliente(Jugador jugador) {

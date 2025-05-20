@@ -39,7 +39,6 @@ public class mdlMenu implements Observado, ImdlMenu {
         cli.enviarServidor(convertir.convertir_Dominio_a_DTO(partida));
         if (cli.esRespuestaValida()) {
             cli.setPartidaCliente(partida);
-            cli.setAdministrador(true);
             estado = "cambiar";
             interfaz = this;
             notificar();
