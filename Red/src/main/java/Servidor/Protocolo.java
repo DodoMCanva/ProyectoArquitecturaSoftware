@@ -81,7 +81,6 @@ public class Protocolo {
             System.out.println("Es vertical");
         }
         return aplico;
-
     }
 
     public JugadorDTO obtenerJugador(int index) {

@@ -256,9 +256,7 @@ public class Cliente {
         preferencias[3] = J4;
     }
 
-    public boolean esTurno() {
-        return false;
-    }
+    
 
     public Movimiento getUltimo() {
         return ultimo;
