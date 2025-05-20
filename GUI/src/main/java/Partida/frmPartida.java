@@ -328,29 +328,16 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
     public void cargarDatosJugadores(ImdlPartida modelo) {
         Jugador[] jugadores = modelo.obtenerJugadores();
 
-        lblNombreJ1.setText(jugadores[0].getNombre());
         lblScoreJ1.setText(Integer.toString(jugadores[0].getPuntos()));
         icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[0].getAvatar()));
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         lblJ1.setIcon(new ImageIcon(imagen));
-        if (jugadores[0].getNombre().equals(modelo.obtenerTurnoActual())) {
-            System.out.println("Son iguales");
-            lblJ1.setBackground(Color.red);
-        } else {
-            System.out.println("no son iguales");
-            lblJ1.setBackground(Color.white);
-        }
 
         lblNombreJ2.setText(jugadores[1].getNombre());
         lblScoreJ2.setText(Integer.toString(jugadores[1].getPuntos()));
         icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[1].getAvatar()));
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         lblJ2.setIcon(new ImageIcon(imagen));
-        if (jugadores[1].getNombre().equals(modelo.obtenerTurnoActual())) {
-            lblJ2.setBackground(Color.BLUE);
-        } else {
-            lblJ2.setBackground(Color.white);
-        }
 
         if (jugadores[2] != null) {
             lblNombreJ3.setText(jugadores[2].getNombre());
@@ -358,11 +345,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
             icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[2].getAvatar()));
             imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             lblJ3.setIcon(new ImageIcon(imagen));
-            if (jugadores[2].getNombre().equals(modelo.obtenerTurnoActual())) {
-                lblJ3.setBackground(Color.PINK);
-            } else {
-                lblJ3.setBackground(Color.white);
-            }
+
         }
 
         if (jugadores[3] != null) {
@@ -371,11 +354,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
             icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[3].getAvatar()));
             imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             lblJ4.setIcon(new ImageIcon(imagen));
-            if (jugadores[3].getNombre().equals(modelo.obtenerTurnoActual())) {
-                lblJ4.setBackground(Color.red);
-            } else {
-                lblJ4.setBackground(Color.white);
-            }
+
         }
 
     }
