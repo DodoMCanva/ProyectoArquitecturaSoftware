@@ -56,7 +56,7 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
                 vista.actualizar(interfaz);
                 cli.setCambiograficoLobby(false);
             }
-            
+
             if (cli.isPartidalista()) {
                 activo = false;
                 estado = "cambio";
@@ -64,7 +64,7 @@ public class mdlLobby extends Thread implements Observado, ImdlLobby {
                 vista.actualizar(interfaz);
                 cli.setCambiograficoLobby(false);
             }
-            
+
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {

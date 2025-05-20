@@ -171,7 +171,7 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jPanel1.add(lblColor4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
-        jLabel6.setText("Color jugador");
+        jLabel6.setText("Color Cuarto");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 300, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 10)); // NOI18N
