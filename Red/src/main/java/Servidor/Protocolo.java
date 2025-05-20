@@ -78,7 +78,7 @@ public class Protocolo {
                 partida.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
                 System.out.println("Es horizontal");
             } else {
-                partida.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
+                partida.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
                 System.out.println("Es vertical");
             }
             return true;

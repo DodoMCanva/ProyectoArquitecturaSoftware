@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +31,8 @@ public class Administrador implements Runnable {
     private static int[] clientesPartida = new int[MAX_JUGADORES];
     private static int totalJugadores = 0;
     private static int votosInicio = 0;
+
+    private static ArrayList<Integer> clientesAbandono = new ArrayList<>();
 
     // Turnos
     private static int[] ordenTurnos = new int[MAX_JUGADORES];
@@ -57,11 +60,18 @@ public class Administrador implements Runnable {
 
                 //Crear Usuario
                 if (obj instanceof String) {
-                    if (!obj.equals("aceptado")) {
-                        servidor.notificar(protocolo.nombreUnicoJugador((String) obj), cliente);
+                    switch ((String) obj) {
+                        case "aceptado":
 
-                    } else {
-
+                            break;
+                        case "abandono":
+                            synchronized (Administrador.class) {
+                                clientesAbandono.add(cliente);
+                            }
+                            
+                            break;
+                        default:
+                            servidor.notificar(protocolo.nombreUnicoJugador((String) obj), cliente);
                     }
                 }
 
@@ -86,24 +96,24 @@ public class Administrador implements Runnable {
                 if (obj instanceof JugadorDTO) {
 //                    servidor.notificarTodos("solicitud");
 //                    if (aceptado) {
-                        Jugador jugador = convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj);
-                        Partida partida = protocolo.agregarJugador(jugador);
-                        if (partida.partidaCompleta()) {
-                            generarOrdenTurnos();
+                    Jugador jugador = convertidorJugador.convertir_DTO_a_Dominio((JugadorDTO) obj);
+                    Partida partida = protocolo.agregarJugador(jugador);
+                    if (partida.partidaCompleta()) {
+                        generarOrdenTurnos();
+                    }
+                    if (partida != null) {
+                        PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(partida);
+                        synchronized (Administrador.class) {
+                            if (totalJugadores < MAX_JUGADORES) {
+                                clientesPartida[totalJugadores++] = cliente;
+                                System.out.println("Jugador " + cliente + " unido. Total: " + totalJugadores);
+                            }
                         }
-                        if (partida != null) {
-                            PartidaDTO partidaDTO = convertidorPartida.convertir_Dominio_a_DTO(partida);
-                            synchronized (Administrador.class) {
-                                if (totalJugadores < MAX_JUGADORES) {
-                                    clientesPartida[totalJugadores++] = cliente;
-                                    System.out.println("Jugador " + cliente + " unido. Total: " + totalJugadores);
-                                }
-                            }
-                            for (int i = 0; i < clientesPartida.length; i++) {
-                                servidor.notificar(partidaDTO, clientesPartida[i]);
-                            }
+                        for (int i = 0; i < clientesPartida.length; i++) {
+                            servidor.notificar(partidaDTO, clientesPartida[i]);
+                        }
 
-                        }
+                    }
 //                    }
                 }
 
@@ -120,7 +130,7 @@ public class Administrador implements Runnable {
                 // Movimiento
                 if (obj instanceof Movimiento) {
                     System.out.println("cliente que envio " + cliente);
-                    System.out.println("numero de cliente en el turno actual "+ ordenTurnos[turnoActual] );
+                    System.out.println("numero de cliente en el turno actual " + ordenTurnos[turnoActual]);
                     synchronized (Administrador.class) {
                         if (ordenTurnos[turnoActual] == cliente) {
                             if (protocolo.ejercerTurno((Movimiento) obj)) {
@@ -167,6 +177,11 @@ public class Administrador implements Runnable {
         System.out.println("Se cambio el turno");
         System.out.println("turno anterior " + turnoActual);
         turnoActual = (turnoActual + 1) % totalJugadores;
+        
+        // corregir no es del todo eficiente
+        if (clientesAbandono.contains(turnoActual)) {
+            turnoActual = (turnoActual + 1) % totalJugadores;
+        }
         System.out.println("turno actual " + turnoActual);
         //Aqui se mandaria el index
         int j = 0;
