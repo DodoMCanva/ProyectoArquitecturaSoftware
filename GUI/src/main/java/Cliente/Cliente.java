@@ -306,6 +306,10 @@ public class Cliente {
     public static void setRespuestaRecibida(boolean respuestaRecibida) {
         Cliente.respuestaRecibida = respuestaRecibida;
     }
+
+    public void restaurar() {
+    
+    }
     
 
 }

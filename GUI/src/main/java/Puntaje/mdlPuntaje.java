@@ -3,7 +3,10 @@ package Puntaje;
 import Cliente.Cliente;
 import Interfaz.Observado;
 import Interfaz.Observador;
+import Objetos.Jugador;
 import Objetos.Partida;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  *
@@ -37,6 +40,14 @@ public class mdlPuntaje implements Observado, ImdlPuntaje {
     @Override
     public void notificar() {
         vista.actualizar(interfaz);
+    }
+
+    @Override
+    public Jugador[] obtenerJugadores() {
+        Jugador[] listaordenada = cli.getPartidaCliente().getJugadores();
+        Arrays.sort(listaordenada, (j1, j2) -> Integer.compare(j2.getPuntos(), j1.getPuntos()));
+        return listaordenada;
+
     }
 
 }

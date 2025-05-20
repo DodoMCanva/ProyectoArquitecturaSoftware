@@ -1,15 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package Puntaje;
+
+import Objetos.Jugador;
 
 /**
  *
- * @author cesar
+ * @author Equipo
  */
 public interface ImdlPuntaje {
 
     public String obtenerEstado();
+    
+    public Jugador[] obtenerJugadores();
 
 }
