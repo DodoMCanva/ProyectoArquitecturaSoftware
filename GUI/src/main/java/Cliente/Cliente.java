@@ -265,44 +265,36 @@ public class Cliente {
         return jugadorTurnoActual;
     }
 
-    
-
-    
-
-    
-
     public void ejercerTurno(Movimiento mov) {
-    convertirJugador convertir = new convertirJugador();
-    Jugador jugadorMovimiento = convertir.convertir_DTO_a_Dominio(mov.getJugador());
+        convertirJugador convertir = new convertirJugador();
+        Jugador jugadorMovimiento = convertir.convertir_DTO_a_Dominio(mov.getJugador());
 
-    // Buscar el jugador real dentro de la partida
-    Jugador jugadorReal = null;
-    for (Jugador j : PartidaCliente.getJugadores()) {
-        if (j != null && j.getNombre().equals(jugadorMovimiento.getNombre())) {
-            jugadorReal = j;
-            break;
+        // Buscar el jugador real dentro de la partida
+        Jugador jugadorReal = null;
+        for (Jugador j : PartidaCliente.getJugadores()) {
+            if (j != null && j.getNombre().equals(jugadorMovimiento.getNombre())) {
+                jugadorReal = j;
+                break;
+            }
         }
-    }
 
-    if (jugadorReal == null) {
-        System.out.println("Jugador no encontrado en la partida");
-        return;
-    }
+        if (jugadorReal == null) {
+            System.out.println("Jugador no encontrado en la partida");
+            return;
+        }
 
-    boolean aplico;
-    if (mov.isEsHorizontal()) {
-        aplico = PartidaCliente.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), jugadorReal);
-    } else {
-        aplico = PartidaCliente.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), jugadorReal);
-    }
+        boolean aplico;
+        if (mov.isEsHorizontal()) {
+            aplico = PartidaCliente.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), jugadorReal);
+        } else {
+            aplico = PartidaCliente.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), jugadorReal);
+        }
 
-    if (aplico) {
-        System.out.println("Movimiento aplicado correctamente");
-    } else {
-        System.out.println("Movimiento inválido");
-    }
-}
-
+        if (aplico) {
+            System.out.println("Movimiento aplicado correctamente");
+        } else {
+            System.out.println("Movimiento inválido");
+        }
 
         if (aplico) {
             System.out.println("Movimiento aplicado correctamente");
