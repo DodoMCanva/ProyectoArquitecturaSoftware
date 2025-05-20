@@ -76,6 +76,7 @@ public class Cliente {
                     //Ejerciero Turno
                     if (obj instanceof Movimiento) {
                         ultimo = (Movimiento) obj;
+
                         cambiograficoPartida = true;
                     }
 
@@ -266,7 +267,22 @@ public class Cliente {
     public String getJugadorTurnoActual() {
         return jugadorTurnoActual;
     }
-    
-    
+
+    public void ejercerTurno(Movimiento mov) {
+        convertirJugador convertir = new convertirJugador();
+        boolean aplico;
+        if (mov.isEsHorizontal()) {
+            aplico = PartidaCliente.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
+            System.out.println("Es horizontal");
+        } else {
+            aplico = PartidaCliente.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
+            System.out.println("Es vertical");
+        }
+        if (aplico) {
+            System.out.println("Se recibio con exito");
+        } else {
+            System.out.println("Error al recibir");
+        }
+    }
 
 }
