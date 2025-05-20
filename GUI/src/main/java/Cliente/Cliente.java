@@ -107,7 +107,7 @@ public class Cliente {
                         if (numeroCliente == -1) {
                             numeroCliente = (int) obj;
                         } else {
-                            
+
                         }
                     }
                 }
@@ -257,8 +257,6 @@ public class Cliente {
         preferencias[3] = J4;
     }
 
-    
-
     public Movimiento getUltimo() {
         return ultimo;
     }
@@ -267,20 +265,49 @@ public class Cliente {
         return jugadorTurnoActual;
     }
 
+    
+
+    
+
+    
+
     public void ejercerTurno(Movimiento mov) {
-        convertirJugador convertir = new convertirJugador();
-        boolean aplico;
-        if (mov.isEsHorizontal()) {
-            aplico = PartidaCliente.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
-            System.out.println("Es horizontal");
-        } else {
-            aplico = PartidaCliente.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), convertir.convertir_DTO_a_Dominio(mov.getJugador()));
-            System.out.println("Es vertical");
+    convertirJugador convertir = new convertirJugador();
+    Jugador jugadorMovimiento = convertir.convertir_DTO_a_Dominio(mov.getJugador());
+
+    // Buscar el jugador real dentro de la partida
+    Jugador jugadorReal = null;
+    for (Jugador j : PartidaCliente.getJugadores()) {
+        if (j != null && j.getNombre().equals(jugadorMovimiento.getNombre())) {
+            jugadorReal = j;
+            break;
         }
+    }
+
+    if (jugadorReal == null) {
+        System.out.println("Jugador no encontrado en la partida");
+        return;
+    }
+
+    boolean aplico;
+    if (mov.isEsHorizontal()) {
+        aplico = PartidaCliente.getTablero().dibujarLineaHorizontal(mov.getFila(), mov.getColumna(), jugadorReal);
+    } else {
+        aplico = PartidaCliente.getTablero().dibujarLineaVertical(mov.getFila(), mov.getColumna(), jugadorReal);
+    }
+
+    if (aplico) {
+        System.out.println("Movimiento aplicado correctamente");
+    } else {
+        System.out.println("Movimiento inválido");
+    }
+}
+
+
         if (aplico) {
-            System.out.println("Se recibio con exito");
+            System.out.println("Movimiento aplicado correctamente");
         } else {
-            System.out.println("Error al recibir");
+            System.out.println("Movimiento inválido");
         }
     }
 
@@ -292,6 +319,4 @@ public class Cliente {
         this.preferencias = preferencias;
     }
 
-    
-    
 }
