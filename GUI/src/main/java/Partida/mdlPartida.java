@@ -20,8 +20,6 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private Observador vista;
     private ImdlPartida interfaz;
     private String estado = "";
-    
-    
 
     //Datos de logica
     private boolean Terminada = true;
@@ -54,7 +52,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
         tmn = cli.getPartidaCliente().getTablero().getTamano();
         separador = tmnTablero / tmn;
         tmn = this.cli.getPartidaCliente().getTablero().getTamano();
-        colores= cli.getPreferencias();
+        colores = cli.getPreferencias();
         agregarPuntos();
         vista = new frmPartida(control);
         estado = "abrir";
@@ -177,7 +175,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
         while (Terminada) {
             if (cli.cambioPartida()) {
                 interpretarMovimiento(cli.getUltimo());
-         
+                cli.setCambiograficoPartida(false);
             }
 
             estado = "refrescar";
@@ -195,25 +193,27 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     }
 
     private void interpretarMovimiento(Movimiento ultimo) {
-        int x = ultimo.getColumna() * separador;
-        int y = ultimo.getFila() * separador;
+        if (ultimo != null) {
+            int x = ultimo.getColumna() * separador;
+            int y = ultimo.getFila() * separador;
 
-        punto p1, p2;
+            punto p1, p2;
 
-        if (ultimo.isEsHorizontal()) {
-            p1 = new punto(x, y);
-            p2 = new punto(x + separador, y);
-        } else {
-            p1 = new punto(x, y);
-            p2 = new punto(x, y + separador);
+            if (ultimo.isEsHorizontal()) {
+                p1 = new punto(x, y);
+                p2 = new punto(x + separador, y);
+            } else {
+                p1 = new punto(x, y);
+                p2 = new punto(x, y + separador);
+            }
+            linea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()), colores[turno]);
+
+            linea nuevaLinea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()), colores[turno]);
+            this.linea = nuevaLinea;
+            this.lineas.add(nuevaLinea);
+
+            turno = (turno + 1) % 3;
         }
-        linea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()),colores[turno]);
-
-        linea nuevaLinea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()),colores[turno]);
-        this.linea = nuevaLinea;
-        this.lineas.add(nuevaLinea);
-        
-        turno= (turno+1)% 3;
     }
 
 }
