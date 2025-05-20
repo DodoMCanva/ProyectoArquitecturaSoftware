@@ -212,6 +212,8 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
         linea nuevaLinea = new linea(p1, p2, convertir.convertir_DTO_a_Dominio(ultimo.getJugador()),colores[turno]);
         this.linea = nuevaLinea;
         this.lineas.add(nuevaLinea);
+        
+        turno= (turno+1)% 3;
     }
 
 }
