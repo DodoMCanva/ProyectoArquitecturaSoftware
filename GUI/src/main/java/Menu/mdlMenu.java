@@ -51,12 +51,12 @@ public class mdlMenu implements Observado, ImdlMenu {
     public void unirsePartida() {
         convertirJugador convertir = new convertirJugador();
         cli.enviarServidor(convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente()));
-
-        if (cli.getPartidaCliente() != null) {
-            estado = "cambiar";
-            interfaz = this;
-            notificar();
-
+        if (cli.esRespuestaValida()) {
+            if (cli.getPartidaCliente() != null) {
+                estado = "cambiar";
+                interfaz = this;
+                notificar();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo acceder a la partida");
         }
