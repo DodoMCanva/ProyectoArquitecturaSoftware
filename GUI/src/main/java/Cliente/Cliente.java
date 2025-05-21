@@ -320,6 +320,10 @@ public class Cliente {
     public void setJugadoresenPartida(int jugadoresenPartida) {
         this.jugadoresenPartida = jugadoresenPartida;
     }
+
+    public void restaurar() {
+        PartidaCliente = null;
+    }
     
 
 }

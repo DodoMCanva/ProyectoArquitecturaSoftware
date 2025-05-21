@@ -23,6 +23,8 @@ public class ctrlPuntaje {
     }
 
     void abrirVentanaSiguiente() {
+        cli.restaurar();
+        control_menu = new ctrlMenu(cli);
         control_menu.abrirVentana();
     }
 }
