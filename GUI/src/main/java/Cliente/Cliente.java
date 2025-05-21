@@ -29,12 +29,13 @@ public class Cliente {
     //Variables de logica de red
     private static boolean respuestaValida = false;
     private static boolean respuestaRecibida = false;
+    boolean partidaFinForzada = false;
 
     //Variables unicas de cliente
     private Jugador JugadorCliente;
     private Partida PartidaCliente;
     private int numeroCliente = -1;
-    private int jugadoresenPartida=0;
+    private int jugadoresenPartida = 0;
 
     private String jugadorTurnoActual;
 
@@ -42,7 +43,7 @@ public class Cliente {
     private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
     //Tuberia
     private TuberiaConversorPartida tuberiaConversorPartida;
-    
+
     //variables logica cliente
     private boolean cambiograficoPartida = false;
     private boolean cambiograficoLobby = false;
@@ -54,7 +55,7 @@ public class Cliente {
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
-        this.tuberiaConversorPartida=new TuberiaConversorPartida();
+        this.tuberiaConversorPartida = new TuberiaConversorPartida();
         new Thread(() -> {
             try {
                 Object obj;
@@ -74,7 +75,7 @@ public class Cliente {
                         partidalista = PartidaCliente.partidaCompleta();
                     }*/
                     if (obj instanceof PartidaDTO) {
-                    procesarPartida((PartidaDTO) obj);
+                        procesarPartida((PartidaDTO) obj);
                     }
 
                     if (obj instanceof JugadorDTO) {
@@ -92,9 +93,11 @@ public class Cliente {
 
                     if (obj instanceof String) {
                         switch ((String) obj) {
-                            
                             case "voto":
                                 partidalista = true;
+                                break;
+                            case "forzarterminar":
+                                partidaFinForzada = true;
                                 break;
                             default:
                                 System.out.println("N/A");
@@ -119,18 +122,19 @@ public class Cliente {
     }
 
     private void procesarPartida(PartidaDTO partidaDTO) {
-    // Convertir la partida DTO a objetos de dominio
-    Partida nuevaPartida = tuberiaConversorPartida.procesar(partidaDTO);
+        // Convertir la partida DTO a objetos de dominio
+        Partida nuevaPartida = tuberiaConversorPartida.procesar(partidaDTO);
 
-    if (nuevaPartida != null) {
-        PartidaCliente = nuevaPartida;
-        cambiograficoLobby = true;
-        partidalista = nuevaPartida.partidaCompleta();
-        System.out.println("Partida convertida correctamente.");
-    } else {
-        System.out.println("Error al procesar la partida.");
+        if (nuevaPartida != null) {
+            PartidaCliente = nuevaPartida;
+            cambiograficoLobby = true;
+            partidalista = nuevaPartida.partidaCompleta();
+            System.out.println("Partida convertida correctamente.");
+        } else {
+            System.out.println("Error al procesar la partida.");
+        }
     }
-}
+
     //Logica de red
     public boolean isPartidalista() {
         return partidalista;
@@ -256,7 +260,7 @@ public class Cliente {
 
     public void ajustarPreferencias(Color J1, Color J2, Color J3, Color J4) {
         for (int i = 0; i < PartidaCliente.getJugadores().length; i++) {
-            if (PartidaCliente.getJugadores()[i]!=null) {
+            if (PartidaCliente.getJugadores()[i] != null) {
                 jugadoresenPartida++;
             }
         }
@@ -343,10 +347,20 @@ public class Cliente {
     public void setJugadoresenPartida(int jugadoresenPartida) {
         this.jugadoresenPartida = jugadoresenPartida;
     }
-
-    public void restaurar() {
-        PartidaCliente = null;
+    
+    public boolean partidaForzada(){
+        return partidaFinForzada;
     }
     
+    public void restaurar() {
+        respuestaValida = false;
+        respuestaRecibida = false;
+        PartidaCliente = null;
+        numeroCliente = -1;
+        jugadoresenPartida = 0;
+        jugadorTurnoActual = null;
+        ultimo = null;
+        boolean partidaFinForzada = false;
+    }
 
 }
