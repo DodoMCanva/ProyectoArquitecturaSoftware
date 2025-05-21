@@ -21,7 +21,7 @@ public class UbicarPrmeraPosicion {
         return new int[]{x, y};
     }
  public int[] obtenerCoordenada(Movimiento movimiento) {
-        return new int[]{movimiento.getColumna(), movimiento.getFila()};
+        return new int[]{movimiento.getX(), movimiento.getY()};
     }
 
 }
