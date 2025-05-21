@@ -192,8 +192,8 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         lblImagen2do.setIcon(new ImageIcon(imagen));
         
-
-        if (jugadores[2] != null) {
+        System.out.println("Tama;o arreglo"+jugadores.length);
+        if (jugadores.length > 2) {
             lblNombre3ero.setText(jugadores[2].getNombre());
             lblpuntos3ero.setText(Integer.toString(jugadores[2].getPuntos()));
             icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[2].getAvatar()));
@@ -202,7 +202,7 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
             
         }
 
-        if (jugadores[3] != null) {
+        if (jugadores.length > 3) {
             lblNombre4to.setText(jugadores[3].getNombre());
             lblNombre4to.setText(Integer.toString(jugadores[3].getPuntos()));
             icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[3].getAvatar()));

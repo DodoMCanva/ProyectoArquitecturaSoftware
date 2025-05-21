@@ -5,8 +5,10 @@ import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
 import Objetos.Partida;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -22,7 +24,7 @@ public class mdlPuntaje implements Observado, ImdlPuntaje {
     private Cliente cli;
 
     public mdlPuntaje(Cliente cli) {
-
+        this.cli = cli;
     }
 
     public void abrirVentana(ctrlPuntaje control) {
@@ -44,10 +46,19 @@ public class mdlPuntaje implements Observado, ImdlPuntaje {
 
     @Override
     public Jugador[] obtenerJugadores() {
-        Jugador[] listaordenada = cli.getPartidaCliente().getJugadores();
-        Arrays.sort(listaordenada, (j1, j2) -> Integer.compare(j2.getPuntos(), j1.getPuntos()));
-        return listaordenada;
+        Jugador[] jugadores = cli.getPartidaCliente().getJugadores();
 
+        // Filtrar jugadores no nulos
+        List<Jugador> jugadoresNoNulos = new ArrayList<>();
+        for (Jugador j : jugadores) {
+            if (j != null) {
+                jugadoresNoNulos.add(j);
+            }
+        }
+        // Ordenar de mayor a menor por puntos
+        jugadoresNoNulos.sort((j1, j2) -> Integer.compare(j2.getPuntos(), j1.getPuntos()));
+        // Convertir la lista filtrada de vuelta a un arreglo
+        return jugadoresNoNulos.toArray(new Jugador[0]);
     }
 
 }
