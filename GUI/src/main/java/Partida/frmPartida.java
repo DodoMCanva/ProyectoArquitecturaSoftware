@@ -322,7 +322,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
         g2d.setColor(color);
         g2d.setStroke(new BasicStroke(2));
-        g2d.drawLine(x1 + 10, y1 + 10, x2 + 10, y2 + 10);
+        g2d.drawLine(x1 + 24, y1 + 24, x2 + 24, y2 + 24);
     }
 
     public void cargarDatosJugadores(ImdlPartida modelo) {

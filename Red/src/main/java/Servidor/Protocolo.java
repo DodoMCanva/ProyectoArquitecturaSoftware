@@ -91,6 +91,9 @@ public class Protocolo {
         }
 
         if (aplico) {
+            if (partida.getTablero().terminarPartida()) {
+                resetearPartida();
+            }
             avanzarTurno();
         }
 
@@ -121,6 +124,7 @@ public class Protocolo {
         int jugadoresActivos = jugadoresDentro() - clientesAbandono.size();
 
         if (jugadoresActivos <= 1) {
+            resetearPartida();
             return "forzarterminar";
         } else {
             return "abandono registrado";
@@ -135,5 +139,14 @@ public class Protocolo {
             }
         }
         return cant;
+    }
+
+    public void resetearPartida() {
+        votos.clear();
+        clientesAbandono.clear();
+        partida = null;
+        ordenTurnos = null;
+        turnoActual = 0;
+
     }
 }

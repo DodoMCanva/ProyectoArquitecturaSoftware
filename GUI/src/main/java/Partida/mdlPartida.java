@@ -24,7 +24,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private String estado = "";
 
     //Datos de logica
-    private boolean Terminada = true;
+    private boolean Terminada = false;
     private List<punto> puntos = new ArrayList<>();
     private List<linea> lineas = new ArrayList<>();
 
@@ -98,7 +98,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
 
     //Metodos no directos 
     public void procesarLinea(punto aux1, punto aux2) {
-      
+
         int distancia;
         if (aux1.getX() == aux2.getX()) {
             // Línea vertical
@@ -106,7 +106,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             if (distancia <= separador) {
                 int fila = Math.min(aux1.getY(), aux2.getY()) / separador;
                 int col = aux1.getX() / separador;
-                cli.enviarServidor(new MovimientoDTO(fila, col, false,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+                cli.enviarServidor(new MovimientoDTO(fila, col, false, convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
             }
         } else if (aux1.getY() == aux2.getY()) {
             // Línea horizontal
@@ -115,12 +115,13 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
                 int fila = aux1.getY() / separador;
                 int col = Math.min(aux1.getX(), aux2.getX()) / separador;
                 System.out.println("se envio una linea");
-                cli.enviarServidor(new MovimientoDTO(fila, col, true,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+                cli.enviarServidor(new MovimientoDTO(fila, col, true, convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
             }
         } else {
             System.out.println("No es una línea válida");
         }
     }
+
     public void agregarPuntos() {
         separador = tmnTablero / tmn;
         System.out.println(separador);
@@ -175,15 +176,18 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
 
     @Override
     public void run() {
-        while (Terminada) {
+        while (!Terminada) {
+
+            if (!Terminada) {
+                estado = "refrescar";
+                interfaz = this;
+                vista.actualizar(interfaz);
+            }
+
             if (cli.cambioPartida()) {
                 interpretarMovimiento(cli.getUltimo());
                 cli.setCambiograficoPartida(false);
             }
-
-            estado = "refrescar";
-            interfaz = this;
-            vista.actualizar(interfaz);
 
             if (cli.getPartidaCliente().getTablero().terminarPartida() || cli.partidaForzada()) {
                 estado = "terminada";
@@ -203,7 +207,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     }
 
     private void interpretarMovimiento(MovimientoDTO ultimo) {
-         if (ultimo != null) {
+        if (ultimo != null) {
             int x = ultimo.getColumna() * separador;
             int y = ultimo.getFila() * separador;
 
@@ -222,7 +226,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             this.linea = nuevaLinea;
             this.lineas.add(nuevaLinea);
 
-            turno = (turno + 1) % 3;
+            turno = (turno + 1) % cli.getJugadoresenPartida();
         }
     }
 

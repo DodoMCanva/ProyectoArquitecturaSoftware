@@ -21,10 +21,12 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
      * Creates new form frmScores
      */
     public frmPuntaje(ctrlPuntaje control) {
+
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultLookAndFeelDecorated(true);
+        this.control = control;
     }
 
     @SuppressWarnings("unchecked")
@@ -175,8 +177,8 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
                 System.out.println("n/a");
         }
     }
-    
-    public void cargarDatosJugadores(ImdlPuntaje modelo){
+
+    public void cargarDatosJugadores(ImdlPuntaje modelo) {
         Jugador[] jugadores = modelo.obtenerJugadores();
 
         lblNombre1ero.setText(jugadores[0].getNombre());
@@ -184,22 +186,21 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
         icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[0].getAvatar()));
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         lblImagen1ero.setIcon(new ImageIcon(imagen));
-        
 
         lblNombre2do.setText(jugadores[1].getNombre());
         lblpuntos2do.setText(Integer.toString(jugadores[1].getPuntos()));
         icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[1].getAvatar()));
         imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         lblImagen2do.setIcon(new ImageIcon(imagen));
-        
-        System.out.println("Tama;o arreglo"+jugadores.length);
+
+        System.out.println("Tama;o arreglo" + jugadores.length);
         if (jugadores.length > 2) {
             lblNombre3ero.setText(jugadores[2].getNombre());
             lblpuntos3ero.setText(Integer.toString(jugadores[2].getPuntos()));
             icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[2].getAvatar()));
             imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             lblpuntos3ero.setIcon(new ImageIcon(imagen));
-            
+
         }
 
         if (jugadores.length > 3) {
@@ -208,10 +209,9 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
             icono = new ImageIcon(getClass().getResource("/imagenes/" + jugadores[3].getAvatar()));
             imagen = icono.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             lblNombre4to.setIcon(new ImageIcon(imagen));
-            
+
         }
 
-    
     }
 
 }

@@ -19,12 +19,14 @@ public class ctrlPuntaje {
     }
 
     public void abrirVentana() {
+        control_menu = new ctrlMenu(cli);
         modelo.abrirVentana(this);
+
     }
 
     void abrirVentanaSiguiente() {
         cli.restaurar();
-        control_menu = new ctrlMenu(cli);
+
         control_menu.abrirVentana();
     }
 }
