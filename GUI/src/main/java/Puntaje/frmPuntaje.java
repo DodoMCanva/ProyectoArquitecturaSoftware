@@ -134,7 +134,7 @@ public class frmPuntaje extends javax.swing.JFrame implements Observador<ImdlPun
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-
+        control.abrirVentanaSiguiente();
     }//GEN-LAST:event_btnMenuActionPerformed
 
 
