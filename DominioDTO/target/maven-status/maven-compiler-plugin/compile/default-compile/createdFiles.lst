@@ -2,8 +2,8 @@ Convertidor\convertirTablero.class
 Objetos\CajaDTO.class
 Objetos\LineaDTO.class
 Objetos\PartidaDTO.class
-Objetos\Movimiento.class
 Convertidor\convertirPartida.class
 Convertidor\convertirJugador.class
 Objetos\JugadorDTO.class
 Objetos\TableroDTO.class
+Objetos\MovimientoDTO.class
