@@ -10,21 +10,6 @@ public class Tablero {
     public Linea[][] horizontales;
     private Linea[][] verticales;
     private Caja[][] cajas;
-    private String[][] estructura;
-
-    public int getTamano() {
-        return tamano;
-    }
-
-    public void setTamano(int tamano) {
-        this.tamano = tamano;
-    }
-
-     public Tablero(int tamano, String[][] estructura) {
-        this.tamano = tamano;
-        this.estructura = estructura;
-    }
-
 
     public Tablero(int tamano) {
         this.tamano = tamano;
@@ -137,8 +122,6 @@ public class Tablero {
         return tamano;
     }
 
-
-
     public void setTamano(int tamano) {
         this.tamano = tamano;
     }
@@ -147,16 +130,13 @@ public class Tablero {
         return horizontales;
     }
 
-
     public void setHorizontales(Linea[][] horizontales) {
         this.horizontales = horizontales;
     }
 
-
     public Linea[][] getVerticales() {
         return verticales;
     }
-
 
     public void setVerticales(Linea[][] verticales) {
         this.verticales = verticales;

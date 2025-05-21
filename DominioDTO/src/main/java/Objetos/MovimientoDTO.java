@@ -6,14 +6,14 @@ import java.io.Serializable;
  *
  * @author equipo
  */
-public class Movimiento implements Serializable {
+public class MovimientoDTO implements Serializable {
 
     private int fila;
     private int columna;
     private boolean esHorizontal;
     private JugadorDTO jugador;
 
-    public Movimiento(int fila, int columna, boolean esHorizontal, JugadorDTO jugador) {
+    public MovimientoDTO(int fila, int columna, boolean esHorizontal, JugadorDTO jugador) {
         this.fila = fila;
         this.columna = columna;
         this.esHorizontal = esHorizontal;

@@ -1,6 +1,6 @@
 package Servidor;
 
-import Objetos.Movimiento;
+import Objetos.MovimientoDTO;
 import Convertidor.convertirJugador;
 import Convertidor.convertirPartida;
 import Objetos.*;
@@ -86,8 +86,8 @@ public class Administrador implements Runnable {
                     }
                 }
 
-                if (obj instanceof Movimiento) {
-                    Movimiento mov = (Movimiento) obj;
+                if (obj instanceof MovimientoDTO) {
+                    MovimientoDTO mov = (MovimientoDTO) obj;
                     boolean resultado = protocolo.ejercerTurno(mov, cliente);
                     if (resultado) {
                         servidor.notificarTodos(mov);

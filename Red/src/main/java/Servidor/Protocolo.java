@@ -1,7 +1,6 @@
 package Servidor;
 
 
-import Objetos.Movimiento;
 import Convertidor.convertirJugador; 
 import Objetos.*;
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class Protocolo {
         turnoActual = 0;
     }
 
-    public synchronized boolean ejercerTurno(Movimiento mov, int clienteSolicitante) {
+    public synchronized boolean ejercerTurno(MovimientoDTO mov, int clienteSolicitante) {
         if (ordenTurnos == null || ordenTurnos.length == 0) return false;
         if (ordenTurnos[turnoActual] != clienteSolicitante) return false;
 

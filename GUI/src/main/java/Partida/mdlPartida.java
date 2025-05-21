@@ -1,17 +1,11 @@
 package Partida;
 
 import Cliente.Cliente;
-import Filtros.IFiltro;
-import Interfaz.Observado;
-import Interfaz.Observador;
-import Objetos.Linea;
-import Objetos.Movimiento;
-import Tuberias.TuberiaMovimientoRecibido;
 import Convertidor.convertirJugador;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
-import Objetos.Movimiento;
+import Objetos.MovimientoDTO;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +20,6 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private Observador vista;
     private ImdlPartida interfaz;
     private String estado = "";
-    private boolean Terminada = false;
-    private TuberiaMovimientoRecibido tuberiaMovimientoRecibido;
-
-
 
     //Datos de logica
     private boolean Terminada = true;
@@ -93,10 +83,6 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             }
         }
     }
-        public mdlPartida(IFiltro<Linea, Boolean> verificarLinea) {
-        this.tuberiaMovimientoRecibido = new TuberiaMovimientoRecibido(verificarLinea);
-    }
-
 
     public void Terminar() {
 
@@ -116,7 +102,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
                 int fila = Math.min(aux1.getY(), aux2.getY()) / separador;
                 int col = aux1.getX() / separador;
                 System.out.println("se envio una linea");
-                cli.enviarServidor(new Movimiento(fila, col, false, convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+                cli.enviarServidor(new MovimientoDTO(fila, col, false,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
             }
         } else if (aux1.getY() == aux2.getY()) {
             // Línea horizontal
@@ -125,7 +111,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
                 int fila = aux1.getY() / separador;
                 int col = Math.min(aux1.getX(), aux2.getX()) / separador;
                 System.out.println("se envio una linea");
-                cli.enviarServidor(new Movimiento(fila, col, true, convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+                cli.enviarServidor(new MovimientoDTO(fila, col, true,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
             }
         } else {
             System.out.println("No es una línea válida");
@@ -206,20 +192,7 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
 
     }
 
-
-    public void recibirMovimiento(Movimiento movimiento) {
-        Linea lineaProcesada = tuberiaMovimientoRecibido.procesarMovimiento(movimiento);
-
-        if (lineaProcesada != null) {
-            System.out.println("Movimiento válido. Línea creada: " + lineaProcesada);
-        } else {
-            System.out.println("Movimiento inválido. No se generó línea.");
-        }
-    }
-
-
-
-    private void interpretarMovimiento(Movimiento ultimo) {
+    private void interpretarMovimiento(MovimientoDTO ultimo) {
         if (ultimo != null) {
             int x = ultimo.getColumna() * separador;
             int y = ultimo.getFila() * separador;
@@ -242,6 +215,5 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
             turno = (turno + 1) % 3;
         }
     }
-
 
 }

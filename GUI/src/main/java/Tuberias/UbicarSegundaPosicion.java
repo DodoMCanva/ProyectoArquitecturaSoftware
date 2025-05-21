@@ -10,7 +10,7 @@ package Tuberias;
  */
 
 import Objetos.Linea;
-import Objetos.Movimiento;
+import Objetos.MovimientoDTO;
 import Objetos.Tablero;
 
 public class UbicarSegundaPosicion {
@@ -19,9 +19,9 @@ public class UbicarSegundaPosicion {
         int y = 0; // Lógica real para calcular Y
         return new int[]{x, y};
     }
- public int[] obtenerCoordenada(Movimiento movimiento, boolean esHorizontal) {
-        int xFinal = esHorizontal ? movimiento.getX() + 1 : movimiento.getX();
-        int yFinal = esHorizontal ? movimiento.getY() : movimiento.getY() + 1;
+ public int[] obtenerCoordenada(MovimientoDTO movimiento, boolean esHorizontal) {
+        int xFinal = esHorizontal ? movimiento.getFila() + 1 : movimiento.getFila();
+        int yFinal = esHorizontal ? movimiento.getColumna() : movimiento.getColumna() + 1;
         return new int[]{xFinal, yFinal};
     }
 

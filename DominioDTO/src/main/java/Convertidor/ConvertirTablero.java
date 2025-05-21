@@ -60,4 +60,49 @@ public class convertirTablero {
         return dto;
     }
 
+    
+    // Método para convertir de DTO a Dominio
+    public Tablero transformar(TableroDTO dto) {
+        if (dto == null) {
+            throw new IllegalArgumentException("TableroDTO es null");
+        }
+
+        int tamano = dto.getTamano();
+        Tablero tablero = new Tablero(tamano);
+
+        // Convertir líneas horizontales
+        for (int i = 0; i < tamano; i++) {
+            for (int j = 0; j < tamano - 1; j++) {
+                LineaDTO lineaDTO = dto.getHorizontales()[i][j];
+                Linea linea = new Linea();
+                linea.setEstaDibujada(lineaDTO.isEstaDibujada());
+                linea.setJugador(lineaDTO.getJugador());
+                tablero.getHorizontales()[i][j] = linea;
+            }
+        }
+
+        // Convertir líneas verticales
+        for (int i = 0; i < tamano - 1; i++) {
+            for (int j = 0; j < tamano; j++) {
+                LineaDTO lineaDTO = dto.getVerticales()[i][j];
+                Linea linea = new Linea();
+                linea.setEstaDibujada(lineaDTO.isEstaDibujada());
+                linea.setJugador(lineaDTO.getJugador());
+                tablero.getVerticales()[i][j] = linea;
+            }
+        }
+
+        // Convertir cajas
+        for (int i = 0; i < tamano - 1; i++) {
+            for (int j = 0; j < tamano - 1; j++) {
+                CajaDTO cajaDTO = dto.getCajas()[i][j];
+                Caja caja = new Caja();
+                caja.setPropietario(cajaDTO.getPropietario());
+                tablero.getCajas()[i][j] = caja;
+            }
+        }
+
+        return tablero;
+    }
+
 }

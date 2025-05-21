@@ -6,7 +6,7 @@ package Tuberias;
  */
 import Filtros.IFiltro;
 import Objetos.Linea;
-import Objetos.Movimiento;
+import Objetos.MovimientoDTO;
 
 
 
@@ -33,7 +33,7 @@ public class TuberiaMovimientoRecibido {
    
 
 
-    public Linea procesarMovimiento(Movimiento movimiento) {
+    public Linea procesarMovimiento(MovimientoDTO movimiento) {
         // Paso 3: Determinar orientación
         boolean esHorizontal = ubicarOrientacion.definirOrientacion(movimiento);
 

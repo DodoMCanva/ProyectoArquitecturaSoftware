@@ -10,23 +10,20 @@ package Tuberias;
  */
 
 
-import Convertidor.ConvertirTablero;
 import Convertidor.convertirJugador;
-import Convertidor.convertirPartida;
+import Convertidor.convertirTablero;
 import Objetos.Jugador;
 import Objetos.Tablero;
 import Objetos.Partida;
 import Objetos.PartidaDTO;
-import Objetos.JugadorDTO;
-import Objetos.TableroDTO;
 
 public class TuberiaConversorPartida {
      private convertirJugador convertirJugadores;
-    private ConvertirTablero convertirTablero;
+    private convertirTablero convertirTablero;
 
     public TuberiaConversorPartida() {
         this.convertirJugadores = new convertirJugador();
-        this.convertirTablero = new ConvertirTablero();
+        this.convertirTablero = new convertirTablero();
     }
 
     public Partida procesar(PartidaDTO partidaDTO) {

@@ -9,9 +9,10 @@ import java.io.Serializable;
 public class LineaDTO implements Serializable {
 
     private boolean estaDibujada;
-    private String nombreJugador;
+    private Jugador jugador;
 
     public LineaDTO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public boolean isEstaDibujada() {
@@ -19,6 +20,10 @@ public class LineaDTO implements Serializable {
     }
 
     public void setEstaDibujada(boolean estaDibujada) {
+        this.estaDibujada = estaDibujada;
+    }
+
+    public LineaDTO(boolean estaDibujada) {
         this.estaDibujada = estaDibujada;
     }
 
@@ -30,11 +35,5 @@ public class LineaDTO implements Serializable {
         this.jugador = jugador;
     }
 
-    
-    // Constructor desde objeto de dominio
-    public LineaDTO(Objetos.Linea linea) {
-        this.estaDibujada = linea.estaDibujada();
-        this.nombreJugador = linea.getJugador().getNombre();
-    }
     
 }

@@ -1,11 +1,12 @@
 package Cliente;
 
-import Objetos.Movimiento;
 import Convertidor.convertirJugador;
 import Convertidor.convertirPartida;
-import Objetos.*;
-import Objetos.*;
-import Tuberias.TuberiaConversorPartida;
+import Objetos.Jugador;
+import Objetos.JugadorDTO;
+import Objetos.MovimientoDTO;
+import Objetos.Partida;
+import Objetos.PartidaDTO;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,11 +20,6 @@ import javax.swing.JOptionPane;
  * @author Equipo
  */
 public class Cliente {
- private TuberiaConversorPartida tuberiaConversorPartida;
-
-    public Cliente() {
-        this.tuberiaConversorPartida = new TuberiaConversorPartida();
-    }
 
     //Variables de red
     private Socket socket;
@@ -42,7 +38,7 @@ public class Cliente {
 
     private String jugadorTurnoActual;
 
-    private Movimiento ultimo;
+    private MovimientoDTO ultimo;
     private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
 
     //variables logica cliente
@@ -82,8 +78,8 @@ public class Cliente {
                     }
 
                     //Ejerciero Turno
-                    if (obj instanceof Movimiento) {
-                        ultimo = (Movimiento) obj;
+                    if (obj instanceof MovimientoDTO) {
+                        ultimo = (MovimientoDTO) obj;
                         ejercerTurno(ultimo);
                         cambiograficoPartida = true;
                     }
@@ -257,12 +253,6 @@ public class Cliente {
         this.cambiograficoLobby = cambiograficoLobby;
     }
 
- 
-    public Partida recibirDatosPartida(PartidaDTO partidaDTO) {
-        return tuberiaConversorPartida.procesar(partidaDTO);
-    }
-
-
     public void ajustarPreferencias(Color J1, Color J2, Color J3, Color J4) {
         preferencias[0] = J1;
         preferencias[1] = J2;
@@ -270,7 +260,7 @@ public class Cliente {
         preferencias[3] = J4;
     }
 
-    public Movimiento getUltimo() {
+    public MovimientoDTO getUltimo() {
         return ultimo;
     }
 
@@ -278,7 +268,7 @@ public class Cliente {
         return jugadorTurnoActual;
     }
 
-    public void ejercerTurno(Movimiento mov) {
+    public void ejercerTurno(MovimientoDTO mov) {
         convertirJugador convertir = new convertirJugador();
         Jugador jugadorMovimiento = convertir.convertir_DTO_a_Dominio(mov.getJugador());
 
@@ -340,6 +330,5 @@ public class Cliente {
         Cliente.respuestaRecibida = respuestaRecibida;
     }
     
-
 
 }
