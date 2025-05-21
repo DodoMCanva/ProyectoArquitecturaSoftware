@@ -4,6 +4,6 @@ package Tuberias;
  *
  * @author josed
  */
-public class TuberiaMovimiento {
+public class TuberiaMovimientoEnviado {
     
 }

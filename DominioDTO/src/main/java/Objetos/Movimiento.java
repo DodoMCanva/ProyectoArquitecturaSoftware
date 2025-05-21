@@ -19,6 +19,7 @@ public class Movimiento implements Serializable {
         this.esHorizontal = esHorizontal;
         this.jugador = jugador;
     }
+    
 
     public int getFila() {
         return fila;
@@ -51,5 +52,10 @@ public class Movimiento implements Serializable {
     public void setJugador(JugadorDTO jugador) {
         this.jugador = jugador;
     }
+     public boolean esHorizontal() {
+        return esHorizontal;
+    }
+
+
 
 }
