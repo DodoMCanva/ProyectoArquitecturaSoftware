@@ -6,6 +6,7 @@ import Convertidor.convertirPartida;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.*;
+import Tuberias.TuberiaCrearPartida;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,6 +36,11 @@ public class mdlMenu implements Observado, ImdlMenu {
     public void crearPartida(int tmn, int nj) {
         convertirPartida convertir = new convertirPartida();
         Partida partida = new Partida(tmn, nj);
+           TuberiaCrearPartida tuberia = new TuberiaCrearPartida();
+    if (!tuberia.procesar(partida)) {
+        JOptionPane.showMessageDialog(null, "Parámetros incorrectos para crear la partida.");
+        return;
+    }
         partida.agregarJugador(cli.getJugadorCliente());
         cli.enviarServidor(convertir.convertir_Dominio_a_DTO(partida));
         if (cli.esRespuestaValida()) {
