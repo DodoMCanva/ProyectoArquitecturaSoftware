@@ -27,8 +27,13 @@ public class TuberiaMovimientoRecibido {
     }
 
     public boolean procesar(Linea linea) {
-        return verificarLinea.aplicar(linea);
+    boolean esValida = verificarLinea.aplicar(linea);
+    if (!esValida) {
+        System.out.println("Línea inválida: " + linea);
     }
+    return esValida;
+}
+
 
    
 

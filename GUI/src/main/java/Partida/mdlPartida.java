@@ -5,7 +5,9 @@ import Convertidor.convertirJugador;
 import Interfaz.Observado;
 import Interfaz.Observador;
 import Objetos.Jugador;
+import Objetos.Linea;
 import Objetos.MovimientoDTO;
+import Tuberias.TuberiaMovimientoRecibido;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,8 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     private Color[] colores;
     private int turno;
 
+    //Tuberia
+    private TuberiaMovimientoRecibido tuberiaMovimientoRecibido;
     //RED
     private Cliente cli;
 
@@ -95,28 +99,60 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     //Metodos no directos 
     public void procesarLinea(punto aux1, punto aux2) {
         int distancia;
-        if (aux1.getX() == aux2.getX()) {
-            // Línea vertical
-            distancia = Math.abs(aux1.getY() - aux2.getY());
-            if (distancia <= separador) {
-                int fila = Math.min(aux1.getY(), aux2.getY()) / separador;
-                int col = aux1.getX() / separador;
-                System.out.println("se envio una linea");
-                cli.enviarServidor(new MovimientoDTO(fila, col, false,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+
+    if (aux1.getX() == aux2.getX()) {
+        distancia = Math.abs(aux1.getY() - aux2.getY());
+        if (distancia <= separador) {
+            int fila = Math.min(aux1.getY(), aux2.getY()) / separador;
+            int col = aux1.getX() / separador;
+
+            Linea nuevaLinea = new Linea(fila, col, fila + 1, col, false);
+
+            // Validar línea con `TuberiaMovimientoEnviado`
+            if (tuberiaMovimientoRecibido.procesar(nuevaLinea)) {
+                cli.enviarServidor(new MovimientoDTO(fila, col, false, convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
             }
-        } else if (aux1.getY() == aux2.getY()) {
-            // Línea horizontal
-            distancia = Math.abs(aux1.getX() - aux2.getX());
-            if (distancia <= separador) {
-                int fila = aux1.getY() / separador;
-                int col = Math.min(aux1.getX(), aux2.getX()) / separador;
-                System.out.println("se envio una linea");
-                cli.enviarServidor(new MovimientoDTO(fila, col, true,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
-            }
-        } else {
-            System.out.println("No es una línea válida");
         }
+    } else if (aux1.getY() == aux2.getY()) {
+        distancia = Math.abs(aux1.getX() - aux2.getX());
+        if (distancia <= separador) {
+            int fila = aux1.getY() / separador;
+            int col = Math.min(aux1.getX(), aux2.getX()) / separador;
+
+            Linea nuevaLinea = new Linea(fila, col, fila, col + 1, true);
+
+            if (tuberiaMovimientoRecibido.procesar(nuevaLinea)) {
+                cli.enviarServidor(new MovimientoDTO(fila, col, true, convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+            }
+        }
+    } else {
+        System.out.println("No es una línea válida.");
     }
+}
+
+    
+//        int distancia;
+//        if (aux1.getX() == aux2.getX()) {
+//            // Línea vertical
+//            distancia = Math.abs(aux1.getY() - aux2.getY());
+//            if (distancia <= separador) {
+//                int fila = Math.min(aux1.getY(), aux2.getY()) / separador;
+//                int col = aux1.getX() / separador;
+//                cli.enviarServidor(new MovimientoDTO(fila, col, false,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+//            }
+//        } else if (aux1.getY() == aux2.getY()) {
+//            // Línea horizontal
+//            distancia = Math.abs(aux1.getX() - aux2.getX());
+//            if (distancia <= separador) {
+//                int fila = aux1.getY() / separador;
+//                int col = Math.min(aux1.getX(), aux2.getX()) / separador;
+//                System.out.println("se envio una linea");
+//                cli.enviarServidor(new MovimientoDTO(fila, col, true,convertir.convertir_Dominio_a_DTO(cli.getJugadorCliente())));
+//            }
+//        } else {
+//            System.out.println("No es una línea válida");
+//        }
+//    }
 
     public void agregarPuntos() {
         separador = tmnTablero / tmn;
@@ -193,7 +229,28 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     }
 
     private void interpretarMovimiento(MovimientoDTO ultimo) {
-        if (ultimo != null) {
+      if (ultimo != null) {
+        // Procesar el movimiento con `TuberiaMovimientoRecibido`
+        Linea nuevaLinea = tuberiaMovimientoRecibido.procesarMovimiento(ultimo);
+
+        if (nuevaLinea != null) {
+            int x = nuevaLinea.getX1() * separador;
+            int y = nuevaLinea.getY1() * separador;
+
+            punto p1 = new punto(x, y);
+            punto p2 = nuevaLinea.isEsHorizontal() ? new punto(x + separador, y) : new punto(x, y + separador);
+
+            // Crear la línea y agregarla a la lista
+            linea = new linea(p1, p2, nuevaLinea.getJugador(), colores[turno]);
+            this.lineas.add(linea);
+
+            turno = (turno + 1) % 3;
+        } else {
+            System.out.println("Movimiento inválido, no se generó línea.");
+        }
+      }
+    }
+        /* if (ultimo != null) {
             int x = ultimo.getColumna() * separador;
             int y = ultimo.getFila() * separador;
 
@@ -214,6 +271,6 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
 
             turno = (turno + 1) % 3;
         }
-    }
+    }*/
 
 }

@@ -11,9 +11,14 @@ public class LineaDTO implements Serializable {
     private boolean estaDibujada;
     private Jugador jugador;
 
+   
     public LineaDTO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.estaDibujada = false;
+        this.jugador = null;
+
     }
+
+    
 
     public boolean isEstaDibujada() {
         return estaDibujada;
