@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Filtros;
+package Tuberias;
 
 /**
  *
@@ -20,8 +20,8 @@ public class UbicarSegundaPosicion {
         return new int[]{x, y};
     }
  public int[] obtenerCoordenada(MovimientoDTO movimiento, boolean esHorizontal) {
-        int xFinal = esHorizontal ? movimiento.getColumna() + 1 : movimiento.getColumna();
-        int yFinal = esHorizontal ? movimiento.getFila() : movimiento.getFila() + 1;
+        int xFinal = esHorizontal ? movimiento.getFila() + 1 : movimiento.getFila();
+        int yFinal = esHorizontal ? movimiento.getColumna() : movimiento.getColumna() + 1;
         return new int[]{xFinal, yFinal};
     }
 

@@ -2,14 +2,17 @@ package Cliente;
 
 import Convertidor.convertirJugador;
 import Convertidor.convertirPartida;
-import Objetos.*;
-import Objetos.*;
+import Objetos.Jugador;
+import Objetos.JugadorDTO;
+import Objetos.MovimientoDTO;
+import Objetos.Partida;
+import Objetos.PartidaDTO;
+import Tuberias.TuberiaConversorPartida;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,9 +38,11 @@ public class Cliente {
 
     private String jugadorTurnoActual;
 
-    private Movimiento ultimo;
+    private MovimientoDTO ultimo;
     private Color[] preferencias = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
-
+    //Tuberia
+    private TuberiaConversorPartida tuberiaConversorPartida;
+    
     //variables logica cliente
     private boolean cambiograficoPartida = false;
     private boolean cambiograficoLobby = false;
@@ -49,7 +54,7 @@ public class Cliente {
         out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
         in = new ObjectInputStream(socket.getInputStream());
-
+        this.tuberiaConversorPartida=new TuberiaConversorPartida();
         new Thread(() -> {
             try {
                 Object obj;
@@ -60,13 +65,18 @@ public class Cliente {
                         respuestaRecibida = true;
                     }
                     //Te uniste a la partida
+                    /*
                     if (obj instanceof PartidaDTO) {
                         convertirPartida convertidorP = new convertirPartida();
                         PartidaCliente = (convertidorP.convertir_DTO_a_Dominio((PartidaDTO) obj));
                         cambiograficoLobby = true;
                         //Corregir
                         partidalista = PartidaCliente.partidaCompleta();
+                    }*/
+                    if (obj instanceof PartidaDTO) {
+                    procesarPartida((PartidaDTO) obj);
                     }
+
                     if (obj instanceof JugadorDTO) {
                         convertirJugador convertidorJ = new convertirJugador();
                         jugadorTurnoActual = convertidorJ.convertir_DTO_a_Dominio((JugadorDTO) obj).getNombre();
@@ -74,8 +84,8 @@ public class Cliente {
                     }
 
                     //Ejerciero Turno
-                    if (obj instanceof Movimiento) {
-                        ultimo = (Movimiento) obj;
+                    if (obj instanceof MovimientoDTO) {
+                        ultimo = (MovimientoDTO) obj;
                         ejercerTurno(ultimo);
                         cambiograficoPartida = true;
                     }
@@ -108,6 +118,19 @@ public class Cliente {
 
     }
 
+    private void procesarPartida(PartidaDTO partidaDTO) {
+    // Convertir la partida DTO a objetos de dominio
+    Partida nuevaPartida = tuberiaConversorPartida.procesar(partidaDTO);
+
+    if (nuevaPartida != null) {
+        PartidaCliente = nuevaPartida;
+        cambiograficoLobby = true;
+        partidalista = nuevaPartida.partidaCompleta();
+        System.out.println("Partida convertida correctamente.");
+    } else {
+        System.out.println("Error al procesar la partida.");
+    }
+}
     //Logica de red
     public boolean isPartidalista() {
         return partidalista;
@@ -243,7 +266,7 @@ public class Cliente {
         preferencias[3] = J4;
     }
 
-    public Movimiento getUltimo() {
+    public MovimientoDTO getUltimo() {
         return ultimo;
     }
 
@@ -251,7 +274,7 @@ public class Cliente {
         return jugadorTurnoActual;
     }
 
-    public void ejercerTurno(Movimiento mov) {
+    public void ejercerTurno(MovimientoDTO mov) {
         convertirJugador convertir = new convertirJugador();
         Jugador jugadorMovimiento = convertir.convertir_DTO_a_Dominio(mov.getJugador());
 

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Filtros;
+package Tuberias;
 
 /**
  *
@@ -13,16 +13,15 @@ import Objetos.Linea;
 import Objetos.MovimientoDTO;
 import Objetos.Tablero;
 
-public class UbicarSegundaPosicion {
-    public int[] obtenerSegundaPosicion(Linea linea, Tablero tablero) {
+
+public class UbicarPrmeraPosicion {
+      public int[] obtenerPrimeraPosicion(Linea linea, Tablero tablero) {
         int x = 0; // Lógica real para calcular X
         int y = 0; // Lógica real para calcular Y
         return new int[]{x, y};
     }
- public int[] obtenerCoordenada(MovimientoDTO movimiento, boolean esHorizontal) {
-        int xFinal = esHorizontal ? movimiento.getColumna() + 1 : movimiento.getColumna();
-        int yFinal = esHorizontal ? movimiento.getFila() : movimiento.getFila() + 1;
-        return new int[]{xFinal, yFinal};
+ public int[] obtenerCoordenada(MovimientoDTO movimiento) {
+        return new int[]{movimiento.getFila(), movimiento.getColumna()};
     }
 
 }

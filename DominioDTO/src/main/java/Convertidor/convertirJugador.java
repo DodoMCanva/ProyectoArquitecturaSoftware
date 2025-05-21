@@ -24,4 +24,11 @@ public class convertirJugador {
         }
         return null;
     }
+     public Jugador[] mapear(JugadorDTO[] jugadoresDTO) {
+        Jugador[] jugadores = new Jugador[jugadoresDTO.length];
+        for (int i = 0; i < jugadoresDTO.length; i++) {
+            jugadores[i] = new Jugador(jugadoresDTO[i].getNombre(),jugadoresDTO[i].getAvatar(),jugadoresDTO[i].getPuntos());
+        }
+        return jugadores;
+    }
 }

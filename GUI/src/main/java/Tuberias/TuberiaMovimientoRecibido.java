@@ -4,12 +4,9 @@ package Tuberias;
  *
  * @author equipo
  */
-import Filtros.FormarLinea;
-import Filtros.UbicarOrientacion;
 import Filtros.IFiltro;
-import Filtros.UbicarSegundaPosicion;
 import Objetos.Linea;
-import Objetos.Movimiento;
+import Objetos.MovimientoDTO;
 
 
 
@@ -30,13 +27,18 @@ public class TuberiaMovimientoRecibido {
     }
 
     public boolean procesar(Linea linea) {
-        return verificarLinea.aplicar(linea);
+    boolean esValida = verificarLinea.aplicar(linea);
+    if (!esValida) {
+        System.out.println("Línea inválida: " + linea);
     }
+    return esValida;
+}
+
 
    
 
 
-    public Linea procesarMovimiento(Movimiento movimiento) {
+    public Linea procesarMovimiento(MovimientoDTO movimiento) {
         // Paso 3: Determinar orientación
         boolean esHorizontal = ubicarOrientacion.definirOrientacion(movimiento);
 
