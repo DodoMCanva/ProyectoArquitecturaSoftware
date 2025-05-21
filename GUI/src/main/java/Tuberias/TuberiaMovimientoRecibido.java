@@ -9,9 +9,8 @@ import Objetos.Linea;
 import Objetos.MovimientoDTO;
 
 
-
 public class TuberiaMovimientoRecibido {
-       private UbicarOrientacion ubicarOrientacion;
+    private UbicarOrientacion ubicarOrientacion;
     private UbicarPrmeraPosicion ubicarPrimerPunto;
     private UbicarSegundaPosicion ubicarSegundoPunto;
     private FormarLinea formarLinea;
@@ -23,40 +22,35 @@ public class TuberiaMovimientoRecibido {
         this.ubicarSegundoPunto = new UbicarSegundaPosicion();
         this.formarLinea = new FormarLinea();
         this.verificarLinea = verificarLinea;
-
     }
 
-    public boolean procesar(Linea linea) {
-    boolean esValida = verificarLinea.aplicar(linea);
-    if (!esValida) {
-        System.out.println("Línea inválida: " + linea);
-    }
-    return esValida;
-}
-
-
-   
-
-
+    // Validar y procesar un movimiento recibido
     public Linea procesarMovimiento(MovimientoDTO movimiento) {
-        // Paso 3: Determinar orientación
+        if (movimiento == null) {
+            System.out.println("❌ Movimiento recibido es null.");
+            return null;
+        }
+
+        // Paso 1: Determinar orientación
         boolean esHorizontal = ubicarOrientacion.definirOrientacion(movimiento);
 
-        // Paso 5: Obtener primera coordenada
+        // Paso 2: Obtener primera coordenada
         int[] primerPunto = ubicarPrimerPunto.obtenerCoordenada(movimiento);
 
-        // Paso 7: Obtener segunda coordenada
+        // Paso 3: Obtener segunda coordenada
         int[] segundoPunto = ubicarSegundoPunto.obtenerCoordenada(movimiento, esHorizontal);
 
-        // Paso 9: Formatear línea
+        // Paso 4: Crear línea
         Linea nuevaLinea = formarLinea.construirLinea(primerPunto, segundoPunto, esHorizontal);
 
-        // Validar si la línea es válida antes de enviarla
+        // Validar si la línea es correcta antes de procesarla
         if (verificarLinea.aplicar(nuevaLinea)) {
+            System.out.println("✅ Línea válida, procesando.");
             return nuevaLinea;
         }
 
-        return null; // Retorna nulo si el movimiento no es válido
+        System.out.println("❌ Línea inválida, no se procesará.");
+        return null; // Si la línea no es válida, retorna null
     }
 
 }

@@ -24,4 +24,5 @@ public class UbicarOrientacion {
         return movimiento.isEsHorizontal();
     }
 
+    
 }

@@ -66,7 +66,6 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnSolicitarInicio = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
         imgJ4 = new javax.swing.JLabel();
         imgJ3 = new javax.swing.JLabel();
         imgJ2 = new javax.swing.JLabel();
@@ -110,14 +109,6 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
             }
         });
         jPanel1.add(btnSolicitarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 220, 50));
-
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         imgJ4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPanel1.add(imgJ4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 130, 120));
@@ -200,10 +191,6 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-
-    }//GEN-LAST:event_btnSalirActionPerformed
-
     private void btnSolicitarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarInicioActionPerformed
         
         control.solicitarInicio();
@@ -217,7 +204,6 @@ public class frmLobby extends javax.swing.JFrame implements Observador<ImdlLobby
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSolicitarInicio;
     private javax.swing.JComboBox<String> comboColor1;
     private javax.swing.JComboBox<String> comboColor2;

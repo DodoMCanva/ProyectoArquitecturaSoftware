@@ -24,4 +24,5 @@ public class UbicarPrmeraPosicion {
         return new int[]{movimiento.getFila(), movimiento.getColumna()};
     }
 
+ 
 }

@@ -26,7 +26,6 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         jpMenu = new javax.swing.JPanel();
         cboxTmn = new javax.swing.JComboBox<>();
         lblTituloCrearPartida = new javax.swing.JLabel();
-        btnVolverMenu = new javax.swing.JButton();
         lbtituloTamañoTab = new javax.swing.JLabel();
         btnUnirsePartida = new javax.swing.JButton();
         lblLogoCrearPartida = new javax.swing.JLabel();
@@ -57,14 +56,6 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         lblTituloCrearPartida.setForeground(new java.awt.Color(255, 255, 255));
         lblTituloCrearPartida.setText("Partida");
         jpMenu.add(lblTituloCrearPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-
-        btnVolverMenu.setText("Volver");
-        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverMenuActionPerformed(evt);
-            }
-        });
-        jpMenu.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         lbtituloTamañoTab.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         lbtituloTamañoTab.setForeground(new java.awt.Color(255, 255, 255));
@@ -113,11 +104,6 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-
-
-    }//GEN-LAST:event_btnVolverMenuActionPerformed
-
     private void cboxTmnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTmnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboxTmnActionPerformed
@@ -156,7 +142,6 @@ public class frmMenu extends javax.swing.JFrame implements Observador<ImdlMenu> 
     private javax.swing.JButton btnCrearPartida;
     private javax.swing.ButtonGroup btnGroup;
     private javax.swing.JButton btnUnirsePartida;
-    private javax.swing.JButton btnVolverMenu;
     private javax.swing.JComboBox<String> cboxTmn;
     private javax.swing.JPanel jpMenu;
     private javax.swing.JLabel lblLogoCrearPartida;
