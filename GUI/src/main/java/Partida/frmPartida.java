@@ -320,7 +320,7 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
             d= 5;
         }
         g.setColor(Color.BLACK);
-        g.fillOval(x, y, 15, 15);
+        g.fillOval(x, y, d, d);
     }
 
     public static void pintarLinea(Graphics g, int x1, int y1, int x2, int y2, Color color) {
