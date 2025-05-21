@@ -8,8 +8,6 @@ package Tuberias;
  *
  * @author delll
  */
-
-
 import Convertidor.convertirJugador;
 import Convertidor.convertirPartida;
 import Convertidor.convertirTablero;

@@ -80,19 +80,19 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
 
         ls.setText("Score:");
 
-        lblScoreJ1.setText("100");
+        lblScoreJ1.setText("0");
 
         ls1.setText("Score:");
 
-        lblScoreJ2.setText("100");
+        lblScoreJ2.setText("0");
 
         ls2.setText("Score:");
 
-        lblScoreJ3.setText("100");
+        lblScoreJ3.setText("0");
 
         ls3.setText("Score:");
 
-        lblScoreJ4.setText("100");
+        lblScoreJ4.setText("0");
 
         btnAbandonar.setBackground(new java.awt.Color(255, 51, 51));
         btnAbandonar.setForeground(new java.awt.Color(255, 255, 255));
