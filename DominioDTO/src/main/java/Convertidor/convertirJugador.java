@@ -25,10 +25,21 @@ public class convertirJugador {
         return null;
     }
      public Jugador[] mapear(JugadorDTO[] jugadoresDTO) {
-        Jugador[] jugadores = new Jugador[jugadoresDTO.length];
-        for (int i = 0; i < jugadoresDTO.length; i++) {
-            jugadores[i] = new Jugador(jugadoresDTO[i].getNombre(),jugadoresDTO[i].getAvatar(),jugadoresDTO[i].getPuntos());
-        }
-        return jugadores;
+       
+    if (jugadoresDTO == null) {
+        throw new IllegalArgumentException("El arreglo jugadoresDTO es null.");
     }
+
+    Jugador[] jugadores = new Jugador[jugadoresDTO.length];
+    for (int i = 0; i < jugadoresDTO.length; i++) {
+        if (jugadoresDTO[i] == null) {
+            System.out.println("Advertencia: jugadoresDTO[" + i + "] es null.");
+            jugadores[i] = null; // O asigna un jugador vacío si es necesario
+        } else {
+            jugadores[i] = new Jugador(jugadoresDTO[i].getNombre(), jugadoresDTO[i].getAvatar(), jugadoresDTO[i].getPuntos());
+        }
+    }
+    return jugadores;
+}
+    
 }
