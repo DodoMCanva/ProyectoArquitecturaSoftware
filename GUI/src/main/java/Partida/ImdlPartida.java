@@ -21,4 +21,6 @@ public interface ImdlPartida {
     
     public List<linea> obtenerLineas();
     
+    public int obtenerTamanoTablero();
+    
 }

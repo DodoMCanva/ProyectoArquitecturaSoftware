@@ -284,13 +284,13 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
             case "abrir":
                 this.setVisible(true);
                 for (punto punto : modelo.obtenerPuntos()) {
-                    pintarCirculo(g, punto.getX(), punto.getY());
+                    pintarCirculo(g, punto.getX(), punto.getY(), modelo);
                 }
                 break;
 
             case "refrescar":
                 for (punto punto : modelo.obtenerPuntos()) {
-                    pintarCirculo(g, punto.getX(), punto.getY());
+                    pintarCirculo(g, punto.getX(), punto.getY(), modelo);
                 }
                 for (linea l : modelo.obtenerLineas()) {
                     punto p1 = l.getPunto_1();
@@ -311,7 +311,14 @@ public class frmPartida extends javax.swing.JFrame implements Observador<ImdlPar
         }
     }
 
-    public static void pintarCirculo(Graphics g, int x, int y) {
+    public static void pintarCirculo(Graphics g, int x, int y, ImdlPartida modelo) {
+        int d = 15;
+        if (modelo.obtenerTamanoTablero() == 20) {
+            d= 10;
+        }
+        if (modelo.obtenerTamanoTablero() == 30) {
+            d= 5;
+        }
         g.setColor(Color.BLACK);
         g.fillOval(x, y, 15, 15);
     }

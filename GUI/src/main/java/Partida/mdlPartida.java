@@ -66,8 +66,14 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
     }
 
     public void clickPanel(int x, int y) {
-        System.out.println("Entro");
         int d = 20;
+        if (cli.getPartidaCliente().getTablero().getTamano() == 20) {
+            d = 10;
+        }
+        if (cli.getPartidaCliente().getTablero().getTamano() == 30) {
+            d = 5;
+        }
+
         for (punto punto : puntos) {
             if ((x <= (punto.getX() + d) && x >= (punto.getX() - d)) && ((y <= (punto.getY() + d) && (y >= (punto.getY() - d))))) {
                 System.out.println("Si es punto wens");
@@ -228,6 +234,11 @@ public class mdlPartida extends Thread implements Observado, ImdlPartida {
 
             turno = (turno + 1) % cli.getJugadoresenPartida();
         }
+    }
+
+    @Override
+    public int obtenerTamanoTablero() {
+        return cli.getPartidaCliente().getTablero().getTamano();
     }
 
 }
